@@ -12,4 +12,47 @@ Updates DreamVents schema table: USER and USER_LIST
 
 Needs a login authenicatable page now to transfer user to his front page.
 
-FatalThrowableError in SessionGuard.php line 418
+FatalThrowableError in SessionGuard.php line 418: could be source where this is done
+
+Note: unsure if sqlserver is connected properly at the moment. Only tested on homestead local enviroment
+
+Requirements:
+
+1. composer
+
+2. laravel
+
+3. mysql server
+
+4. php 7~
+
+5. apache2
+
+Installation for EC2 Server:
+
+1) git clone this repository to a folder make sure its chmod 777 so the server can write to it
+
+  - you might have to add the server key to your github account. 
+  
+  - cat ~/.ssh/id_rsa.pub    - copy this to your github account. I am not entirely sure. But this is how I cloned the git to the server
+  - git clone https://yourusername@github.com/TheBoop/DreamVent
+
+2) change your apache config files /etc/apache2/apach2.conf and /etc/apache2/sites-available/000-default.conf document roots
+
+3) sudo apachectl restart
+
+4) navigate to the Dreamvent.            
+
+5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache          permissions for stuff.
+
+6) sudo composer install                to install dependencies
+
+7) php artisan key:generate              to install key
+
+8) change env to .env
+
+Hopefully these steps work...
+
+Note: I chmod -R 777 the entire DreamVent folder and gave everything permissions. This is the only step thats not here. Next installation hopefully I can test that and confirm it is not necessary. I was debugging....
+
+
