@@ -103,7 +103,10 @@ class AuthController extends Controller
                                 [$suv[0], $name, $email, $password, $namer, $suv[1],
                                  $suv[2], $suv[3], $suv[4], $suv[5], $suv[6], $suv[7], 
                                  $suv[8], $suv[9]]);
-
-    
+         return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
 }
