@@ -2,15 +2,14 @@
 
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['web']], function () {
+
+	Route::get('/', function () {
+	    return view('welcome');
+	})->middleware('guest');
+
+	Route::auth();
+	Route::get('/account', 'AccountController@index');
+	
 });
 
-
-
-//Route::post('/task', 'DreamventsController@store');
-//Route::delete('/task/{task}', 'DreamventsController@destroy');
-
-Route::auth();
-
-//Route::get('/home', 'HomeController@index');
