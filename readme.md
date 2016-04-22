@@ -1,3 +1,5 @@
+VERSION 1.00
+
 Need To Fix/To Be Done:
 
 Registering User and logging in DID work
