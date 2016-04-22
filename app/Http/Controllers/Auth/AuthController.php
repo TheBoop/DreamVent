@@ -71,12 +71,13 @@ class AuthController extends Controller
         $email = $data['email'];
         $password = bcrypt($data['password']);
         
-
-        $list[0] = "user_id";
-        $list[1] = "friendlist";
-        $list[2] = "followlist";
-        $list[3] = "contactlist";
-        $list[4] = "pagelist";
+        //this is suppose to insert after User create I believe create
+        //create a model for this and insert after User::create
+        $list[0] = "friendlist";
+        $list[1] = "followlist";
+        $list[2] = "contactlist";
+        $list[3] = "pagelist";
+        $list[4] = "holder4";
         $list[5] = "holder5";
         $list[6] = "holder6";
         $list[7] = "holder7";
@@ -96,21 +97,22 @@ class AuthController extends Controller
 
 
         }
+
         return User::create([
-            'id' => $suv[0],
             'username' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'name' => $namer,
-            'friendlistid' => $suv[1],
-            'followlistid' => $suv[2],
-            'contactlistid' => $suv[3],
-            'pagelistid' => $suv[4],
+            'friendlist_id' => $suv[0],
+            'followlist_id' => $suv[1],
+            'contactlist_id' => $suv[2],
+            'pagelist_id' => $suv[3],
+            'holderid4' => $suv[4],
             'holderid5' => $suv[5],
             'holderid6' => $suv[6],
             'holderid7' => $suv[7],
             'holderid8' => $suv[8],
-            'holderid9' => $suv[9],//?
+            'holderid9' => $suv[9],
         ]);
     }
     
