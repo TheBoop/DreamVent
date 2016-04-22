@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers\Auth;
 
 use DB;
-use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\CustomUser;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new authentication controller instance.
@@ -63,7 +64,8 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    public function create(array $data)
+    
+    protected  function create(array $data)
     {
         $name = $data['name'];
         $email = $data['email'];
@@ -80,7 +82,9 @@ class AuthController extends Controller
         $list[7] = "holder7";
         $list[8] = "holder8";
         $list[9] = "holder9";
-            
+
+        $namer = "Bob Ross";
+          
         for ($i=0; $i < 10; $i++)
         {   
             $affected = DB::insert('insert into USER_LIST
@@ -92,8 +96,8 @@ class AuthController extends Controller
 
 
         }
+        /*
 
-        $namer = "Bob Ross";
         $affected = DB::insert('insert into USER
                                 (user_id, username, email, password, name, 
                                 friendlist_id, followlist_id, contactlist_id, 
@@ -103,10 +107,27 @@ class AuthController extends Controller
                                 [$suv[0], $name, $email, $password, $namer, $suv[1],
                                  $suv[2], $suv[3], $suv[4], $suv[5], $suv[6], $suv[7], 
                                  $suv[8], $suv[9]]);
-         return User::create([
-            'name' => $data['name'],
+
+        */
+
+        return User::create([
+            'id' => $suv[0],
+            'username' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'name' => $namer,
+            'friendlistid' => $suv[1],
+            'followlistid' => $suv[2],
+            'contactlistid' => $suv[3],
+            'pagelistid' => $suv[4],
+            'holderid5' => $suv[5],
+            'holderid6' => $suv[6],
+            'holderid7' => $suv[7],
+            'holderid8' => $suv[8],
+            'holderid9' => $suv[9],//?
         ]);
     }
+    
+
+
 }
