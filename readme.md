@@ -24,6 +24,8 @@ Requirements:
 
 Installation for EC2 Server:
 
+***** Make sure to import Version-X.XX sql data from google drive SQL/IMPORT/Version-X.XX to your local sql database using mysql testbench or something ****
+
 1) cd /var/www/
   
   sudo mkdir Version-X.XX
