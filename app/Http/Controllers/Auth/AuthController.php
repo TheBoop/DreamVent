@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers\Auth;
 
 use DB;
-use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\CustomUser;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new authentication controller instance.
@@ -63,24 +64,28 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    public function create(array $data)
+    
+    protected  function create(array $data)
     {
         $name = $data['name'];
         $email = $data['email'];
         $password = bcrypt($data['password']);
         
-
-        $list[0] = "user_id";
-        $list[1] = "friendlist";
-        $list[2] = "followlist";
-        $list[3] = "contactlist";
-        $list[4] = "pagelist";
+        //this is suppose to insert after User create I believe create
+        //create a model for this and insert after User::create
+        $list[0] = "friendlist";
+        $list[1] = "followlist";
+        $list[2] = "contactlist";
+        $list[3] = "pagelist";
+        $list[4] = "holder4";
         $list[5] = "holder5";
         $list[6] = "holder6";
         $list[7] = "holder7";
         $list[8] = "holder8";
         $list[9] = "holder9";
-            
+
+        $namer = "Bob Ross";
+          
         for ($i=0; $i < 10; $i++)
         {   
             $affected = DB::insert('insert into USER_LIST
@@ -93,17 +98,24 @@ class AuthController extends Controller
 
         }
 
-        $namer = "Bob Ross";
-        $affected = DB::insert('insert into USER
-                                (user_id, username, email, password, name, 
-                                friendlist_id, followlist_id, contactlist_id, 
-                                pagelist_id, holder_id5, holder_id6, holder_id7,
-                                holder_id8, holder_id9 ) values 
-                                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                                [$suv[0], $name, $email, $password, $namer, $suv[1],
-                                 $suv[2], $suv[3], $suv[4], $suv[5], $suv[6], $suv[7], 
-                                 $suv[8], $suv[9]]);
-
-    
+        return User::create([
+            'username' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'name' => $namer,
+            'friendlist_id' => $suv[0],
+            'followlist_id' => $suv[1],
+            'contactlist_id' => $suv[2],
+            'pagelist_id' => $suv[3],
+            'holderid4' => $suv[4],
+            'holderid5' => $suv[5],
+            'holderid6' => $suv[6],
+            'holderid7' => $suv[7],
+            'holderid8' => $suv[8],
+            'holderid9' => $suv[9],
+        ]);
     }
+    
+
+
 }
