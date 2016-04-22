@@ -96,20 +96,6 @@ class AuthController extends Controller
 
 
         }
-        /*
-
-        $affected = DB::insert('insert into USER
-                                (user_id, username, email, password, name, 
-                                friendlist_id, followlist_id, contactlist_id, 
-                                pagelist_id, holder_id5, holder_id6, holder_id7,
-                                holder_id8, holder_id9 ) values 
-                                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                                [$suv[0], $name, $email, $password, $namer, $suv[1],
-                                 $suv[2], $suv[3], $suv[4], $suv[5], $suv[6], $suv[7], 
-                                 $suv[8], $suv[9]]);
-
-        */
-
         return User::create([
             'id' => $suv[0],
             'username' => $data['name'],
