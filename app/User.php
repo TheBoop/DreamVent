@@ -1,12 +1,14 @@
 <?php
 namespace App;
 
+use App\AccountFrontPage;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     protected $table = 'USER';
     public $timestamps = false;
-
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
@@ -25,11 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    /**
-     * Get all of the tasks for the user.
-     */
-    public function account()
+
+    public function frontpages()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(AccountFrontPage::class);
     }
+
 }
