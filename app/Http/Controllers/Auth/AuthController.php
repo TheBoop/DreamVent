@@ -1,15 +1,14 @@
 <?php
-
-namespace App\Http\Controllers;
 namespace App\Http\Controllers\Auth;
 
+
+use Illuminate\Http\Request;
 use DB;
+use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use App\CustomUser;
-use App\User;
 
 class AuthController extends Controller
 {
@@ -31,7 +30,10 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/account';
+    protected $loginPath = '/';
+    protected $redirectAfterLogout = '/';
+    protected $redirectPath = '/frontpages';
+    protected $username = 'username';
 
     /**
      * Create a new authentication controller instance.
@@ -40,8 +42,9 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'logout']);
     }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -51,12 +54,16 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        //be careful of spaces
+        //unique:Table, column
         return Validator::make($data, [
+            'username' => 'required|max:255|unique:USER,username',
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:USER',
+            'email' => 'required|email|max:255|unique:USER,email',
             'password' => 'required|min:6|confirmed',
         ]);
-    }
+    } 
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -67,12 +74,18 @@ class AuthController extends Controller
     
     protected  function create(array $data)
     {
+        DB::getQueryLog();
+        $username = $data['username'];
         $name = $data['name'];
         $email = $data['email'];
         $password = bcrypt($data['password']);
         
+        //this currently is incorrect. but ill leave it hear for temp use
         //this is suppose to insert after User create I believe create
         //create a model for this and insert after User::create
+        //I need this to happen after user is valid... dont know how to do
+        //that right now
+
         $list[0] = "friendlist";
         $list[1] = "followlist";
         $list[2] = "contactlist";
@@ -83,8 +96,6 @@ class AuthController extends Controller
         $list[7] = "holder7";
         $list[8] = "holder8";
         $list[9] = "holder9";
-
-        $namer = "Bob Ross";
           
         for ($i=0; $i < 10; $i++)
         {   
@@ -99,10 +110,10 @@ class AuthController extends Controller
         }
 
         return User::create([
-            'username' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'name' => $namer,
+            'name' => $data['name'],
             'friendlist_id' => $suv[0],
             'followlist_id' => $suv[1],
             'contactlist_id' => $suv[2],
@@ -114,7 +125,10 @@ class AuthController extends Controller
             'holderid8' => $suv[8],
             'holderid9' => $suv[9],
         ]);
+
+
     }
+
     
 
 
