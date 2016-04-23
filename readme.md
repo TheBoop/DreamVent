@@ -1,69 +1,52 @@
-VERSION 1.00
+VERSION 1.01
 
 Need To Fix/To Be Done:
 
-Registering User and logging in DID work
+- Please make sure you understand routing, controllers, views, and models.
 
-Logout link did not work
+- Start adding some functionality since login and registration is working
+    - If you must, you may use rawsql to get some functionality in. 
 
-Logging back in did not work 
+- Need to add model for USER_LIST_CONTAINS - that raw sql code in AuthController is temporary needs to be transferred to a model. 
 
-Note: 
 
-If you get infinite redirect on a webpage reset your browser cookies past hour
+Important Info
 
-Requirements:
+Models manage data and such.... (Backend)
 
-1. composer
+Views are what the viewer sees... (Frontend)
 
-2. laravel
+Controllers is what connects everything through inputs and outputs
 
-3. mysql server
+Me and Matt worked our butts off debugging the authentication system and understanding how these three things work together.  There are some files in this repository that show you how some of this is accomplished. 
 
-4. php 7~
 
-5. apache2
+Models are in /app. 
 
-Installation for EC2 Server:
+User.php - Completed for auth() functions. auth() = just routing commands for the authentication function
 
-***** Make sure to import Version-X.XX sql data from google drive SQL/IMPORT/Version-X.XX to your local sql database using mysql testbench or something ****
+AccountFrontPage.php - Me trying to pull info from the database with app/Repositories/AccountRepository.php. It is unfinished
 
-1) cd /var/www/
-  
-  sudo mkdir Version-X.XX
-  
-  sudo chmod -R 777 Version-X.XX
 
-2) cd Version-X.XX
+Controller are in app/http/controller
 
-  - you might have to add the server key to your github account. If so skip to 3)
-  
-  - cat ~/.ssh/id_rsa.pub    - copy this to your github account. I am not entirely sure. But this is how I cloned the git to the server
-  - 
-3) git clone https://yourusername@github.com/TheBoop/DreamVent
+auth/AuthController.php - Handles registeration and validation form
 
-4) change your apache config files /etc/apache2/sites-available/000-default.conf  
+auth/FrontPageController.php - still playing around with this to output something from the database. Unfinished
 
-  - change your document root to /var/www/Version-X.XX/DreamVent/public
 
-  - depends on what command does the work. In this case apachectl
+Routes are in /app/http/routes.php
 
-3) sudo apachectl restart or whatever you are using
+We choose what each domain does here with Controllers. 
 
-4) cd /var/www/Version-X.XX/DreamVent/         
+Example:
 
-5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache
+  get('/', ~) - if user goes to www.dreamvent.com/ we show them the welcome page
 
-6) sudo composer install
+   get(/frontpages', ~) if user is redirected to .com/frontpages controller will check if authenticated if so show frontpagse.index
+   
 
-7) change env to .env and then cd to public/htaccess and rename htaccess to .htaccess
+Views are in /DreamVent/resources/views
 
-  - env is your enviroment variable
-  
-  - htaccess routes the web server to the controllers how neat
-  
-8)  cd /var/www/Version-X.XX/DreamVent/  
-    
-    php artisan key:generate
+these are what the user sees
 
-9) check the site
