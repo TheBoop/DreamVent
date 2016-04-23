@@ -41,9 +41,9 @@ We choose what each domain does here with Controllers.
 
 Example:
 
-  get('/', ~) - if user goes to www.dreamvent.com/ we show them the welcome page
+  get('/', ~) - if user goes to www.dreamvents.com/ we show them the welcome page
 
-   get(/frontpages', ~) if user is redirected to .com/frontpages controller will check if authenticated if so show frontpagse.index
+   get(/frontpages', ~) if user is redirected to .com/frontpages controller will check if authenticated if so show frontpages.index
    
 
 Views are in /DreamVent/resources/views
