@@ -23,6 +23,8 @@
 
 use Illuminate\Http\Request;
 
+
+//need to read up on middleware.
 Route::group(['middleware' => ['web']], function () {
 	
 	//welcome page
@@ -39,6 +41,9 @@ Route::group(['middleware' => ['web']], function () {
 	   'password' => 'Auth\PasswordController',
 	]);
 	
+	//Check current user
+	Route::get('/currentUser', 'UserController@currentUser');
+	
 	//=== Uploading Pictures ===
 	//display form
 	Route::get('/uploadPicture', 'PictureController@upload');
@@ -46,6 +51,7 @@ Route::group(['middleware' => ['web']], function () {
 	//Handles submission
 	Route::post('/uploadPicture', 'PictureController@store');
 
+	//View uploaded pictures
 	Route::get('/viewPictures', 'PictureController@show');
 
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth; //for Auth::user()
 
 use App\Http\Requests;
 
@@ -15,6 +16,11 @@ use App\Picture; //Eloquent Model
 
 class PictureController extends Controller
 {
+	//User must be authenticated.
+	public function __construct() {
+		$this->middleware('auth');
+	}
+	
     //display form for uploading
 	public function upload() {
 		echo "GET";
@@ -36,7 +42,7 @@ class PictureController extends Controller
 		
 		//fill out fields in model
 		$picture->description = $request->description;
-		$picture->author_id = 1; //TODO hardcoded for now, figure out how to access from the session?
+		$picture->author_id = Auth::user()->id; //TODO hardcoded for now, figure out how to access from the session?
 		
 		if ($request->hasFile('picture')) {
 			$file = Input::file('picture');
@@ -45,7 +51,8 @@ class PictureController extends Controller
 			$timestamp = $timestamp = str_replace([' ', ':'], '-', microtime()); //lol microtime, TODO find something more informative
 			$name = $timestamp . $file->getClientOriginalName();
 			
-			$picture->picture_link = public_path().'/Pictures/'. $name;
+			//$picture->picture_link = public_path().'/Pictures/'. $name;
+			$picture->picture_link = '/Pictures/'. $name;
 			
 			$file->move(public_path().'/Pictures/', $name);
 		}
@@ -60,8 +67,8 @@ class PictureController extends Controller
 	//show all pictures
 	public function show(Request $request)
     {
-    //    $images = Image::all();
-    //   return view('image.showLists', compact('images'));
+        $pictures = Picture::all();
+       return view('viewPictures', compact('pictures'));
 
     }
 }
