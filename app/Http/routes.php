@@ -24,21 +24,29 @@
 use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['web']], function () {
-
+	
+	//welcome page
 	Route::get('/', function () {
 	    return view('welcome');
 	})->middleware('guest');
 
 	Route::get('/frontpages', 'FrontPageController@index');
+	
+	//authentication
 	Route::auth();
 	
 	Route::controllers([
 	   'password' => 'Auth\PasswordController',
-]);
-
-
-
-
+	]);
 	
+	//=== Uploading Pictures ===
+	//display form
+	Route::get('/uploadPicture', 'PictureController@upload');
+	
+	//Handles submission
+	Route::post('/uploadPicture', 'PictureController@store');
+
+	Route::get('/viewPictures', 'PictureController@show');
+
 });
 
