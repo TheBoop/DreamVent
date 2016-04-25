@@ -46,10 +46,10 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/frontpages">Your Stories</a></li>
+                    <li><a href="/viewPictures">Temp View Pictures</a></li>
                     <li><a href="/browse">Browse</a></li>
                     <li><a href="/search">Search</a></li>
-                    <li><a href="/">Tab 4</a></li>
+                    <li><a href="/uploadPicture">Temp Upload</a></li>
                     <li><a href="/">Tab 5</a></li>
                     <li><a href="/">Tab 6</a></li>
                     <li class="dropdown">
