@@ -42,7 +42,10 @@ Installation for EC2 Server:
 
 5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache
 
-6) sudo composer install
+6) 
+      sudo composer install
+      
+      sudo composer update
 
 7) change env to .env and then cd to public/htaccess and rename htaccess to .htaccess
 
