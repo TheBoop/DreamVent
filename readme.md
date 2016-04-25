@@ -1,68 +1,52 @@
-This version has a temporary home page. 
+VERSION 1.01
 
-Has a form page for register account
+Need To Fix/To Be Done:
 
-Creates user account with ID 10-19 for user 1. User 2 will have ID 20-29. etc
+- Please make sure you understand routing, controllers, views, and models.
 
-after submission of form, 
+- Start adding some functionality since login and registration is working
+    - If you must, you may use rawsql to get some functionality in. 
 
-*still needs a value for "name" at the moment USER takes a static value of "Bob Ross" as a name.
+- Need to add model for USER_LIST_CONTAINS - that raw sql code in AuthController is temporary needs to be transferred to a model. 
 
-Updates DreamVents schema table: USER and USER_LIST
 
-Needs a login authenicatable page now to transfer user to his front page.
+Important Info
 
-FatalThrowableError in SessionGuard.php line 418: could be source where this is done
+Models manage data and such.... (Backend)
 
-Note: unsure if sqlserver is connected properly at the moment. Only tested on homestead local enviroment today
+Views are what the viewer sees... (Frontend)
 
-If server is connected properly then RegisterAccount is functional.
+Controllers is what connects everything through inputs and outputs
 
-Requirements:
+Me and Matt worked our butts off debugging the authentication system and understanding how these three things work together.  There are some files in this repository that show you how some of this is accomplished. 
 
-1. composer
 
-2. laravel
+Models are in /app. 
 
-3. mysql server
+User.php - Completed for auth() functions. auth() = just routing commands for the authentication function
 
-4. php 7~
+AccountFrontPage.php - Me trying to pull info from the database with app/Repositories/AccountRepository.php. It is unfinished
 
-5. apache2
 
-Installation for EC2 Server:
+Controller are in app/http/controller
 
-1) git clone this repository to a folder make sure its chmod 777 so the server can write to it
+auth/AuthController.php - Handles registeration and validation form
 
-  - you might have to add the server key to your github account. 
-  
-  - cat ~/.ssh/id_rsa.pub    - copy this to your github account. I am not entirely sure. But this is how I cloned the git to the server
-  - git clone https://yourusername@github.com/TheBoop/DreamVent
+auth/FrontPageController.php - still playing around with this to output something from the database. Unfinished
 
-2) change your apache config files /etc/apache2/sites-available/000-default.conf   change your document root to www/~~~/DreamVent/Root
 
-  -depends on what command do the work. In this case apachectl
+Routes are in /app/http/routes.php
 
-3) sudo apachectl restart
+We choose what each domain does here with Controllers. 
 
-4) navigate to the Dreamvent folder            
+Example:
 
-5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache          permissions for stuff.
+  get('/', ~) - if user goes to www.dreamvents.com/ we show them the welcome page
 
-6) sudo composer install                to install dependencies
+   get(/frontpages', ~) if user is redirected to .com/frontpages controller will check if authenticated if so show frontpages.index
+   
 
-7) change env to .env and then cd to public/htaccess and rename htaccess to .htaccess
+Views are in /DreamVent/resources/views
 
-  -env is your enviroment variable
-  
-  -htaccess routes the web server to the controllers how neat
-  
-8) php artisan key:generate              to install key to .env file
-
-9) check the site
-
-Hopefully these steps work...
-
-Note: I chmod -R 777 the entire DreamVent folder and gave everything permissions. This is the only step thats not here. Next installation hopefully I can test that and confirm it is not necessary. I was debugging....and testing whether permissions were the cause.
-
+these are what the user sees
 

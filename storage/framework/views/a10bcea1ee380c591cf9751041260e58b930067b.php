@@ -1,6 +1,6 @@
-<! --@extends('layouts.app') -->
+<! -- -->
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <!-- Background color/Theme -->
 <style>
@@ -48,21 +48,21 @@ body {
       <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('login') }}">Login</a></li>
-                        <li><a href="{{ url('register') }}">Register</a></li>
-                    @else
-                        <li><a href="{{ url('/') }}">Inbox</a></li>
+                    <?php if(Auth::guest()): ?>
+                        <li><a href="<?php echo e(url('login')); ?>">Login</a></li>
+                        <li><a href="<?php echo e(url('register')); ?>">Register</a></li>
+                    <?php else: ?>
+                        <li><a href="<?php echo e(url('/')); ?>">Inbox</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                             </a>
                             
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="<?php echo e(url('logout')); ?>"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
-                    @endif
+                    <?php endif; ?>
                 </ul>
 
     </div><!--/.nav-collapse -->
@@ -87,4 +87,6 @@ body {
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
