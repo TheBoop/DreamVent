@@ -42,6 +42,9 @@ Installation for EC2 Server:
 
 5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache
 
+  - if you get permission denied while uploading pictures
+    sudo chmod 777 /public/Pictures
+
 6) 
       sudo composer install
       
