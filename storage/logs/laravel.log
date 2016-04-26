@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2016-04-21 02:59:46] local.ERROR: InvalidArgumentException: Route [createPost] not defined. in /home/vagrant/Code/Laravel/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:307
 Stack trace:
 #0 /home/vagrant/Code/Laravel/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(218): Illuminate\Routing\UrlGenerator->route('createPost')
@@ -5339,3 +5340,5 @@ Stack trace:
 #91 /var/www/Laravel/DreamVent/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(99): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #92 /var/www/Laravel/DreamVent/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #93 {main}  
+=======
+>>>>>>> e49f42ca0fef61d1ddeefff1e1ba37710383e0c0

@@ -162,6 +162,7 @@
             "time": "2015-11-06 14:35:42"
         },
         {
+<<<<<<< HEAD
             "name": "illuminate/html",
             "version": "v5.0.0",
             "source": {
@@ -208,6 +209,8 @@
             "time": "2015-01-01 16:31:18"
         },
         {
+=======
+>>>>>>> e49f42ca0fef61d1ddeefff1e1ba37710383e0c0
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {

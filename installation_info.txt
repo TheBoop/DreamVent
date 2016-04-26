@@ -42,7 +42,15 @@ Installation for EC2 Server:
 
 5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache
 
-6) sudo composer install
+  - if you get permission denied while uploading pictures
+    sudo chmod 777 /public/Pictures
+
+6) 
+      sudo composer install
+        - if composer install give you 
+          Error Output: PHP Fatal error:  Class 'Collective\Html\HtmlServiceProvider' not found 
+          run: composer require illuminate/html
+      sudo composer update
 
 7) change env to .env and then cd to public/htaccess and rename htaccess to .htaccess
 

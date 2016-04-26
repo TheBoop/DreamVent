@@ -23,14 +23,20 @@ class PictureController extends Controller
 	
     //display form for uploading
 	public function upload() {
+<<<<<<< HEAD
 		echo "GET";
 		return view('uploadPicture');
+=======
+		//echo "GET";
+		return view('picture/uploadPicture');
+>>>>>>> e49f42ca0fef61d1ddeefff1e1ba37710383e0c0
 	}
 	
 	//handles storing of the image.
 	//$request is the POST submission.
 	public function store(Request $request) {
-		echo "POST";
+
+		//echo "POST";
 		
 		//new instance of model
 		$picture = new Picture();
@@ -68,7 +74,11 @@ class PictureController extends Controller
 	public function show(Request $request)
     {
         $pictures = Picture::all();
+<<<<<<< HEAD
        return view('viewPictures', compact('pictures'));
+=======
+       return view('picture/viewPictures', compact('pictures'));
+>>>>>>> e49f42ca0fef61d1ddeefff1e1ba37710383e0c0
 
     }
 }

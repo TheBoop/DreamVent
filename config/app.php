@@ -159,6 +159,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //added
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -208,6 +211,10 @@ return [
 		//added
 		'Html'      => 'Illuminate\Html\HtmlFacade',
 		'Form'      => 'Illuminate\Html\FormFacade',
+
+        //added
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
