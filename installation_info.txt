@@ -38,8 +38,10 @@ Installation for EC2 Server:
 
 3) sudo apachectl restart or whatever you are using
 
-4) cd /var/www/Version-X.XX/DreamVent/         
+4) cd /var/www/Version-X.XX/DreamVent/  
 
-5) ./install_script.sh
+5) chmod u+x install_script.sh
+
+6) ./install_script.sh
 
 7) check the site
