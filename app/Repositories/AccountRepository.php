@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\User;
 use App\AccountFrontPage;
+use App\Picture;
 
 class AccountRepository
 {
@@ -14,7 +15,7 @@ class AccountRepository
      */
     public function forUser(User $user)
     {
-        return USER::where('id', $user->id)
+        return Picture::where('author_id', $user->id)
                     ->get();
     }
 }

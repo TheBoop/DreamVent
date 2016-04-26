@@ -12,7 +12,9 @@
                             <tbody>
                                 @foreach ($frontpages as $frontpages)
                                     <tr>
-                                        <td class="table-text"><div>{{ $frontpages->name }}</div></td>
+                                        <div class="table table-bordered bg-success">
+                                            <a href="{!! $frontpages->picture_link !!}">
+                                                {{$frontpages->picture_link}}</a></div>
                                     </tr>
                                 @endforeach
                             </tbody>

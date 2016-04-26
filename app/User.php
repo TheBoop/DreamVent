@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function frontpages()
+    public function pictures()
     {
         return $this->hasMany(AccountFrontPage::class);
     }
