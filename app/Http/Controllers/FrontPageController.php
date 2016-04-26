@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\AccountFrontPage;
+use App\Picture;
 use App\Repositories\AccountRepository;
 
 class FrontPageController extends Controller
