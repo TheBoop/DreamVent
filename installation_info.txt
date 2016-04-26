@@ -40,9 +40,25 @@ Installation for EC2 Server:
 
 4) cd /var/www/Version-X.XX/DreamVent/         
 
-5) sudo chmod -R 777 storage && sudo chmod -R 777 bootstrap/cache
+5) 
+	sudo php artisan cache:clear 
 
-6) sudo composer install
+	sudo chmod -R 777 storage 
+
+	sudo chmod -R 777 bootstrap/cache
+
+	sudo composer dump-autoload	
+
+  - if you get permission denied while uploading pictures
+    sudo chmod -R 777 /public/Pictures
+
+6) 
+      sudo composer install
+        - if composer install give you 
+          Error Output: PHP Fatal error:  Class 'Collective\Html\HtmlServiceProvider' not found 
+          run: composer require illuminate/html
+      sudo composer update
+
 
 7) change env to .env and then cd to public/htaccess and rename htaccess to .htaccess
 

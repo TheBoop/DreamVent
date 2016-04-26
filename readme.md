@@ -1,14 +1,16 @@
-VERSION 1.01
+VERSION 1.10
+
+What is working:
+
+- Login/Register Users
+
+- Temporary upload and view pictures 
 
 Need To Fix/To Be Done:
 
 - Please make sure you understand routing, controllers, views, and models.
 
-- Start adding some functionality since login and registration is working
-    - If you must, you may use rawsql to get some functionality in. 
-
-- Need to add model for USER_LIST_CONTAINS - that raw sql code in AuthController is temporary needs to be transferred to a model. 
-
+- Need more design and view creation from the frontend people. 
 
 Important Info
 
