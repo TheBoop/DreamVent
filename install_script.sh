@@ -7,4 +7,5 @@ sudo composer update
 mv env .env
 cd public/
 mv htaccess .htaccess
+cd ..
 php artisan key:generate
