@@ -4973,3 +4973,4 @@ Stack trace:
 #5 /var/www/Version-1.00/DreamVent/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(155): Illuminate\Session\Middleware\StartSession->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #6 /var/www/Version-1.00/DreamVent/public/index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #7 {main}  
+
