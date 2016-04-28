@@ -23,6 +23,33 @@
 
 use Illuminate\Http\Request;
 
+/*
+|--------------------------------------------------------------------------
+| Tutorials and Examples
+|--------------------------------------------------------------------------
+Create
+Route::post()
+
+Read: whenever we submite our data to the form
+Route::get()
+	Variables
+	Route::get('hello/{name}', function($name){
+		echo 'Hello there ' . $name;
+	});
+
+	Send an item to put route
+	Route::get('test',function(){
+		echo '<form action="test" method="POST">';
+		echo '<input type="submit" value="submit">';
+		echo '<input type="submit" value="submit">';
+	});
+Update
+Route::put()
+
+Delete
+Route::delete()
+*/
+
 
 //need to read up on middleware.
 Route::group(['middleware' => ['web']], function () {
