@@ -46,10 +46,10 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/viewPictures">Temp View Pictures</a></li>
+                    <li><a href="/YourPictures">View Your Pictures</a></li>
                     <li><a href="/browse">Browse</a></li>
                     <li><a href="/search">Search</a></li>
-                    <li><a href="/uploadPicture">Temp Upload</a></li>
+                    <li><a href="/uploadPicture">Picture Upload</a></li>
                     <li><a href="/">Tab 5</a></li>
                     <li><a href="/">Tab 6</a></li>
                     <li class="dropdown">
@@ -92,9 +92,6 @@
 
     @yield('content')
 
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
 </body>
 </html>
