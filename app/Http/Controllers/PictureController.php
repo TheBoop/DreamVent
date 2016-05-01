@@ -23,13 +23,13 @@ class PictureController extends Controller
 	
     //display form for uploading
 	public function upload() {
-		//echo "GET";
 		return view('picture/uploadPicture');
 	}
 	
 	//handles storing of the image.
 	//$request is the POST submission.
 	public function store(Request $request) {
+
 		//echo "POST";
 		
 		//new instance of model
@@ -42,13 +42,13 @@ class PictureController extends Controller
 		
 		//fill out fields in model
 		$picture->description = $request->description;
-		$picture->author_id = Auth::user()->id; //TODO hardcoded for now, figure out how to access from the session?
+		$picture->author_id = Auth::user()->id;
 		
 		if ($request->hasFile('picture')) {
 			$file = Input::file('picture');
 			
 			//prefix it with a timestamp later.
-			$timestamp = $timestamp = str_replace([' ', ':'], '-', microtime()); //lol microtime, TODO find something more informative
+			$timestamp = $timestamp = str_replace([' ', ':'], '-', microtime()); //lol microtime, TODO find something more informative?
 			$name = $timestamp . $file->getClientOriginalName();
 			
 			//$picture->picture_link = public_path().'/Pictures/'. $name;
@@ -68,7 +68,11 @@ class PictureController extends Controller
 	public function show(Request $request)
     {
         $pictures = Picture::all();
-       return view('picture/viewPictures', compact('pictures'));
+
+       return view('viewPictures', compact('pictures'));
+
+     //  return view('picture/viewPictures', compact('pictures'));
+
 
     }
 }

@@ -23,33 +23,6 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| Tutorials and Examples
-|--------------------------------------------------------------------------
-Create
-Route::post()
-
-Read: whenever we submite our data to the form
-Route::get()
-	Variables
-	Route::get('hello/{name}', function($name){
-		echo 'Hello there ' . $name;
-	});
-
-	Send an item to put route
-	Route::get('test',function(){
-		echo '<form action="test" method="POST">';
-		echo '<input type="submit" value="submit">';
-		echo '<input type="submit" value="submit">';
-	});
-Update
-Route::put()
-
-Delete
-Route::delete()
-*/
-
 
 //need to read up on middleware.
 Route::group(['middleware' => ['web']], function () {
@@ -67,14 +40,22 @@ Route::group(['middleware' => ['web']], function () {
 	Route::controllers([
 	   'password' => 'Auth\PasswordController',
 	]);
-	
-	//Check current user
-	//Route::get('/currentUser', 'UserController@currentUser');
-	//Route::resource('profile', 'ProfilesController', ['only' => ['show', 'edit', 'update']]);
-	Route::get('/profile/{username}', 'ProfileController@show');
+
+	//User Profiles
+	//Route::get('/profile/{username}', 'ProfileController@show');
+	Route::get('user/profile', 'UserController@showProfile')->name('profile');
+	Route::get('profile/{username}', function($username){
+		//echo $username;
+		return view('profile.foreign_profile');
+	});
 
 	//=== Uploading Pictures ===
 	//display form
+	//Testing: check current user
+	Route::get('/currentUser', 'UserController@currentUser');
+	
+	//=== Begin: Uploading Pictures ===
+	//Display: upload standalone picture
 	Route::get('/uploadPicture', 'PictureController@upload');
 	
 	//Handles submission
@@ -82,6 +63,23 @@ Route::group(['middleware' => ['web']], function () {
 
 	//View uploaded pictures
 	Route::get('/viewPictures', 'PictureController@show');
+	// === End: Uploading Pictures ===
+	
+	
+	// === Begin: Uploading Stories ===
+	//display: uploading standalone story.
+	Route::get ('/uploadStory/', 'StoryController@uploadParent'); 				//upload story as standalone
+	Route::get ('/uploadStory/{picture_id}', 'StoryController@uploadChild');	//upload story in response to picture prompt
+	
+	//Store
+	Route::post('/uploadStory/', 'StoryController@storeParent');				//store parent
+	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');	
+	
+	
+	
+	//display:
+	
+	
 
 });
 
