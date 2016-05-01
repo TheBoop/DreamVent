@@ -71,7 +71,7 @@ Route::group(['middleware' => ['web']], function () {
 	//Check current user
 	//Route::get('/currentUser', 'UserController@currentUser');
 	//Route::resource('profile', 'ProfilesController', ['only' => ['show', 'edit', 'update']]);
-	Route::get('/profile/{username}', 'ProfilesController@show');
+	Route::get('/profile/{username}', 'ProfileController@show');
 
 	//=== Uploading Pictures ===
 	//display form

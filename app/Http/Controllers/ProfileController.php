@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers
 
 
-class ProfileController.php{
+class ProfileController extends Controller
+{
 	public function show($username)
 	{
 		return view('profile.profile_home',['user' => Auth::user() ]);
