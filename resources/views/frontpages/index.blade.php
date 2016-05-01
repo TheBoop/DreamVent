@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     @if (count($frontpages) > 0)
                 <div class="panel panel-default">

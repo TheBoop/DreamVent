@@ -33,9 +33,10 @@ class FrontPageController extends Controller
      */
     public function index(Request $request)
     {
-        return view('frontpages.index', [
+        /*return view('frontpages.index', [
             'frontpages' => $this->frontpages->forUser($request->user()),
-        ]);
+        ]);*/
+        return view('welcome');
     }
     
 }

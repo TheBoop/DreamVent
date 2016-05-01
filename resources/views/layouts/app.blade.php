@@ -18,7 +18,7 @@
     <style>
         body {
             font-family: 'Lato';
-            background-color: lightblue;
+            background-color: rgb(115,205,100);
         }
         .fa-btn {
             margin-right: 6px;
@@ -81,6 +81,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="/{{ Auth::user()->name }}">Personal Page</a></li>
                                 <li><a href="{{ url('logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
