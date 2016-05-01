@@ -1,0 +1,5 @@
+/vendor
+/bootstrap/cache/compiled.php
+*.log
+.DS_Store
+.DS_Store?
