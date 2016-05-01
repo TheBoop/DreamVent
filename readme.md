@@ -9,6 +9,8 @@ What is working:
 
 Need To Fix/To Be Done:
 
+- As you can see the front page needs some design!!
+
 - A lot of these are stub pages for people who are working on the frontend.
 
 - Please make sure you understand routing, controllers, views, and models.
