@@ -3,3 +3,7 @@
 *.log
 .DS_Store
 .DS_Store?
+*.log
+*.php
+storage/framework/views/03a416f96d23cc101844ab57dde2723f00a768d9.php
+*.log

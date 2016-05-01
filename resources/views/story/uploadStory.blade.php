@@ -9,7 +9,6 @@
 <img class="img-rounded"
      src="{{asset($picture_path)}}"> 
 </img>
-	
 @endif
 
 
@@ -22,7 +21,12 @@
           </div>
         @endif
         <div class="secure">Upload form</div>
-        {!! Form::open(array('url'=>'/uploadStory','method'=>'POST')) !!}
+		@if ($picture_path != NULL)
+			{!! Form::open(array('url'=>'/uploadStory/'.$picture_id,'method'=>'POST')) !!}
+		@else
+			{!! Form::open(array('url'=>'/uploadStory','method'=>'POST')) !!}
+		@endif
+		
          <div class="control-group">
           <div class="controls">
 			{{ Form::textarea('storyContent') }} 

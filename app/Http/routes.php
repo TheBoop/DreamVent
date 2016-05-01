@@ -28,11 +28,11 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['web']], function () {
 	
 	//welcome page
-	Route::get('/', function () {
-	    return view('welcome');
-	})->middleware('guest');
+	Route::get('/', 'WelcomeController@nonUserFrontPage'
+		)->middleware('guest');
 
-	Route::get('/frontpages', 'FrontPageController@index');
+	Route::get('/frontpages', 'FrontPageController@userBaseFrontPage');
+	Route::get('/YourPictures', 'FrontPageController@YourPictures');
 	
 	//authentication
 	Route::auth();
@@ -41,18 +41,24 @@ Route::group(['middleware' => ['web']], function () {
 	   'password' => 'Auth\PasswordController',
 	]);
 
-	//User Profiles
-	//Route::get('/profile/{username}', 'ProfileController@show');
-	Route::get('user/profile', 'UserController@showProfile')->name('profile');
+	// === User Page
 	Route::get('profile/{username}', function($username){
 		//echo $username;
 		return view('profile.foreign_profile');
 	});
 
-	//=== Uploading Pictures ===
-	//display form
-	//Testing: check current user
+	//=== Begin: Temporary Test Stuff ===
 	Route::get('/currentUser', 'UserController@currentUser');
+	// === End: Temporary Test Stuff ===
+	
+	// === Begin: Post Page ===
+	//Route::get('/post/pic/{picture_id}','PostPage@ViewImage');
+	//Route::get('/post/story/{story_id}','PostPage@ViewStory');
+	
+	//Route::get('/post/pic/{picture_id}', function() {
+	//	return view('my_view',['picture_id' => 1])
+	//})
+
 	
 	//=== Begin: Uploading Pictures ===
 	//Display: upload standalone picture
@@ -64,8 +70,7 @@ Route::group(['middleware' => ['web']], function () {
 	//View uploaded pictures
 	Route::get('/viewPictures', 'PictureController@show');
 	// === End: Uploading Pictures ===
-	
-	
+
 	// === Begin: Uploading Stories ===
 	//display: uploading standalone story.
 	Route::get ('/uploadStory/', 'StoryController@uploadParent'); 				//upload story as standalone
@@ -73,8 +78,8 @@ Route::group(['middleware' => ['web']], function () {
 	
 	//Store
 	Route::post('/uploadStory/', 'StoryController@storeParent');				//store parent
-	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');	
-	
+	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');		//store child
+	// === End: Uploading Stories ===
 	
 	
 	//display:
