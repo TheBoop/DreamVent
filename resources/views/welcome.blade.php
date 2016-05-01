@@ -15,8 +15,16 @@
 
 <div class="container">
     @foreach ($frontpages as $frontpage)
-        <a href="{{ url('/viewPost/'.$frontpage->picture_id) }}">
         <img src="{!! $frontpage->picture_link !!}">
+        <a href="{{ url('/viewPost/'.$frontpage->picture_id) }}">
+            <button 
+                class="btn btn-primary">View Post Page
+            </button>
+        </a>
+        <a href="{{ url('/uploadStory/'.$frontpage->picture_id) }}">
+            <button 
+                class="btn btn-primary">Make your Story
+            </button>
         </a>
     @endforeach
 </div>

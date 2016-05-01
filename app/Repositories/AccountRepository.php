@@ -19,7 +19,7 @@ class AccountRepository
         //return Picture::where('author_id', $user->id)
         //          ->get();
         //order by tags likes etc
-        return Picture::get();
+        return Picture::paginate(4);
     }
     public function forNonUser()
     {
@@ -30,6 +30,6 @@ class AccountRepository
     public function viewYourOwnPicture(User $user)
     {
        return Picture::where('author_id', $user->id)
-                    ->get(); 
+                    ->paginate(4);
     }
 }
