@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Auth; //for Auth::user()
 
 use App\Http\Requests;
 
-use App\Story; //Eloquent Model
-use App\Picture; //Eloquent Model
+//Eloquent Models
+use App\Story; 
+use App\Picture; 
+use App\GrabPics; 
 
 class StoryController extends Controller
 {
@@ -26,8 +28,6 @@ class StoryController extends Controller
 
 	//This is for uploading a standalone story.
 	public function uploadParent () {
-		echo "upload parent story <br/>";
-		
 		return view('story/uploadStory', ['picture_path' => NULL]);
 	}
 	
@@ -52,19 +52,18 @@ class StoryController extends Controller
 	
 	//This is for uploading a story as a response to a picture prompt.
 	public function uploadChild ($picture_id) {
-		echo "in progress <br/>";
-		echo "upload child story <br/>";
-		
+
 		$picture = Picture::find($picture_id);
 		echo $picture->picture_link;
 		
-		return view('story/uploadStory', ['picture_path' => $picture->picture_link]);
-		
-		//{{ URL::to('/') }}/images/stackoverflow.png
+		return view('story/uploadStory', 
+					['picture_path' => $picture->picture_link,
+					 'picture_id' => $picture_id
+					]);
 	}
 	
 	//Storing a child involves a picture_id of some sort.
-	public function storeChild () {
+	public function storeChild (Request $request, $picture_id) {
 		//new instance of model
 		$story = new Story();
 		$grab_pics = new GrabPics();
@@ -79,6 +78,12 @@ class StoryController extends Controller
 		$story->content = $request->storyContent;
 		
 		$story->save();
+		
+		//fill grab_pics relation table
+		$grab_pics->story_id = $story->story_id;
+		$grab_pics->picture_id = $picture_id;
+		
+		$grab_pics->save();
 		
 		return;
 	}
