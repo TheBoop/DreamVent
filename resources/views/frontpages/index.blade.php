@@ -4,7 +4,7 @@
     @if (count($frontpages) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Temp User Page
+                        Front Page Of the Interwebs
                     </div>
 
                     <div class="panel-body">
@@ -13,8 +13,8 @@
                                 @foreach ($frontpages as $frontpages)
                                     <tr>
                                         <div class="table table-bordered bg-success">
-                                            <a href="{!! $frontpages->picture_link !!}">
-                                                {{$frontpages->picture_link}}</a></div>
+                                        <li><a href="{{ url('/viewPost/'.$frontpages->picture_id) }}">
+                                        <img src="{!! $frontpages->picture_link !!}"/>
                                     </tr>
                                 @endforeach
                             </tbody>

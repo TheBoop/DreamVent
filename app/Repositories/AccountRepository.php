@@ -13,9 +13,17 @@ class AccountRepository
      * @param  User  $user
      * @return Collection
      */
-    public function forUser(User $user)
+    public function UserFrontPage(User $user)
     {
-        return Picture::where('author_id', $user->id)
-                    ->get();
+        //order by tags likes etc
+        //return Picture::where('author_id', $user->id)
+        //          ->get();
+        //order by tags likes etc
+        return Picture::get();
+    }
+    public function forNonUser()
+    {
+       return Picture::orderBy('num_likes', 'DESC')
+                    ->get(); 
     }
 }

@@ -1,17 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Welcome</div>
-                <div class="panel-body">
-                    Your Application's Landing Page.
+    @if (count($frontpages) > 0)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Front Page Of the Interwebs
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-striped task-table">
+                            <tbody>
+                                @foreach ($frontpages as $frontpages)
+                                    <tr>
+                                        <div class="table table-bordered bg-success">
+                                        <li><a href="{{ url('/viewPost/'.$frontpages->picture_id) }}">
+                                        <img src="{!! $frontpages->picture_link !!}"/>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            @endif
 @endsection

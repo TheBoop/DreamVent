@@ -10,7 +10,7 @@ use App\AccountFrontPage;
 use App\Picture;
 use App\Repositories\AccountRepository;
 
-class FrontPageController extends Controller
+class WelcomeController extends Controller
 {
     /**
      * The task repository instance.
@@ -18,12 +18,11 @@ class FrontPageController extends Controller
      * @var TaskRepository
      */
     protected $frontpages;
-
     public function __construct(AccountRepository $frontpages)
     {
-        $this->middleware('auth');
         $this->frontpages = $frontpages;
     }
+
 
     /**
      * Display a list of all of the user's task.
@@ -31,10 +30,10 @@ class FrontPageController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function userBaseFrontPage(Request $request)
+    public function nonUserFrontPage()
     {
-        return view('frontpages.index', [
-            'frontpages' => $this->frontpages->UserFrontPage($request->user()),
+        return view('welcome', [
+            'frontpages' => $this->frontpages->forNonUser(),
         ]);
     }
     
