@@ -41,11 +41,11 @@ Route::group(['middleware' => ['web']], function () {
 	   'password' => 'Auth\PasswordController',
 	]);
 	
-	//Check current user
+	//Testing: check current user
 	Route::get('/currentUser', 'UserController@currentUser');
 	
-	//=== Uploading Pictures ===
-	//display form
+	//=== Begin: Uploading Pictures ===
+	//Display: upload standalone picture
 	Route::get('/uploadPicture', 'PictureController@upload');
 	
 	//Handles submission
@@ -53,6 +53,23 @@ Route::group(['middleware' => ['web']], function () {
 
 	//View uploaded pictures
 	Route::get('/viewPictures', 'PictureController@show');
+	// === End: Uploading Pictures ===
+	
+	
+	// === Begin: Uploading Stories ===
+	//display: uploading standalone story.
+	Route::get ('/uploadStory/', 'StoryController@uploadParent'); 				//upload story as standalone
+	Route::get ('/uploadStory/{picture_id}', 'StoryController@uploadChild');	//upload story in response to picture prompt
+	
+	//Store
+	Route::post('/uploadStory/', 'StoryController@storeParent');				//store parent
+	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');	
+	
+	
+	
+	//display:
+	
+	
 
 });
 

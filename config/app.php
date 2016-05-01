@@ -149,7 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 		
 		//Non-core
-		Illuminate\Html\HtmlServiceProvider::class,
+		//Illuminate\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -207,10 +207,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-		
-		//added
-		'Html'      => 'Illuminate\Html\HtmlFacade',
-		'Form'      => 'Illuminate\Html\FormFacade',
 
         //added
         'Form' => Collective\Html\FormFacade::class,

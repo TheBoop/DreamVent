@@ -25,6 +25,7 @@ class User extends Authenticatable
 		'pagelist_id', 
 		'holderid4', 'holderid5', 'holderid6','holderid7','holderid8', 'holderid9',
     ];
+	
     /**
      * The attributes excluded from the model's JSON form.
      *
