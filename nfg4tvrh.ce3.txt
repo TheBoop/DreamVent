@@ -1,0 +1,36 @@
+﻿Merge remote-tracking branch 'refs/remotes/origin/master' into chris
+
+# Conflicts:
+#	storage/logs/laravel.log
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch chris
+# Your branch is up-to-date with 'origin/chris'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	renamed:    env -> .env
+#	modified:   app/Http/routes.php
+#	modified:   bootstrap/autoload.php
+#	modified:   bootstrap/cache/services.php
+#	modified:   composer.json
+#	modified:   composer.lock
+#	renamed:    public/htaccess -> public/.htaccess
+#	new file:   resources/views/user.php
+#	new file:   storage/framework/views/03a416f96d23cc101844ab57dde2723f00a768d9.php
+#	new file:   storage/framework/views/10512d9ef71e2c1e14c9d9a13e1ea1cde490b45d.php
+#	new file:   storage/logs/laravel.log
+#
+# Changes not staged for commit:
+#	modified:   .gitignore
+#	deleted:    resources/views/user.php
+#
+
