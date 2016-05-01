@@ -24,9 +24,9 @@ class AccountRepository
     public function forNonUser()
     {
        return Picture::orderBy('num_likes', 'DESC')
-                    ->get(); 
+                    ->paginate(4); 
     }
-    
+
     public function viewYourOwnPicture(User $user)
     {
        return Picture::where('author_id', $user->id)
