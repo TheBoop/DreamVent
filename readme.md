@@ -1,12 +1,15 @@
-VERSION 1.10
+VERSION 1.30
 
 What is working:
 
 - Login/Register Users
-
-- Temporary upload and view pictures 
+- Front Page with Pictures (shows based on non-existant number of likes)
+- Temporary upload page
+- Write a story
 
 Need To Fix/To Be Done:
+
+- A lot of these are stub pages for people who are working on the frontend.
 
 - Please make sure you understand routing, controllers, views, and models.
 
