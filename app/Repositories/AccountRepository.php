@@ -26,4 +26,10 @@ class AccountRepository
        return Picture::orderBy('num_likes', 'DESC')
                     ->get(); 
     }
+    
+    public function viewYourOwnPicture(User $user)
+    {
+       return Picture::where('author_id', $user->id)
+                    ->get(); 
+    }
 }

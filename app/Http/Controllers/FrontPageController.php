@@ -37,5 +37,11 @@ class FrontPageController extends Controller
             'frontpages' => $this->frontpages->UserFrontPage($request->user()),
         ]);
     }
+    public function YourPictures(Request $request)
+    {
+        return view('frontpages.index', [
+            'frontpages' => $this->frontpages->viewYourOwnPicture($request->user()),
+        ]);
+    }
     
 }

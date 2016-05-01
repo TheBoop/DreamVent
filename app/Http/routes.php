@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 		)->middleware('guest');
 
 	Route::get('/frontpages', 'FrontPageController@userBaseFrontPage');
+	Route::get('/YourPictures', 'FrontPageController@YourPictures');
 	
 	//authentication
 	Route::auth();
