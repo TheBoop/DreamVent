@@ -53,13 +53,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::controllers([
 	   'password' => 'Auth\PasswordController',
 	]);
-<<<<<<< HEAD
-	// === End: Temporary Test Stuff ===
-	
-	// === Begin: Post Page ===
-	//Route::get('/post/pic/{picture_id}','PostPage@ViewImage');
-	//Route::get('/post/story/{story_id}','PostPage@ViewStory');
-=======
 	
 	/*
 	* =====================
@@ -79,8 +72,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/currentUser', 'UserController@currentUser');
 	//Route::get('/test/{picture_id}', 'test@test' );
 
->>>>>>> refs/remotes/origin/Matt_2
-	
 
 	/*
 	* =====================

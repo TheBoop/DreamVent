@@ -7,15 +7,10 @@
 <body id="app-layout">
     <nav class="navbar navbar-default">
         <div class="container">
-
-            @include('includes.header')
-
-<<<<<<< HEAD
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     DreamVents
                 </a>
-            </div>
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -60,8 +55,6 @@
                     @endif
                 </ul>
             </div>
-=======
->>>>>>> refs/remotes/origin/Matt_2
         </div>
     </nav>
 
