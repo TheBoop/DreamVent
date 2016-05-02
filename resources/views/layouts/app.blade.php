@@ -48,7 +48,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/YourPictures">View Your Pictures</a></li>
                     <li><a href="/browse">Browse</a></li>
-                    <li><a href="/search">Search</a></li>
+                    <li><a href="/searchtest">Search</a></li>
                     <li><a href="/uploadPicture">Picture Upload</a></li>
                     <li><a href="/">Tab 5</a></li>
                     <li><a href="/">Tab 6</a></li>
