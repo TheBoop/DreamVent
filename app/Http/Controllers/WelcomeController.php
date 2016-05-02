@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\AccountFrontPage;
 use App\Picture;
 use App\Repositories\AccountRepository;
+use Illuminate\Support\Facades\Input;
 
 class WelcomeController extends Controller
 {
@@ -34,6 +35,26 @@ class WelcomeController extends Controller
     {
         return view('welcome', [
             'frontpages' => $this->frontpages->forNonUser(),
+        ]);
+    }
+
+    public function gettestSearch(Request $request)
+    {
+        //get keyword
+        //the frontpages => line doesnt make sense to me but it kept getting
+        //variable frontpages not found if i left it there
+        //to fix line the view page must be fixed to handle post/get
+        //too tired to do that right now
+        return view('test', [
+            'frontpages' => $this->frontpages->showTagResults($request->keyword),
+        ]);
+    }
+    public function posttestSearch(Request $request)
+    {
+        //uses keyword input to search
+        //Function in App/Repositories/AccountRepository.php
+        return view('test', [
+            'frontpages' => $this->frontpages->showTagResults($request->keyword),
         ]);
     }
     
