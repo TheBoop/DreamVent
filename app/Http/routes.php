@@ -52,7 +52,7 @@ Route::group(['middleware' => ['web']], function () {
 	// === End: Temporary Test Stuff ===
 	
 	// === Begin: Post Page ===
-	Route::get('/post/pic/{picture_id}','PostPageController@ViewPost');
+	Route::get('/post/pic/{picture_id}','PostPage@ViewPost');
 	//Route::get('/post/story/{story_id}','PostPageController@ViewStory');
 	
 	//Route::get('/post/pic/{picture_id}', function() {

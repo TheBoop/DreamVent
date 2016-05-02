@@ -34,7 +34,7 @@
                 <div class="panel-heading">posting</div>
 
                 <div class="panel-body">
-                    <img src="{{ URL::to('/') }}{{$picture->picture_link}} " width="500" height="300"
+                    <img src="{{ URL::to('/') }}public{{$picture->picture_link}} " width="500" height="300"
                     
                     <div position: fixed; top 100px;>
                       <a onclick={{$picture->num_likes}}++>
@@ -45,6 +45,7 @@
                     <div class="panel panel-default">
                       <div class="panel-heading">description</div>
                         {{$picture->description}}
+                        /public{{$picture->picture_link}}
                       </div>
                     </div>
                 </div>
