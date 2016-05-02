@@ -1,17 +1,12 @@
 <?php
-
 /*
 *
 *	Why there are methods for parent/child: I thought you might use different views and 
 *	I don't know if I have to handle the data differently.
 */
-
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; //for Auth::user()
-
 use App\Http\Requests;
 
 //Eloquent Models
@@ -25,7 +20,6 @@ class StoryController extends Controller
 	public function __construct() {
 		$this->middleware('auth');
 	}
-
 	//This is for uploading a standalone story.
 	public function uploadParent () {
 		return view('story/uploadStory', ['picture_path' => NULL]);
@@ -52,7 +46,6 @@ class StoryController extends Controller
 	
 	//This is for uploading a story as a response to a picture prompt.
 	public function uploadChild ($picture_id) {
-
 		$picture = Picture::find($picture_id);
 		echo $picture->picture_link;
 		
@@ -98,5 +91,4 @@ class StoryController extends Controller
 		echo "test elegant store";
 		return;
 	}
-
 }

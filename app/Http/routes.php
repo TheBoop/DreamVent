@@ -27,7 +27,11 @@ use Illuminate\Http\Request;
 //need to read up on middleware.
 Route::group(['middleware' => ['web']], function () {
 	
-	//welcome page
+	/*
+	* =====================
+	* Welcome Page
+	* =====================
+	*/
 	Route::get('/', 'WelcomeController@nonUserFrontPage'
 		)->middleware('guest');
 
@@ -39,50 +43,98 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/searchtest', 'WelcomeController@gettestSearch');
 	Route::post('/searchtest', 'WelcomeController@posttestSearch');
 	
-	//authentication
+	/*
+	* =====================
+	* Authentication
+	* =====================
+	*/
 	Route::auth();
 	
 	Route::controllers([
 	   'password' => 'Auth\PasswordController',
 	]);
+<<<<<<< HEAD
 	// === End: Temporary Test Stuff ===
 	
 	// === Begin: Post Page ===
 	//Route::get('/post/pic/{picture_id}','PostPage@ViewImage');
 	//Route::get('/post/story/{story_id}','PostPage@ViewStory');
+=======
 	
-	//Route::get('/post/pic/{picture_id}', function() {
-	//	return view('my_view',['picture_id' => 1])
-	//})
+	/*
+	* =====================
+	* User Page
+	* =====================
+	*/
+	Route::get('profile/{username}', function($username){
+		//echo $username;
+		return view('profile.foreign_profile');
+	});
+
+	/*
+	* =====================
+	* Temporary Test Stuff
+	* =====================
+	*/
+	Route::get('/currentUser', 'UserController@currentUser');
+	//Route::get('/test/{picture_id}', 'test@test' );
+
+>>>>>>> refs/remotes/origin/Matt_2
 	
+
+	/*
+	* =====================
+	* Post Page (i.e. displaying content)
+	* =====================
+	*/
+	//Display
+	Route::get('/post/picture/{picture_id}','PostPage@ViewImage');
+	Route::get('/post/story/{story_id}','PostPage@ViewStory');
 	
-	//=== Begin: Uploading Pictures ===
-	//Display: upload standalone picture
+	//Comments
+	Route::post('/post/picture/{picture_id}','PostPage@StoreImageComment');
+	Route::post('/post/story/{story_id}','PostPage@StoreStoryComment');
+
+	
+	/*
+	* =====================
+	* Browsing
+	* =====================
+	*/
+	//content: pictures, stories
+	Route::get('/browse', 'Browse@defaultBrowse');
+	//users
+	Route::get('/browseUsers', 'Browse@defaultBrowseUser');
+
+
+	
+	/*
+	* =====================
+	* Uploading Pictures
+	* =====================
+	*/
+	//Upload Form
 	Route::get('/uploadPicture', 'PictureController@upload');
 	
-	//Handles submission
+	//Store
 	Route::post('/uploadPicture', 'PictureController@store');
 
 	//View uploaded pictures
 	Route::get('/viewPictures', 'PictureController@show');
-	// === End: Uploading Pictures ===
 	
-	// === Begin: Uploading Stories ===
-	//display: uploading standalone story.
+	/*
+	* =====================
+	* Uploading Stories
+	* =====================
+	*/
+	//Upload Form
 	Route::get ('/uploadStory/', 'StoryController@uploadParent'); 				//upload story as standalone
 	Route::get ('/uploadStory/{picture_id}', 'StoryController@uploadChild');	//upload story in response to picture prompt
 	
 	//Store
 	Route::post('/uploadStory/', 'StoryController@storeParent');				//store parent
 	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');		//store child
-	// === End: Uploading Stories ===
-	
-	
-	
-	
-	
-	//display:
-	
+
 	
 
 });

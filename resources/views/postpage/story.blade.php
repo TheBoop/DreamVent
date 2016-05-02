@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- display story -->
+{{$story->content}}
+<br/>
+<br/>
+
+<!-- display comments -->
+These are comments attached to this picture. <br/>
+@foreach ($comments as $comment)
+	{{$comment->text}} <br/>
+@endforeach
+
+<!-- comment text area-->
 <div class="about-section">
    <div class="text-content">
      <div class="span7 offset1">
@@ -9,17 +22,15 @@
           <h2>{!! Session::get('success') !!}</h2>
           </div>
         @endif
-        <div class="secure">Upload form</div>
-        {!! Form::open(array('url'=>'/uploadPicture','method'=>'POST', 'files'=>true)) !!}
+        <div class="secure">Post Comment</div>
+			{!! Form::open(array('url'=>'/post/story/'.$story->story_id,'method'=>'POST')) !!}
          <div class="control-group">
           <div class="controls">
-          {!! Form::file('picture') !!}
-		  
-		  Description:
-		  {!! Form::text('description') !!}
-	  <p class="errors">{!!$errors->first('image')!!}</p>
+			{{ Form::textarea('comment') }} 
+			
+	  <p class="errors">{!!$errors->first('story')!!}</p> <!-- I'm not sure what this line is actually for, or if I'm doing it right. -->
 	@if(Session::has('error'))
-	<p class="errors">{!! Session::get('error') !!}</p>
+	<p class="errors">{!! Session::get('error') !!}</p> 
 	@endif
         </div>
         </div>
@@ -29,4 +40,6 @@
       </div>
    </div>
 </div>
+
+
 @endsection

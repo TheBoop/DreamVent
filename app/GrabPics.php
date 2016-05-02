@@ -11,7 +11,7 @@ class GrabPics extends Model
 	
 	//timestamps 
 	public $timestamps = false;
-	
+
 	//mass-assignable fields
 	protected $fillable = [
 		'picture_id',
