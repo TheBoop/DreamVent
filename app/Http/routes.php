@@ -52,8 +52,8 @@ Route::group(['middleware' => ['web']], function () {
 	// === End: Temporary Test Stuff ===
 	
 	// === Begin: Post Page ===
-	//Route::get('/post/pic/{picture_id}','PostPage@ViewImage');
-	//Route::get('/post/story/{story_id}','PostPage@ViewStory');
+	Route::get('/post/pic/{picture_id}','PostPageController@ViewImage');
+	//Route::get('/post/story/{story_id}','PostPageController@ViewStory');
 	
 	//Route::get('/post/pic/{picture_id}', function() {
 	//	return view('my_view',['picture_id' => 1])
