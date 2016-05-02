@@ -45,7 +45,7 @@ class WelcomeController extends Controller
         //variable frontpages not found if i left it there
         //to fix line the view page must be fixed to handle post/get
         //too tired to do that right now
-        return view('test', [
+        return view('testsearch', [
             'frontpages' => $this->frontpages->showTagResults($request->keyword),
         ]);
     }
@@ -53,7 +53,7 @@ class WelcomeController extends Controller
     {
         //uses keyword input to search
         //Function in App/Repositories/AccountRepository.php
-        return view('test', [
+        return view('testsearch', [
             'frontpages' => $this->frontpages->showTagResults($request->keyword),
         ]);
     }
