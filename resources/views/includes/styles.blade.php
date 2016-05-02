@@ -10,3 +10,5 @@
     .fa-btn {
         margin-right: 6px;
     }
+    
+</style>

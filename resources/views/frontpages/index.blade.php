@@ -15,7 +15,7 @@
 
 <div class="container">
     @foreach ($frontpages as $frontpage)
-        <a href="/post/pic/{{$frontpage->picture_id}}"><img src="{{ URL::to('/') }}{{$frontpage->picture_link}} " width="500" height="300" </a>
+        <a href="/post/pic/{{$frontpage->picture_id}}"><img src="{{ URL::to('/') }}{{$frontpage->picture_link}} "</a>
     @endforeach
 </div>
 {!! $frontpages->links() !!}

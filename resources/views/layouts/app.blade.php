@@ -68,8 +68,5 @@
         </div>
         
     </div>
-    <!-- JavaScripts -->
-    @include('javascript.include_java')
-
 </body>
 </html>
