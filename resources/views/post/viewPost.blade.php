@@ -92,7 +92,7 @@
                 <div class="panel-heading">posting</div>
 
                 <div class="panel-body">
-                    <img src="{{ URL::to('/') }}{{$picture->picture_link}} " width="500" height="300"
+                    <img src="{{ URL::to('/') }}{{$picture->picture_link}} "
                     
                     <div position: fixed; width: 300px; height: 60px;>
                       <a>
