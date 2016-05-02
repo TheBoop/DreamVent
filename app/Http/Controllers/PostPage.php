@@ -27,6 +27,11 @@ class PostPage extends Controller
 			 'story_ids' => $story_ids,
 			 'comments' => $comments]);
 	}
+
+    public function ViewPost($picture_id) {
+		return view('post/viewPost',  ['picture' => Picture::find($picture_id)]);
+
+	}
 	
 	public function ViewStory ($story_id) {
 		$story = Story::find($story_id);

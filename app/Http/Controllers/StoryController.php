@@ -8,12 +8,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; //for Auth::user()
 use App\Http\Requests;
-
 //Eloquent Models
 use App\Story; 
 use App\Picture; 
 use App\GrabPics; 
-
 class StoryController extends Controller
 {
     //User must be authenticated.

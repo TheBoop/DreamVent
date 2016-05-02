@@ -53,6 +53,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::controllers([
 	   'password' => 'Auth\PasswordController',
 	]);
+
 	
 	/*
 	* =====================
@@ -97,6 +98,17 @@ Route::group(['middleware' => ['web']], function () {
 	//users
 	Route::get('/browseUsers', 'Browse@defaultBrowseUser');
 
+	//=== Begin: Temporary Test Stuff ===
+	Route::get('/currentUser', 'UserController@currentUser');
+	// === End: Temporary Test Stuff ===
+	
+	// === Begin: Post Page ===
+	Route::get('/post/pic/{picture_id}','PostController@ViewPost');
+	//Route::get('/post/story/{story_id}','PostPageController@ViewStory');
+	
+	//Route::get('/post/pic/{picture_id}', function() {
+	//	return view('my_view',['picture_id' => 1])
+	//})
 
 	
 	/*
@@ -118,15 +130,11 @@ Route::group(['middleware' => ['web']], function () {
 	* Uploading Stories
 	* =====================
 	*/
-	//Upload Form
 	Route::get ('/uploadStory/', 'StoryController@uploadParent'); 				//upload story as standalone
 	Route::get ('/uploadStory/{picture_id}', 'StoryController@uploadChild');	//upload story in response to picture prompt
 	
 	//Store
 	Route::post('/uploadStory/', 'StoryController@storeParent');				//store parent
 	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');		//store child
-
-	
-
 });
 
