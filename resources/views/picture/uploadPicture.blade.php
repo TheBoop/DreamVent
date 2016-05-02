@@ -15,7 +15,7 @@
           <div class="controls">
           {!! Form::file('picture') !!}
 		  
-		  what the hell are you uploading this time?:
+		  Description:
 		  {!! Form::text('description') !!}
 	  <p class="errors">{!!$errors->first('image')!!}</p>
 	@if(Session::has('error'))

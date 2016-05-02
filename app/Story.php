@@ -12,13 +12,10 @@ class Story extends Model
 	//primary key
 	protected $primaryKey = 'story_id';
 	
-	//set timestamps false;
-	public $timestamps  = false;
-	
 	protected $fillable = [
 		'author_id',
 		'content',
-		//'num_likes',
+		'num_likes',
 	];
 	
 }

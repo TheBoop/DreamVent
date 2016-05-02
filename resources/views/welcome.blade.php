@@ -10,9 +10,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
+
 @section('content')
 <body>
-
 <div class="container">
     @foreach ($frontpages as $frontpage)
         <img src="{!! $frontpage->picture_link !!}">
