@@ -25,23 +25,31 @@ class AccountRepository
         return Picture::paginate(4);
     }
 
-    //for any random user. this is our "front page of the internet" like reddit
+    /*
+     * for any non-logged user. this is our "front page of the internet" like reddit.
+     * There is no preference for the user
+     */
     public function forNonUser()
     {
        return Picture::orderBy('num_likes', 'DESC')
                     ->paginate(4); 
     }
 
-    //show user's own pics
+    /*
+     * Show pictures of the current User
+     */
     public function viewYourOwnPicture(User $user)
     {
        return Picture::where('author_id', $user->id)
                     ->paginate(4);
     }
 
-    //THIS currently gets keyword and searches TABLE PICTURE for keyword in description
-    //Need to modify to multitags and such.
-    //I will clean/setup models after midterms
+
+    /*
+     * THIS currently gets keyword and searches TABLE PICTURE for keyword in description
+     * Need to modify to search for multitags and such.
+     */
+    
     public function showTagResults($keyword)
     {
         $keyword = Input::get('keyword');

@@ -84,35 +84,33 @@
 }
 
 </style> </head>
-
+<?php
+var_dump($picture->num_likes);
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">posting</div>
-
-                <div class="panel-body">
-                    <img src="{{ URL::to('/') }}{{$picture->picture_link}} "
-                    
-                    <div position: fixed; width: 300px; height: 60px;>
-                      <a>
-                        <a href="#" class="likeButton" ; size: fixed>{{$picture->num_likes}}</a>
-                      </a>
-                      
-                      <a>
-                        <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton">Post</a>
-                      </a>
-                    
-                    </div>
-                    
-                    <div class="panel panel-default">
-                      <div class="panel-heading">description</div>
-                        {{$picture->description}}
-                      </div>
-                    </div>
-                </div>
-                
-            </div>
+                	<div class="panel-body">
+                	    <img src="{{ URL::to('/') }}{{$picture->picture_link}} "
+                	    
+                	    <div position: fixed; width: 300px; height: 60px;>
+                	      <a>
+                	        <a href="#" class="likeButton" ; size: fixed>{{$picture->num_likes}}</a>
+                	      </a>
+                	      
+                	      <a>
+                	        <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton">Post</a>
+                	      </a>
+                	    
+                	    </div>
+                	    
+                	    <div class="panel panel-default">
+                	      <div class="panel-heading">description</div>
+                	        {{$picture->description}}
+        	    		</div>
+        	</div>
         </div>
     </div>
 </div>

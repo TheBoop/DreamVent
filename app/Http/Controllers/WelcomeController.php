@@ -25,12 +25,6 @@ class WelcomeController extends Controller
     }
 
 
-    /**
-     * Display a list of all of the user's task.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
     public function nonUserFrontPage()
     {
         return view('welcome', [
@@ -38,21 +32,26 @@ class WelcomeController extends Controller
         ]);
     }
 
+    /*
+     *  get keyword from view
+     *  the frontpages => line doesnt make sense to me but it kept getting
+     *  variable frontpages not found if I did not leave it there
+     *  to get rid of line the view page must be changed to handle post/get
+     *  frontpages => ~~ does not affect functionality in this function
+     */
     public function gettestSearch(Request $request)
     {
-        //get keyword
-        //the frontpages => line doesnt make sense to me but it kept getting
-        //variable frontpages not found if i left it there
-        //to fix line the view page must be fixed to handle post/get
-        //too tired to do that right now
         return view('testsearch', [
             'frontpages' => $this->frontpages->showTagResults($request->keyword),
         ]);
     }
+
+    /*
+     *  uses $keyword (from the view) input to search
+     *  Search Function in App/Repositories/AccountRepository.php
+     */
     public function posttestSearch(Request $request)
     {
-        //uses keyword input to search
-        //Function in App/Repositories/AccountRepository.php
         return view('testsearch', [
             'frontpages' => $this->frontpages->showTagResults($request->keyword),
         ]);

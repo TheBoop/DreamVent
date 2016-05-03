@@ -13,9 +13,9 @@ use App\Repositories\AccountRepository;
 class FrontPageController extends Controller
 {
     /**
-     * The task repository instance.
+     * Instance for Front page for Logged-In User
      *
-     * @var TaskRepository
+     * 
      */
     protected $frontpages;
 
@@ -26,10 +26,10 @@ class FrontPageController extends Controller
     }
 
     /**
-     * Display a list of all of the user's task.
-     *
-     * @param  Request  $request
-     * @return Response
+     * Gets Pictures based on search algorithm in AccountRepository 
+     * function UserFrontPage()
+     * @param  We can change paramater to fit our needs
+     * @return View with set of pictures returned from UserFrontPage function
      */
     public function userBaseFrontPage(Request $request)
     {
@@ -37,6 +37,13 @@ class FrontPageController extends Controller
             'frontpages' => $this->frontpages->UserFrontPage($request->user()),
         ]);
     }
+
+    /**
+     * Gets Pictures based on search algorithm in AccountRepository 
+     * function UserFrontPage()
+     * @param  request is user() info
+     * @return View with set of pictures where user()->id
+     */
     public function YourPictures(Request $request)
     {
         return view('frontpages.index', [
