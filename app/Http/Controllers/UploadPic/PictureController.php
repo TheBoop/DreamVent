@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\UploadPic;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth; //for Auth::user()
 
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 use Validator;
 use Redirect;
@@ -62,19 +63,6 @@ class PictureController extends Controller
 		//return $this->create()->with('success', 'what black magic is this?!?!'); 
 		
 	}
-	
-	
-	//show all pictures
-	public function show(Request $request)
-    {
-        $pictures = Picture::all();
-
-       return view('viewPictures', compact('pictures'));
-
-     //  return view('picture/viewPictures', compact('pictures'));
-
-
-    }
 }
 
 

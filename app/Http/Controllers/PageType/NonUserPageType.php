@@ -1,34 +1,42 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\pageType;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\AccountFrontPage;
-use App\Picture;
 use App\Repositories\AccountRepository;
 use Illuminate\Support\Facades\Input;
 
-class WelcomeController extends Controller
+//Eloquent Models
+use App\Story; 
+use App\Picture; 
+use App\User as User;
+
+class NonUserPageType extends Controller
 {
     /**
      * The task repository instance.
      *
      * @var TaskRepository
      */
-    protected $frontpages;
-    public function __construct(AccountRepository $frontpages)
+    protected $NonUserPagetype;
+    public function __construct(AccountRepository $search)
     {
-        $this->frontpages = $frontpages;
+        $this->NonUserPagetype = $search;
+    }
+
+    public function LandingPage()
+    {
+        return view('PageType.welcome');
     }
 
 
-    public function nonUserFrontPage()
+
+    public function FeaturedFrontPage()
     {
-        return view('welcome', [
-            'frontpages' => $this->frontpages->forNonUser(),
+        return view('PageType.index', [
+            'pictureList' => $this->NonUserPagetype->forNonUser(),
         ]);
     }
 
@@ -41,8 +49,8 @@ class WelcomeController extends Controller
      */
     public function gettestSearch(Request $request)
     {
-        return view('testsearch', [
-            'frontpages' => $this->frontpages->showTagResults($request->keyword),
+        return view('search.testsearch', [
+            'pictureList' => $this->NonUserPagetype->showTagResults($request->keyword),
         ]);
     }
 
@@ -52,8 +60,8 @@ class WelcomeController extends Controller
      */
     public function posttestSearch(Request $request)
     {
-        return view('testsearch', [
-            'frontpages' => $this->frontpages->showTagResults($request->keyword),
+        return view('search.testsearch', [
+            'pictureList' => $this->NonUserPagetype->showTagResults($request->keyword),
         ]);
     }
     

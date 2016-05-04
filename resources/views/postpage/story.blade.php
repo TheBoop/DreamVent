@@ -1,7 +1,7 @@
 @extends('layouts.app')
-
+<!DOCTYPE html>
+<html lang="en">
 @section('content')
-
 <!-- display story -->
 {{$story->content}}
 <br/>
@@ -41,5 +41,5 @@ These are comments attached to this picture. <br/>
    </div>
 </div>
 
-
 @endsection
+</html>

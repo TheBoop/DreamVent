@@ -2,7 +2,6 @@
 namespace App\Repositories;
 
 use App\User;
-use App\AccountFrontPage;
 use App\Picture;
 use Illuminate\Support\Facades\Input;
 

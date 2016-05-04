@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\pageType;
 
 use Illuminate\Http\Request;
 
@@ -10,31 +10,35 @@ use App\AccountFrontPage;
 use App\Picture;
 use App\Repositories\AccountRepository;
 
-class FrontPageController extends Controller
+class UserPageType extends Controller
 {
     /**
      * Instance for Front page for Logged-In User
      *
      * 
      */
-    protected $frontpages;
+    protected $UserPagePreference;
 
-    public function __construct(AccountRepository $frontpages)
+    public function __construct(AccountRepository $UserPagePreference)
     {
         $this->middleware('auth');
-        $this->frontpages = $frontpages;
+        $this->UserPagePreference = $UserPagePreference;
     }
 
+    public function LandingPage()
+    {
+        return view('PageType.welcome');
+    }
     /**
      * Gets Pictures based on search algorithm in AccountRepository 
      * function UserFrontPage()
      * @param  We can change paramater to fit our needs
      * @return View with set of pictures returned from UserFrontPage function
      */
-    public function userBaseFrontPage(Request $request)
+    public function RecommendFrontPage(Request $request)
     {
-        return view('frontpages.index', [
-            'frontpages' => $this->frontpages->UserFrontPage($request->user()),
+        return view('PageType.index', [
+            'pictureList' => $this->UserPagePreference->UserFrontPage($request->user()),
         ]);
     }
 
@@ -46,8 +50,8 @@ class FrontPageController extends Controller
      */
     public function YourPictures(Request $request)
     {
-        return view('frontpages.index', [
-            'frontpages' => $this->frontpages->viewYourOwnPicture($request->user()),
+        return view('PageType.index', [
+            'pictureList' => $this->UserPagePreference->viewYourOwnPicture($request->user()),
         ]);
     }
 }

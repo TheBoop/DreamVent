@@ -20,32 +20,23 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-use Illuminate\Http\Request;
-
-
 //need to read up on middleware.
 Route::group(['middleware' => ['web']], function () {
 	
 	/*
 	* =====================
-	* Welcome Page
+	* Page Types - Chris
 	* =====================
 	*/
-	Route::get('/', 'WelcomeController@nonUserFrontPage'
-		)->middleware('guest');
+	Route::get('/', 'pageType\NonUserPageType@LandingPage');
+	Route::get('/Featured', 'pageType\NonUserPageType@FeaturedFrontPage');
+	Route::get('/Recommended', 'pageType\UserPageType@RecommendFrontPage');
+	Route::get('/YourPictures', 'pageType\UserPageType@YourPictures');
 
-	Route::get('/frontpages', 'FrontPageController@userBaseFrontPage');
-	Route::get('/YourPictures', 'FrontPageController@YourPictures');
-
-	//Search stuff REALLLY DESPERATE FAST SEARCH.
-	//It searches for description not tag for example 
-	Route::get('/searchtest', 'WelcomeController@gettestSearch');
-	Route::post('/searchtest', 'WelcomeController@posttestSearch');
 	
 	/*
 	* =====================
-	* Authentication
+	* Authentication - Laravel / Chris
 	* =====================
 	*/
 	Route::auth();
@@ -57,22 +48,24 @@ Route::group(['middleware' => ['web']], function () {
 	
 	/*
 	* =====================
-	* User Page
+	* User Page 
 	* =====================
 	*/
 	Route::get('profile/{username}', function($username){
 		//echo $username;
 		return view('profile.foreign_profile');
 	});
-
+	
 	/*
 	* =====================
-	* Temporary Test Stuff
+	* Browsing - Matt
 	* =====================
 	*/
-	Route::get('/currentUser', 'UserController@currentUser');
-	//Route::get('/test/{picture_id}', 'test@test' );
-
+	//content: pictures, stories
+	Route::get('/browse', 'Browse\BrowseController@defaultBrowse');
+	//users
+	Route::get('/browseUsers', 'Browse\BrowseController@defaultBrowseUser');
+	
 
 	/*
 	* =====================
@@ -80,61 +73,39 @@ Route::group(['middleware' => ['web']], function () {
 	* =====================
 	*/
 	//Display
-	Route::get('/post/picture/{picture_id}','PostPage@ViewImage');
-	Route::get('/post/story/{story_id}','PostPage@ViewStory');
+	Route::get('/post/picture/{picture_id}','ViewStoryComm\PostPageController@ViewImage');
+	Route::get('/post/story/{story_id}','ViewStoryComm\PostPageController@ViewStory');
 	
 	//Comments
-	Route::post('/post/picture/{picture_id}','PostPage@StoreImageComment');
-	Route::post('/post/story/{story_id}','PostPage@StoreStoryComment');
+	Route::post('/post/picture/{picture_id}','ViewStoryComm\PostPageController@StoreImageComment');
+	Route::post('/post/story/{story_id}','ViewStoryComm\PostPageController@StoreStoryComment');
 
 	
 	/*
 	* =====================
-	* Browsing
-	* =====================
-	*/
-	//content: pictures, stories
-	Route::get('/browse', 'Browse@defaultBrowse');
-	//users
-	Route::get('/browseUsers', 'Browse@defaultBrowseUser');
-
-	//=== Begin: Temporary Test Stuff ===
-	Route::get('/currentUser', 'UserController@currentUser');
-	// === End: Temporary Test Stuff ===
-	
-	// === Begin: Post Page ===
-	Route::get('/post/pic/{picture_id}','PostController@ViewPost');
-	//Route::get('/post/story/{story_id}','PostPageController@ViewStory');
-	
-	//Route::get('/post/pic/{picture_id}', function() {
-	//	return view('my_view',['picture_id' => 1])
-	//})
-
-	
-	/*
-	* =====================
-	* Uploading Pictures
+	* Uploading Pictures - Matt
 	* =====================
 	*/
 	//Upload Form
-	Route::get('/uploadPicture', 'PictureController@upload');
-	
-	//Store
-	Route::post('/uploadPicture', 'PictureController@store');
-
-	//View uploaded pictures
-	Route::get('/viewPictures', 'PictureController@show');
+	Route::get('/uploadPicture', 'UploadPic\PictureController@upload');
+	Route::post('/uploadPicture', 'UploadPic\PictureController@store');
 	
 	/*
 	* =====================
-	* Uploading Stories
+	* Uploading Stories - Matt
 	* =====================
 	*/
-	Route::get ('/uploadStory/', 'StoryController@uploadParent'); 				//upload story as standalone
-	Route::get ('/uploadStory/{picture_id}', 'StoryController@uploadChild');	//upload story in response to picture prompt
+	Route::get ('/uploadStory/', 'UploadStory\StoryController@uploadParent'); 				//upload story as standalone
+	Route::get ('/uploadStory/{picture_id}', 'UploadStory\StoryController@uploadChild');	//upload story in response to picture prompt
 	
 	//Store
-	Route::post('/uploadStory/', 'StoryController@storeParent');				//store parent
-	Route::post('/uploadStory/{picture_id}', 'StoryController@storeChild');		//store child
+	Route::post('/uploadStory/', 'UploadStory\StoryController@storeParent');				//store parent
+	Route::post('/uploadStory/{picture_id}', 'UploadStory\StoryController@storeChild');
+
+
+	//Search stuff REALLLY DESPERATE FAST SEARCH.
+	//It searches for description not tag for example 
+	Route::get('/searchtest', 'PageType\NonUserPageType@gettestSearch');
+	Route::post('/searchtest', 'PageType\NonUserPageType@posttestSearch');	//store child
 });
 

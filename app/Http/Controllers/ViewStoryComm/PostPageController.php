@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ViewStoryComm;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; //for Auth::user()
 
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 
 //Eloquent Model
@@ -15,8 +16,9 @@ use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
 
-class PostPage extends Controller
+class PostPageController extends Controller
 {
+
     public function ViewImage($picture_id) {
 		$picture = Picture::find($picture_id);
 		$story_ids = GrabPics::where('picture_id', $picture_id)->select('story_id')->get();
@@ -36,9 +38,9 @@ class PostPage extends Controller
 	public function ViewStory ($story_id) {
 		$story = Story::find($story_id);
 		$comments = StoryComment::where('story_id', $story_id)->get();
-		
 		return view('postpage/story', 
-		['story' => $story,
+		[
+		 'story' => $story,
 		 'comments' => $comments]);
 	}
 	
