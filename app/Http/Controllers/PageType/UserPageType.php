@@ -27,7 +27,7 @@ class UserPageType extends Controller
 
     public function LandingPage()
     {
-        return view('PageType.welcome');
+        return view('pagetype.welcome');
     }
     /**
      * Gets Pictures based on search algorithm in AccountRepository 
@@ -37,7 +37,7 @@ class UserPageType extends Controller
      */
     public function RecommendFrontPage(Request $request)
     {
-        return view('PageType.index', [
+        return view('pagetype.index', [
             'pictureList' => $this->UserPagePreference->UserFrontPage($request->user()),
         ]);
     }
@@ -50,7 +50,7 @@ class UserPageType extends Controller
      */
     public function YourPictures(Request $request)
     {
-        return view('PageType.index', [
+        return view('pagetype.index', [
             'pictureList' => $this->UserPagePreference->viewYourOwnPicture($request->user()),
         ]);
     }

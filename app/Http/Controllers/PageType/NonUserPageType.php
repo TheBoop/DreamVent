@@ -28,14 +28,14 @@ class NonUserPageType extends Controller
 
     public function LandingPage()
     {
-        return view('PageType.welcome');
+        return view('pagetype.welcome');
     }
 
 
 
     public function FeaturedFrontPage()
     {
-        return view('PageType.index', [
+        return view('pagetype.index', [
             'pictureList' => $this->NonUserPagetype->forNonUser(),
         ]);
     }
