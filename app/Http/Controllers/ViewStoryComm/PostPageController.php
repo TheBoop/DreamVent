@@ -16,12 +16,12 @@ use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
 
+
 class PostPageController extends Controller
 {
-
     public function ViewImage($picture_id) {
 		$picture = Picture::find($picture_id);
-		$story_ids = GrabPics::where('picture_id', $picture_id)->select('story_id')->get();
+		$story_ids = GrabPics::where('picture_id', $picture_id)->get();
 		$comments = PictureComment::where('picture_id', $picture_id)->get();
 		
 		return view('postpage/picture', 
@@ -36,10 +36,15 @@ class PostPageController extends Controller
 	}
 	
 	public function ViewStory ($story_id) {
+		//show picture to the story - Chris
+		$piclist = GrabPics::where('story_id', '=', $story_id)->first();
+		$pic = Picture::find($piclist->picture_id);
+		
 		$story = Story::find($story_id);
 		$comments = StoryComment::where('story_id', $story_id)->get();
 		return view('postpage/story', 
 		[
+		 'piclist'=> $pic,
 		 'story' => $story,
 		 'comments' => $comments]);
 	}
@@ -91,9 +96,13 @@ class PostPageController extends Controller
 		//This is basically the contents of ViewStory(). I wrote this in a rush and don't know how to call the function.
 		$story = Story::find($story_id);
 		$comments = StoryComment::where('story_id', $story_id)->get();
-		
+		//Had to add this to prevent view errors - Chris
+		$piclist = GrabPics::where('story_id', '=', $story_id)->first();
+		$pic = Picture::find($piclist->picture_id);
 		return view('postpage/story', 
-		['story' => $story,
+		[
+		 'piclist'=> $pic,
+		 'story' => $story,
 		 'comments' => $comments]);
 
 	}
