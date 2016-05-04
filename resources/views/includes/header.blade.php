@@ -13,9 +13,8 @@
 </div>
 <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-        <li><a href="/Featured">Featured</a></li>
-        <li><a href="/Recommended">Recommended</a></li>
         <li><a href="/browse">Browse</a></li>
+        <li><a href="/favorites">Favorites</a></li>
         <li><a href="/searchtest">Search</a></li>
         <li><a href="/uploadPicture">Picture Upload</a></li>
         <li><a href="/YourPictures">Your Pictures</a></li>

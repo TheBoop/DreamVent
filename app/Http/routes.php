@@ -28,8 +28,7 @@ Route::group(['middleware' => ['web']], function () {
 	* Page Types - Chris
 	* =====================
 	*/
-	Route::get('/', 'pageType\NonUserPageType@LandingPage');
-	Route::get('/Featured', 'pageType\NonUserPageType@FeaturedFrontPage');
+	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
 	Route::get('/Recommended', 'pageType\UserPageType@RecommendFrontPage');
 	Route::get('/YourPictures', 'pageType\UserPageType@YourPictures');
 
