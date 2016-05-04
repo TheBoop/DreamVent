@@ -18,7 +18,7 @@
         <li><a href="/browse">Browse</a></li>
         <li><a href="/searchtest">Search</a></li>
         <li><a href="/uploadPicture">Picture Upload</a></li>
-        <li><a href="/">Tab 6</a></li>
+        <li><a href="/YourPictures">Your Pictures</a></li>
     </ul>
     <!-- Right Side Of Navbar -->
     <ul class="nav navbar-nav navbar-right">

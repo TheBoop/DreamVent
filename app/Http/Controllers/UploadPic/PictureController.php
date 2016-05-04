@@ -58,7 +58,7 @@ class PictureController extends Controller
 			$file->move(public_path().'/Pictures/', $name);
 		}
 		$picture->save();
-		
+		return redirect('/YourPictures');
 		//I don't know what this line does exactly, and it causes an error.
 		//return $this->create()->with('success', 'what black magic is this?!?!'); 
 		
