@@ -147,9 +147,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-		
-		//Non-core
-		//Illuminate\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...

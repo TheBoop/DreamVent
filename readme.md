@@ -1,12 +1,25 @@
-VERSION 1.10
+VERSION 1.50 PLEASE UPDATE YOUR SQL TABLES
 
 What is working:
 
 - Login/Register Users
-
-- Temporary upload and view pictures 
+- Front Page with Pictures (shows based on non-existant number of likes)
+- Temporary upload page
+- Post Page -> Write a story
+- Temporary search (uses description) Must match description
+- Browse - At the moment its just a list of everything does not output content just info
 
 Need To Fix/To Be Done:
+- Many of these views need to be updated to look better
+
+- Post Page - like
+
+- Search method to look up tags not description
+
+- Browse to display random content
+
+- A lot of these are stub pages for people who are working on the frontend.
+
 
 - Please make sure you understand routing, controllers, views, and models.
 

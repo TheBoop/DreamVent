@@ -31,12 +31,16 @@ class FrontPageController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function index(Request $request)
+    public function userBaseFrontPage(Request $request)
     {
-        /*return view('frontpages.index', [
-            'frontpages' => $this->frontpages->forUser($request->user()),
-        ]);*/
-        return view('welcome');
+        return view('frontpages.index', [
+            'frontpages' => $this->frontpages->UserFrontPage($request->user()),
+        ]);
     }
-    
+    public function YourPictures(Request $request)
+    {
+        return view('frontpages.index', [
+            'frontpages' => $this->frontpages->viewYourOwnPicture($request->user()),
+        ]);
+    }
 }

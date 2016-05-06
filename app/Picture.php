@@ -14,12 +14,8 @@ class Picture extends Model
 	//primary key
 	protected $primaryKey = 'picture_id'; 
 	
-	//dont automatically deal with timestamps
-	public $timestamps = false;
-	
 	//what fields can be mass-assigned
 	protected $fillable = [
-		//'picture_id', //the database should auto-increment automatically
 		'picture_link',
 		'author_id',
 		'description'
