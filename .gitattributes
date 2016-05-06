@@ -1,0 +1,2 @@
+.env merge=ours
+.gitignore merge=ours
