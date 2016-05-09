@@ -60,10 +60,17 @@ Route::group(['middleware' => ['web']], function () {
 	* User Page
 	* =====================
 	*/
+	//TODO another user's page
 	Route::get('profile/{username}', function($username){
 		//echo $username;
 		return view('profile.foreign_profile');
 	});
+	//TODO own user page
+	Route::get('myprofile/{username}', function($username){
+		//echo $username;
+		return view('profile.personal_profile');
+	});
+
 
 	/*
 	* =====================
