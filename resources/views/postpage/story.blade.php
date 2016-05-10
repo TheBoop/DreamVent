@@ -1,14 +1,18 @@
 @extends('layouts.app')
-
+<!DOCTYPE html>
+<html lang="en">
 @section('content')
 
+<div class="container">
+<img src="{{ URL::to('/') }}{{$piclist->picture_link}} ">
+</div>
 <!-- display story -->
 {{$story->content}}
 <br/>
 <br/>
 
 <!-- display comments -->
-These are comments attached to this picture. <br/>
+Comments for Story <br/>
 @foreach ($comments as $comment)
 	{{$comment->text}} <br/>
 @endforeach
@@ -41,5 +45,5 @@ These are comments attached to this picture. <br/>
    </div>
 </div>
 
-
 @endsection
+</html>

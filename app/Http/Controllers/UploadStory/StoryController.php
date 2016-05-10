@@ -4,10 +4,12 @@
 *	Why there are methods for parent/child: I thought you might use different views and 
 *	I don't know if I have to handle the data differently.
 */
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\uploadStory;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; //for Auth::user()
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 //Eloquent Models
 use App\Story; 
 use App\Picture; 

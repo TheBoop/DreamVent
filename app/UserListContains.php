@@ -3,9 +3,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserList extends Model
+class UserListContains extends Model
 {
-    protected $table = 'USER_LIST';
+    protected $table = 'USER_LIST_CONTAINS';
     public $timestamps = false;
     protected $primaryKey = 'list_id';
     /**
@@ -14,6 +14,7 @@ class UserList extends Model
      * @var array
      */
     protected $fillable = [
-        'list_type', 'list_id'
+        'list_id', 'user_id'
     ];
+
 }

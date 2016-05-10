@@ -17,5 +17,10 @@ class Story extends Model
 		'content',
 		'num_likes',
 	];
+
+	public function pic_id()
+   {
+        return $this->hasOne('App\GrabPics', 'story_id');
+   }
 	
 }
