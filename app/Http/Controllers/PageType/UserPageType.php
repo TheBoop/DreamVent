@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\pageType;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,22 +26,6 @@ class UserPageType extends Controller
         $this->UserPagePreference = $UserPagePreference;
     }
 
-    public function LandingPage()
-    {
-        return view('pagetype.welcome');
-    }
-    /**
-     * Gets Pictures based on search algorithm in AccountRepository 
-     * function UserFrontPage()
-     * @param  We can change paramater to fit our needs
-     * @return View with set of pictures returned from UserFrontPage function
-     */
-    public function RecommendFrontPage(Request $request)
-    {
-        return view('pagetype.index', [
-            'pictureList' => $this->UserPagePreference->UserFrontPage($request->user()),
-        ]);
-    }
 
     /**
      * Gets Pictures based on search algorithm in AccountRepository 
@@ -48,10 +33,29 @@ class UserPageType extends Controller
      * @param  request is user() info
      * @return View with set of pictures where user()->id
      */
-    public function YourPictures(Request $request)
+    public function YourStories(Request $request)
     {
+        $authorid[] = $request->user()->id;
+        $list_story_id = $this->UserPagePreference->followListStoryID($authorid);
+        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id);
         return view('pagetype.index', [
-            'pictureList' => $this->UserPagePreference->viewYourOwnPicture($request->user()),
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0]
+        ]);
+    }
+
+    public function FollowPage(Request $request)
+    {
+        //we have list of authors the user follow now
+        $list_author_id = $this->UserPagePreference->followListAuthorID();
+        //get lateststory
+        $list_story_id = $this->UserPagePreference->followListStoryID($list_author_id);
+        //with each story ID grab story description and Pic
+        //get picture listGetStoryDescNPic
+        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id);
+        return view('pagetype.index', [
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0]
         ]);
     }
 }

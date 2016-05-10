@@ -29,8 +29,8 @@ Route::group(['middleware' => ['web']], function () {
 	* =====================
 	*/
 	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
-	Route::get('/Recommended', 'pageType\UserPageType@RecommendFrontPage');
-	Route::get('/YourPictures', 'pageType\UserPageType@YourPictures');
+	Route::get('/YourStories', 'pageType\UserPageType@YourStories');
+	Route::get('/Follows', 'pageType\UserPageType@FollowPage');
 
 	
 	/*
@@ -72,12 +72,12 @@ Route::group(['middleware' => ['web']], function () {
 	* =====================
 	*/
 	//Display
-	Route::get('/post/picture/{picture_id}','ViewStoryComm\PostPageController@ViewImage');
-	Route::get('/post/story/{story_id}','ViewStoryComm\PostPageController@ViewStory');
+	Route::get('/post/picture/{picture_id}','ViewStoryComm\NonUserPostController@ViewImage');
+	Route::get('/post/story/{story_id}','ViewStoryComm\NonUserPostController@ViewStory');
 	
 	//Comments
-	Route::post('/post/picture/{picture_id}','ViewStoryComm\PostPageController@StoreImageComment');
-	Route::post('/post/story/{story_id}','ViewStoryComm\PostPageController@StoreStoryComment');
+	Route::post('/post/picture/{picture_id}','ViewStoryComm\UserPostController@StoreImageComment');
+	Route::post('/post/story/{story_id}','ViewStoryComm\UserPostController@StoreStoryComment');
 
 	
 	/*
@@ -106,5 +106,25 @@ Route::group(['middleware' => ['web']], function () {
 	//It searches for description not tag for example 
 	Route::get('/searchtest', 'PageType\NonUserPageType@gettestSearch');
 	Route::post('/searchtest', 'PageType\NonUserPageType@posttestSearch');	//store child
+	/*
+	* =====================
+	* Make a Story+Picture Upload
+	* =====================
+	*/
+	Route::get('/uploadStoryPic', 'UploadPicStory\StoryPicController@upload');
+	Route::post('/uploadStoryPic', 'UploadPicStory\StoryPicController@Store');
+
+
+	//TESTING AND DEMONSTRATION CAN BE REMOVED LATER ONCE VIEWS ARE GOOD.
+	/*
+	* =====================
+	* Add/Remove People You Follow - Chris
+	* =====================
+	*/
+	Route::get('testprofile/{username}', 'UserList\NonUserListController@testProfile');
+	Route::post('followtest/{username}', 'UserList\UserListController@addFollower');
+	Route::post('unfollowtest/{username}', 'UserList\UserListController@removeFollower');
+	//test
+	//Route::get('/', 'UserListController@');
 });
 
