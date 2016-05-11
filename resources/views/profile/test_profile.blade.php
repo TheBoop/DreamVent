@@ -12,7 +12,7 @@
 				type:"POST",
 				url: "{{ url('/followtest\/'.$User->username )}}",
 				cache:false,
-				complete: function(data){
+				success: function(data){
 					$('#follow').attr('onclick', 'unchk()')
 					$('#follow').val('Unfollow');
 					
@@ -30,7 +30,7 @@
 				type:"POST",
 				url: "{{ url('/unfollowtest\/'.$User->username) }}",
 				cache:false,
-				complete: function(data){
+				success: function(data){
 					$('#unfollow').attr('onclick', 'chk()')
 					$('#unfollow').val('Follow');
 					

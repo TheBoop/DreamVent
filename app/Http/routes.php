@@ -31,8 +31,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
 	Route::get('/YourStories', 'pageType\UserPageType@YourStories');
 	Route::get('/Follows', 'pageType\UserPageType@FollowPage');
+	Route::get('/Favorites', 'pageType\UserPageType@FavoritePage');
 
-	
+
 	/*
 	* =====================
 	* Authentication - Laravel / Chris
@@ -124,7 +125,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('testprofile/{username}', 'UserList\NonUserListController@testProfile');
 	Route::post('followtest/{username}', 'UserList\UserListController@addFollower');
 	Route::post('unfollowtest/{username}', 'UserList\UserListController@removeFollower');
-	//test
-	//Route::get('/', 'UserListController@');
+
+	/*
+	* =====================
+	* Favorite/Unfavorite Stories  - Chris
+	* =====================
+	*/
+	Route::post('favoriteStory/{story_id}', 'UserList\UserListController@Favorite');
+	Route::post('unfavoriteStory/{story_id}', 'UserList\UserListController@Unfavorite');
 });
 

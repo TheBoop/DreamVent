@@ -11,6 +11,7 @@ class Favorites extends Model
 	
 	//primary key
 	protected $primaryKey = 'user_id';
+	public $incrementing = false;
 	
 	//what fields can be mass-assigned
 	protected $fillable = [
@@ -20,4 +21,8 @@ class Favorites extends Model
 		'user_id',
 	];
 
+	public function Picture()
+   {
+        return $this->hasOne('App\Picture');
+   }
 }

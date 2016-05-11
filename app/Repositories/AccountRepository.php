@@ -7,6 +7,7 @@ use App\Story;
 use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
+use App\Favorites;
 use App\Http\Requests;
 use App\UserListContains;
 
@@ -16,6 +17,24 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountRepository
 {
+    /*
+     * @param   
+     * @return an ordered list of story_id
+     */
+    public function featuredList()
+    {
+        //search algorithm
+        $collection = Story::orderBy('num_likes', 'DESC')->get();
+
+        //get all story IDS we might have to limit for past 2 days or whatever
+        $story_id = array();
+        foreach($collection as $collection)
+        {
+            $story_id[] = $collection->story_id;
+        }
+        return $story_id; 
+    }
+
     /*
      * @param  User  $user
      * @return Set of Columns.Picture in which the user owns (4)
@@ -85,22 +104,20 @@ class AccountRepository
     }
 
     /*
-     * @param   
-     * @return an ordered list of story_id
+     *  Get a list of StoryIDs associated by Author_id
+     *  Returns list of story IDS Sorted by latest
      */
-    public function featuredList()
-    {
-        //search algorithm
-        $collection = Story::orderBy('num_likes', 'DESC')->get();
-
-        //get all story IDS we might have to limit for past 2 days or whatever
+    public function favoriteListStoryID($author_id)
+    { 
         $story_id = array();
+        $collection = Favorites::where('user_id', $author_id)->latest()->get();
         foreach($collection as $collection)
         {
             $story_id[] = $collection->story_id;
         }
-        return $story_id; 
+        return $story_id;
     }
+
 
 
 
@@ -211,9 +228,16 @@ class AccountRepository
      *  return two objects [Story Object, Picture Object]
      *  Order is made by previous functions (Ordering of story_id)
      */
-    public function GetStoryDescNPic($story_id)
-    {
-        $piclist = array();
+
+    public function GetStoryDescNPic($story_id, $request)
+    {   
+        //error cases with guest/nonguest
+        if ($request==null)
+            $user_id = 0;
+        else
+            $user_id = $request->id;
+        if (empty($story_id))
+            return;
 
         foreach ($story_id as $index => $value) {
             //confusing for someone new to relations but I used relations for find look at models
@@ -222,12 +246,51 @@ class AccountRepository
         }
         $storyids_ordered = implode(',', $story_id);
         $picids_ordered = implode(',', $piclist);
+        //I think i can get reduce query ask of Picture::whereIn and improve speed
         if (!empty($piclist))
             return [
                 Story::whereIn('story_id', $story_id)->orderByRaw("FIELD(story_id, $storyids_ordered)")->paginate(4),
-                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(4)
+                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(4),
+                Favorites::whereIn('story_id', $story_id)
+                        ->where('user_id', $user_id)
+                        ->orderByRaw("FIELD(story_id, $storyids_ordered)")
+                        ->paginate(4)
                 ];
         return;
+    }
+
+    public function StoreFavoriteBySID($story_id, $favorite , $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->followlist_id);
+        var_dump($story_id);
+        $favorite->story_id = $story_id;
+        $favorite->user_id = $request->user()->id;
+        //error checking for ajax bug
+        $zero_or_one = Favorites::
+                        where('story_id', $favorite->story_id)
+                        ->where('user_id', $favorite->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $favorite->save();
+    }
+
+    /*
+     * Destroy Foller in database
+     */ 
+    public function RemoveFavoriteBySID($story_id)
+    {
+        $user_id = Auth::user()->id;
+        $story_id = $story_id;
+
+        //get column
+        $data = Favorites::
+                        where('story_id', $story_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
     }
 
      /*
