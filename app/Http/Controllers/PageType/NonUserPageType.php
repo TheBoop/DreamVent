@@ -34,7 +34,8 @@ class NonUserPageType extends Controller
         [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
-            'isFavorited' => $holdList[2]
+            'isFavorited' => $holdList[2],
+            'isLiked' => $holdList[3]
         ]);
     }
 

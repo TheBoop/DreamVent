@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 //Eloquent Model
 use App\Picture; 
 use App\Story;
+use App\Likes;
 use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
@@ -53,6 +54,32 @@ class UserListController extends Controller
     public function Unfavorite($story_id)
     {   
         $this->UserList->RemoveFavoriteBySID($story_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
+
+    public function Like($story_id, Request $request)
+    {
+        $like = new Likes();
+        $this->UserList->StoreLikeBySID($story_id, $like, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+
+    }
+    public function Unlike($story_id)
+    {   
+        $this->UserList->RemoveLikeBySID($story_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
+
+    public function Like_pic($picture_id, Request $request)
+    {
+        $like = new Likes();
+        $this->UserList->StoreLikeByPID($picture_id, $like, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+
+    }
+    public function Unlike_pic($picture_id)
+    {   
+        $this->UserList->RemoveLikeByPID($picture_id);
         //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
     }
 

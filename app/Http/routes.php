@@ -133,5 +133,10 @@ Route::group(['middleware' => ['web']], function () {
 	*/
 	Route::post('favoriteStory/{story_id}', 'UserList\UserListController@Favorite');
 	Route::post('unfavoriteStory/{story_id}', 'UserList\UserListController@Unfavorite');
+
+	Route::post('likeStory/{story_id}', 'UserList\UserListController@Like');
+	Route::post('unlikeStory/{story_id}', 'UserList\UserListController@Unlike');
+	Route::post('likePicture/{picture_d}', 'UserList\UserListController@Like_pic');
+	Route::post('unlikePicture/{picture_d}', 'UserList\UserListController@Unlike_pic');
 });
 

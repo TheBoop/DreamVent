@@ -10,6 +10,7 @@ use App\StoryComment;
 use App\Favorites;
 use App\Http\Requests;
 use App\UserListContains;
+use App\Likes;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -118,11 +119,6 @@ class AccountRepository
         return $story_id;
     }
 
-
-
-
-
-
     /*
      * ===================================================================
      * =================    Parameter $picture_id   ======================
@@ -166,6 +162,53 @@ class AccountRepository
         $comment->author_id = Auth::user()->id;
 
         $comment->save();
+    }
+
+    public function getNumOfLikesByPID($picture_id)
+    {
+        $data = Likes:: where('picture_id', $picture_id);
+        return count($data);
+
+    }
+
+    public function getNumOfFavoritesByPID($picture_id)
+    {
+        $data = Favorites:: where('picture_id', $picture_id);
+        return count($data);
+
+    }
+
+    public function StoreLikeByPID($picture_id, $like, $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->followlist_id);
+        $like->picture_id = $picture_id;
+        $like->user_id = $request->user()->id;
+        //error checking for ajax bug
+        $zero_or_one = Likes::
+                        where('picture_id', $like->picture_id)
+                        ->where('user_id', $like->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $like->save();
+    }
+
+    /*
+     * Destroy Like in database
+     */ 
+    public function RemoveLikeByPID($picture_id)
+    {
+        $user_id = Auth::user()->id;
+        $picture_id = $picture_id;
+
+        //get column
+        $data = Likes::
+                        where('picture_id', $picture_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
     }
 
     /*
@@ -254,6 +297,10 @@ class AccountRepository
                 Favorites::whereIn('story_id', $story_id)
                         ->where('user_id', $user_id)
                         ->orderByRaw("FIELD(story_id, $storyids_ordered)")
+                        ->paginate(4),
+                Likes::whereIn('story_id', $story_id)
+                        ->where('user_id', $user_id)
+                        ->orderByRaw("FIELD(story_id, $storyids_ordered)")
                         ->paginate(4)
                 ];
         return;
@@ -263,7 +310,6 @@ class AccountRepository
     {
         //select foreign key holy moly one to one magic relationship
         //var_dump(USER::find(6)->followlist_id);
-        var_dump($story_id);
         $favorite->story_id = $story_id;
         $favorite->user_id = $request->user()->id;
         //error checking for ajax bug
@@ -292,6 +338,55 @@ class AccountRepository
         return;
 
     }
+
+    public function StoreLikeBySID($story_id, $favorite , $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->followlist_id);
+        var_dump("gfdg");
+        $favorite->story_id = $story_id;
+        $favorite->user_id = $request->user()->id;
+        //error checking for ajax bug
+        $zero_or_one = Likes::
+                        where('story_id', $favorite->story_id)
+                        ->where('user_id', $favorite->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $favorite->save();
+    }
+
+    /*
+     * Destroy Like in database
+     */ 
+    public function RemoveLikeBySID($story_id)
+    {
+        $user_id = Auth::user()->id;
+        $story_id = $story_id;
+
+        //get column
+        $data = Likes::
+                        where('story_id', $story_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
+    }
+
+    public function getNumOfLikesBySID($story_id)
+    {
+        $data = Likes:: where('story_id', $story_id);
+        return count($data);
+
+    }
+
+    public function getNumOfFavoritesBySID($story_id)
+    {
+        $data = Favorites:: where('story_id', $story_id);
+        return count($data);
+
+    }
+
 
      /*
      * ===================================================================
