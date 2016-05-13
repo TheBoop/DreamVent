@@ -131,11 +131,14 @@ Route::group(['middleware' => ['web']], function () {
 	* Favorite/Unfavorite Stories  - Chris
 	* =====================
 	*/
-	Route::post('favoriteStory/{story_id}', 'UserList\UserListController@Favorite');
-	Route::post('unfavoriteStory/{story_id}', 'UserList\UserListController@Unfavorite');
+	Route::post('favoriteStory/{story_id}', 'ViewStoryComm\UserPostController@Favorite');
+	Route::delete('unfavoriteStory/{story_id}', 'ViewStoryComm\UserPostController@Unfavorite');
 
-	Route::post('likeStory/{story_id}', 'UserList\UserListController@Like');
-	Route::post('unlikeStory/{story_id}', 'UserList\UserListController@Unlike');
+	Route::post('likeStory/{story_id}', 'ViewStoryComm\UserPostController@Like');
+	Route::delete('unlikeStory/{story_id}', 'ViewStoryComm\UserPostController@Unlike');
+
+
+	//
 	Route::post('likePicture/{picture_d}', 'UserList\UserListController@Like_pic');
 	Route::post('unlikePicture/{picture_d}', 'UserList\UserListController@Unlike_pic');
 });

@@ -41,8 +41,6 @@ class UserPageType extends Controller
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
-            'isFavorited' => $holdList[2],
-            'isLiked' => $holdList[3]
         ]);
     }
 
@@ -58,8 +56,6 @@ class UserPageType extends Controller
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
-            'isFavorited' =>  $holdList[2],
-            'isLiked' => $holdList[3]
         ]);
     }
 
@@ -73,8 +69,6 @@ class UserPageType extends Controller
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
-            'isFavorited' =>  $holdList[2],
-            'isLiked' => $holdList[3]
         ]);
     }
 }

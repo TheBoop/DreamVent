@@ -44,32 +44,6 @@ class UserListController extends Controller
         //return redirect()->action('UserList\NonUserListController@testProfile', [$username]);
     }
 
-    public function Favorite($story_id, Request $request)
-    {
-        $favorite = new Favorites();
-        $this->UserList->StoreFavoriteBySID($story_id, $favorite, $request);
-        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
-
-    }
-    public function Unfavorite($story_id)
-    {   
-        $this->UserList->RemoveFavoriteBySID($story_id);
-        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
-    }
-
-    public function Like($story_id, Request $request)
-    {
-        $like = new Likes();
-        $this->UserList->StoreLikeBySID($story_id, $like, $request);
-        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
-
-    }
-    public function Unlike($story_id)
-    {   
-        $this->UserList->RemoveLikeBySID($story_id);
-        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
-    }
-
     public function Like_pic($picture_id, Request $request)
     {
         $like = new Likes();

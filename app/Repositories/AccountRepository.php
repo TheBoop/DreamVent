@@ -294,14 +294,6 @@ class AccountRepository
             return [
                 Story::whereIn('story_id', $story_id)->orderByRaw("FIELD(story_id, $storyids_ordered)")->paginate(4),
                 Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(4),
-                Favorites::whereIn('story_id', $story_id)
-                        ->where('user_id', $user_id)
-                        ->orderByRaw("FIELD(story_id, $storyids_ordered)")
-                        ->paginate(4),
-                Likes::whereIn('story_id', $story_id)
-                        ->where('user_id', $user_id)
-                        ->orderByRaw("FIELD(story_id, $storyids_ordered)")
-                        ->paginate(4)
                 ];
         return;
     }
@@ -310,8 +302,10 @@ class AccountRepository
     {
         //select foreign key holy moly one to one magic relationship
         //var_dump(USER::find(6)->followlist_id);
+
         $favorite->story_id = $story_id;
         $favorite->user_id = $request->user()->id;
+
         //error checking for ajax bug
         $zero_or_one = Favorites::
                         where('story_id', $favorite->story_id)
@@ -328,7 +322,6 @@ class AccountRepository
     {
         $user_id = Auth::user()->id;
         $story_id = $story_id;
-
         //get column
         $data = Favorites::
                         where('story_id', $story_id) 
@@ -343,7 +336,6 @@ class AccountRepository
     {
         //select foreign key holy moly one to one magic relationship
         //var_dump(USER::find(6)->followlist_id);
-        var_dump("gfdg");
         $favorite->story_id = $story_id;
         $favorite->user_id = $request->user()->id;
         //error checking for ajax bug
@@ -362,7 +354,6 @@ class AccountRepository
     {
         $user_id = Auth::user()->id;
         $story_id = $story_id;
-
         //get column
         $data = Likes::
                         where('story_id', $story_id) 
@@ -372,6 +363,7 @@ class AccountRepository
         return;
 
     }
+
 
     public function getNumOfLikesBySID($story_id)
     {
@@ -383,6 +375,41 @@ class AccountRepository
     public function getNumOfFavoritesBySID($story_id)
     {
         $data = Favorites:: where('story_id', $story_id);
+        return count($data);
+
+    }
+
+    /*
+     * Check if SID is liked by user
+     */ 
+    public function isLikedBySID($story_id)
+    {
+        if(Auth::guest())
+            return 0;
+        $user_id = Auth::user()->id;
+        $story_id = $story_id;
+        //get column
+        $data = Likes::
+                        where('story_id', $story_id) 
+                        ->where('user_id', $user_id)->first();
+        return count($data);
+
+    }
+
+
+    /*
+     * Check if SID is favorited by user
+     */ 
+    public function isFavoritedBySID($story_id)
+    {
+        if(Auth::guest())
+            return 0;
+        $user_id = Auth::user()->id;
+        $story_id = $story_id;
+        //get column
+        $data = Favorites::
+                        where('story_id', $story_id) 
+                        ->where('user_id', $user_id)->first();
         return count($data);
 
     }
@@ -455,4 +482,7 @@ class AccountRepository
         return;
 
     }
+
+
+
 }

@@ -9,9 +9,6 @@ class Favorites extends Model
     //table
 	protected $table = 'FAVORITES';
 	
-	//primary key
-	protected $primaryKey = 'user_id';
-	public $incrementing = false;
 	
 	//what fields can be mass-assigned
 	protected $fillable = [

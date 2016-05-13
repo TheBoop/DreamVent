@@ -15,6 +15,8 @@ use App\Story;
 use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
+use App\Favorites;
+use App\Likes;
 use App\Repositories\AccountRepository;
 
 
@@ -67,4 +69,30 @@ class UserPostController extends Controller
 		]);
 
 	}
+
+	public function Favorite($story_id, Request $request)
+    {
+        $favorite = new Favorites();
+        $this->PostPageInstance->StoreFavoriteBySID($story_id, $favorite, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+
+    }
+    public function Unfavorite($story_id)
+    {   
+        $this->PostPageInstance->RemoveFavoriteBySID($story_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
+
+    public function Like($story_id, Request $request)
+    {
+        $like = new Likes();
+        $this->PostPageInstance->StoreLikeBySID($story_id, $like, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+
+    }
+    public function Unlike($story_id)
+    {   
+        $this->PostPageInstance->RemoveLikeBySID($story_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
 }
