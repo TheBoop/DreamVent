@@ -26,31 +26,17 @@ class NonUserPageType extends Controller
         $this->NonUserPagetype = $search;
     }
 
-    public function FeaturedFrontPage()
+    public function FeaturedFrontPage(Request $request)
     {
         $storyList = $this->NonUserPagetype->featuredList();
-        $holdList = $this->NonUserPagetype->GetStoryDescNPic($storyList);
+        $holdList = $this->NonUserPagetype->GetStoryDescNPic($storyList, $request->user());
         return view('pagetype.index',
         [
             'pictureList' => $holdList[1],
-            'storyList' => $holdList[0]
+            'storyList' => $holdList[0],
         ]);
     }
 
-     public function FollowPage(Request $request)
-    {
-        //we have list of authors the user follow now
-        $list_author_id = $this->UserPagePreference->followList();
-        //get lateststory
-        $list_story_id = $this->UserPagePreference->getStoryIDListByAuthorID($list_author_id);
-        //with each story ID grab story description and Pic
-        //get picture listGetStoryDescNPic
-        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id);
-        return view('pagetype.index', [
-            'pictureList' => $holdList[1],
-            'storyList' => $holdList[0]
-        ]);
-    }
     /*
      *  get keyword from view
      *  the frontpages => line doesnt make sense to me but it kept getting

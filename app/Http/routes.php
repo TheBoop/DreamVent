@@ -31,8 +31,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
 	Route::get('/YourStories', 'pageType\UserPageType@YourStories');
 	Route::get('/Follows', 'pageType\UserPageType@FollowPage');
+	Route::get('/Favorites', 'pageType\UserPageType@FavoritePage');
 
-	
+
 	/*
 	* =====================
 	* Authentication - Laravel / Chris
@@ -124,7 +125,21 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('testprofile/{username}', 'UserList\NonUserListController@testProfile');
 	Route::post('followtest/{username}', 'UserList\UserListController@addFollower');
 	Route::post('unfollowtest/{username}', 'UserList\UserListController@removeFollower');
-	//test
-	//Route::get('/', 'UserListController@');
+
+	/*
+	* =====================
+	* Favorite/Unfavorite Stories  - Chris
+	* =====================
+	*/
+	Route::post('favoriteStory/{story_id}', 'ViewStoryComm\UserPostController@Favorite');
+	Route::delete('unfavoriteStory/{story_id}', 'ViewStoryComm\UserPostController@Unfavorite');
+
+	Route::post('likeStory/{story_id}', 'ViewStoryComm\UserPostController@Like');
+	Route::delete('unlikeStory/{story_id}', 'ViewStoryComm\UserPostController@Unlike');
+
+
+	//
+	Route::post('likePicture/{picture_d}', 'UserList\UserListController@Like_pic');
+	Route::post('unlikePicture/{picture_d}', 'UserList\UserListController@Unlike_pic');
 });
 

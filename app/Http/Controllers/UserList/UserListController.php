@@ -12,9 +12,11 @@ use App\Http\Controllers\Controller;
 //Eloquent Model
 use App\Picture; 
 use App\Story;
+use App\Likes;
 use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
+use App\Favorites;
 use App\UserListContains;
 use App\Repositories\AccountRepository;
 
@@ -40,6 +42,19 @@ class UserListController extends Controller
     {   
         $this->UserList->RemoveFollowByUsername($username);
         //return redirect()->action('UserList\NonUserListController@testProfile', [$username]);
+    }
+
+    public function Like_pic($picture_id, Request $request)
+    {
+        $like = new Likes();
+        $this->UserList->StoreLikeByPID($picture_id, $like, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+
+    }
+    public function Unlike_pic($picture_id)
+    {   
+        $this->UserList->RemoveLikeByPID($picture_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
     }
 
 }

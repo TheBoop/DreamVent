@@ -34,4 +34,5 @@ class NonUserListController extends Controller
               'IsFollowed' => $this->UserList->isFollowedByUsername($username)
             ]);
     }
+
 }
