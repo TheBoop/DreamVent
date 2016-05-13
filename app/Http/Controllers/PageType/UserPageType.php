@@ -37,10 +37,10 @@ class UserPageType extends Controller
     {
         $authorid[] = $request->user()->id;
         $list_story_id = $this->UserPagePreference->followListStoryID($authorid);
-        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id);
+        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id, $request->user());
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
-            'storyList' => $holdList[0]
+            'storyList' => $holdList[0],
         ]);
     }
 
@@ -52,10 +52,23 @@ class UserPageType extends Controller
         $list_story_id = $this->UserPagePreference->followListStoryID($list_author_id);
         //with each story ID grab story description and Pic
         //get picture listGetStoryDescNPic
-        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id);
+        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id, $request->user());
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
-            'storyList' => $holdList[0]
+            'storyList' => $holdList[0],
+        ]);
+    }
+
+    public function FavoritePage(Request $request)
+    {
+        //get lateststory
+        $list_story_id = $this->UserPagePreference->favoriteListStoryID($request->user()->id);
+        //with each story ID grab story description and Pic
+        //get picture listGetStoryDescNPic
+        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id, $request->user());
+        return view('pagetype.index', [
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0],
         ]);
     }
 }

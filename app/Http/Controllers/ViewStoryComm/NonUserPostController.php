@@ -15,6 +15,8 @@ use App\Story;
 use App\GrabPics;
 use App\PictureComment;
 use App\StoryComment;
+use App\Favorites;
+use App\Likes;
 use App\Repositories\AccountRepository;
 
 
@@ -47,10 +49,12 @@ class NonUserPostController extends Controller
 	public function ViewStory ($story_id) {
 		return view('postpage/story', 
 		[
-		 'piclist'=> $this->PostPageInstance->getPicBasedOnSID($story_id),
-		 'story' => $this->PostPageInstance->getStoryBasedonSID($story_id),
-		 'comments' => $this->PostPageInstance->getStoryCommentBasedonSID($story_id),
-		 ]);
+		 	'piclist'=> $this->PostPageInstance->getPicBasedOnSID($story_id),
+		 	'story' => $this->PostPageInstance->getStoryBasedonSID($story_id),
+		 	'comments' => $this->PostPageInstance->getStoryCommentBasedonSID($story_id),
+		 	'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
+		 	'isliked' => $this->PostPageInstance->isLikedBySID($story_id),
+		]);
 	}
 	
 }
