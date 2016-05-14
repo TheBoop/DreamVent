@@ -11,10 +11,16 @@ class GrabPics extends Model
 	
 	//timestamps 
 	public $timestamps = false;
-
+	protected $primaryKey = 'story_id';
 	//mass-assignable fields
+	public $incrementing = false; 
 	protected $fillable = [
 		'picture_id',
-		'story_id',
+		'story_id'
 	];
+
+	public function Picture()
+   {
+        return $this->hasOne('App\Picture');
+   }
 }

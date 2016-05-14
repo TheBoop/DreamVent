@@ -1,18 +1,18 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Browse;
 
 use Illuminate\Http\Request;
 //use Illuminate\Pagination\Environment as Paginator;
 
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 //Eloquent Models
 use App\Story; 
 use App\Picture; 
 use App\User as User;
 
-class Browse extends Controller
+class BrowseController extends Controller
 {
     public function defaultBrowse () {
 		//Paginator::setPageName('Pictures');
@@ -31,4 +31,5 @@ class Browse extends Controller
 		$users = NULL;
 		return view('placeholder', ['users' => $users]);
 	}
+	
 }
