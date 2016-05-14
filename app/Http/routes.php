@@ -107,6 +107,11 @@ Route::group(['middleware' => ['web']], function () {
 	//It searches for description not tag for example 
 	Route::get('/searchtest', 'PageType\NonUserPageType@gettestSearch');
 	Route::post('/searchtest', 'PageType\NonUserPageType@posttestSearch');	//store child
+	
+	//new search
+	Route::get('/search', 'Search\SearchController@getSearch');
+	Route::post('/search', 'Search\SearchController@postSearch');
+	
 	/*
 	* =====================
 	* Make a Story+Picture Upload
