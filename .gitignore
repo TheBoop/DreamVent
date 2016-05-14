@@ -1,8 +1,9 @@
 /vendor
 /bootstrap/cache/compiled.php
+/storage
+/public
+/database
 *.log
 .DS_Store
 .DS_Store?
-storage/
-public/Pictures
 .env
