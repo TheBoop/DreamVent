@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\pageType;
+namespace App\Http\Controllers\PageType;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -5,33 +5,29 @@
     @include('includes.styles')
 </head>
 <body>
-    <div class="container">
+    <div id="wrapper">
+        <div class ="container">
+            <div id="header" class="row">
+                @include('includes.header')
+            </div>
 
-    <header class="row">
-        @include('includes.header')
-    </header>
+            <div id="main">
+                <div class="box">
+                    @yield('content')
+                </div>
+            </div>
 
-    <div id="main" class="row">
-
-        <!-- sidebar content -->
-        <div id="sidebar" class="col-md-4">
-            @include('includes.sidebar')
+            <div id ="footer">
+                <div class="box">
+                    @include('includes.footer')
+                </div>
+            </div>
         </div>
-
-        <!-- main content -->
-        <div id="content" class="col-md-8">
-            @yield('content')
-        </div>
-
     </div>
-
-    <footer class="row">
-        @include('includes.footer')
-    </footer>
-
-</div>
      <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
