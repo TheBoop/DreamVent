@@ -281,7 +281,7 @@ class AccountRepository
             $user_id = $request->id;
         if (empty($story_id))
             return;
-
+        
         foreach ($story_id as $index => $value) {
             //confusing for someone new to relations but I used relations for find look at models
             $piclist[$index] = Picture::find(
