@@ -16,8 +16,12 @@
                 <div class="control-group">
                 <div class="controls">
                     {!! Form::file('picture') !!}
-                    Description:
+                    Picture Description:
                     {!! Form::text('description') !!}
+                    <div>
+                    Story Title:
+                    <input type="text" name="title">
+                    </div>
                     <p class="errors">{!!$errors->first('image')!!}</p>
                     @if(Session::has('error'))
                         <p class="errors">{!! Session::get('error') !!}</p>

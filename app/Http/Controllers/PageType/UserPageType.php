@@ -44,6 +44,14 @@ class UserPageType extends Controller
         ]);
     }
 
+    public function YourPictures(Request $request)
+    {
+        $picture_id = $this->UserPagePreference->viewYourOwnPicture(Auth::user());
+        return view('pagetype.index', [
+            'pictureList' => $picture_id,
+        ]);
+    }
+
     public function FollowPage(Request $request)
     {
         //we have list of authors the user follow now
