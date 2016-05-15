@@ -1,0 +1,44 @@
+.main{
+	//position: absolute;
+    //top: 30%;
+    //left: 50%;
+    //width: 50%;
+    margin: auto;
+    //margin-right: -50%;
+    //transform: translate(-50%, -50%)
+    border-radius: 25px;
+}
+
+.send-button {
+    background: #428BCA;
+    color: #fff;
+    font-family: Sans-serif;
+    border-radius: 25px;
+    font-size: 20px;
+    line-height: 60px;
+    margin: 25px 25px;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.send-button:hover {
+  background: #3071A9
+}
+
+
+p.centered {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+}
+
+h1.title{
+	font-family: Sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    text-align: center;
+    //margin: auto;
+	color: white;
+}

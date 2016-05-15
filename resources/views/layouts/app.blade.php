@@ -16,12 +16,6 @@
                     @yield('content')
                 </div>
             </div>
-
-            <div id ="footer">
-                <div class="box">
-                    @include('includes.footer')
-                </div>
-            </div>
         </div>
     </div>
      <!-- JavaScripts -->

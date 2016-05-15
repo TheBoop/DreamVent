@@ -5,8 +5,6 @@
 <style>
 	html,
 	body {
-		margin:0;
-		padding:0;
 		height:100%;
 	    font-family: 'Lato';
 	    background-color: rgb(115,205,100);
@@ -17,7 +15,8 @@
 	
 	#wrapper {
 		min-height:100%;
-		position:relative;
+		width: 1200px; 
+		margin: 0 auto; 
 	}
 	#header {
 		padding:10px;
@@ -28,7 +27,6 @@
 	#footer {
 		width:100%;
 		height:100px;
-		position:absolute;
 		bottom:0;
 	}
 </style>
