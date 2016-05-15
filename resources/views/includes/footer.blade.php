@@ -1,1 +1,1 @@
-<div id="copyright text-right">© Copyright 2016 University of California, Riverside CS180</div>
+<p>© Copyright 2016 University of California, Riverside CS180</p>

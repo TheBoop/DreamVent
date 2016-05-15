@@ -28,7 +28,8 @@ Route::group(['middleware' => ['web']], function () {
 	* Page Types - Chris
 	* =====================
 	*/
-	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
+
+	Route::get('/', 'PageType\NonUserPageType@FeaturedFrontPage');
 	Route::get('/YourStories', 'PageType\UserPageType@YourStories');
 	Route::get('/Follows', 'PageType\UserPageType@FollowPage');
 	Route::get('/Favorites', 'PageType\UserPageType@FavoritePage');
@@ -51,9 +52,9 @@ Route::group(['middleware' => ['web']], function () {
 	* User Page 
 	* =====================
 	*/
-	Route::get('profile/{username}', function($username){
+	Route::get('profile/myprofile', function(){
 		//echo $username;
-		return view('profile.foreign_profile');
+		return view('profile.personal_profile');
 	});
 	
 	/*
