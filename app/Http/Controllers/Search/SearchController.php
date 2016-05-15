@@ -29,34 +29,61 @@ class SearchController extends Controller
 	public function postSearch(Request $request) {
 		echo "Input: $request->keyword <br /><br />";
 		
-		//parse
-		$search_words = explode(" ", $request->keyword);
+		//Parse through to find title requests, put them in the Title Array
+		echo "<br /> Title requests: <br />";
+		$searchRequest = $request->keyword;
+		$titles = array();
 		
-		//find and remove stop words
-		echo "Stop Words: <br />";
-		foreach ($search_words as $key => $word) {
-			if ($this->search->isStopWord($word)) {
-				echo $word . "<br />";
-				unset($search_words[$key]);
+		//process titles from the search request
+		while ($this->search->containsTitleRequest($searchRequest)) {
+			if ($this->search->validateTitleRequest($searchRequest)) {
+				array_push($titles, $this->search->getFirstTitleOccurence($searchRequest));		
 			}
+			else
+				break;
 		}
-		$search_words = array_values($search_words);
-		echo "<br />";
 		
-		//test: print search terms
-		echo "Search Words: <br />";
+		//Get story_ids with matching titles
+		$titleResults = array();
+		$collection = array();
+		$collection = Story::whereIn('title', $titles)->latest()->get();
+		foreach($collection as $collection)
+        {
+            $titleResults[] = $collection->story_id;
+        }		
+		
+		foreach($titles as $title) {
+			echo "$title <br />";
+		}
+		
+		echo "<br /> actual request: $searchRequest <br />";
+
+		//parse search string
+		$search_words = array_map('trim', explode(",", $searchRequest));
+		
+		//find and remove stop words & additional spaces
+		echo " <br /> Stop Words and Additional Spaces: <br />";
 		foreach ($search_words as $key => $word) {
-			echo $key . ": " . $word . "<br />";
+			if ($this->search->isStopWord($word) || $word == '') {
+				echo $key . ":" . $word . "<br />";
+				unset($search_words[$key]);
+			} 
 		}
 		
-		//set num terms
-		$results = array();
+		//Reset index after unset.
+		$search_words = array_values($search_words);
+		
+		//Test: Print list of actual search terms.
+		echo "<br /> Search Words: <br />";
+		foreach ($search_words as $key => $word) {
+			echo $key . ":" . $word . "<br />";
+		}
 		
 		//Get tag results for first term. we use this to obtain story_ids for next step.
-		$results = Tags::where('tag_id', $search_words[0])->get();//->orderBy('created_at', 'desc');
+		$tagResults = Tags::where('tag_id', $search_words[0])->get();//->orderBy('created_at', 'desc');
 		
 		echo "<br /> results containing $search_words[0]: <br />";
-		foreach($results as $result) {
+		foreach($tagResults as $result) {
 			echo $result . "<br />";
 		}
 		
@@ -66,21 +93,40 @@ class SearchController extends Controller
 		echo "<br /> during additional terms: <br />";
 		for($i = 1; $i < count($search_words); $i++) {
 			echo "results not containing $search_words[$i]: <br />";;
-			foreach($results as $key => $result) {
+			foreach($tagResults as $key => $result) {
 				if (!(Tags::where('story_id', $result->story_id)->where('tag_id', $search_words[$i])->first())) {
-					echo $key . ": " . $result . "<br/>";
-					unset($results[$key]);
+					echo $key . ":" . $result . "<br/>";
+					unset($tagResults[$key]);
 				}
 			}
 			echo "<br />";
 		}
 
 		echo "<br /> final results containing all search terms: <br />";
-		foreach($results as $result) {
+		foreach($tagResults as $result) {
 			echo $result . "<br />";
 		}
 		
+		echo "<br /> final results containing all titles: <br />";
+		foreach($titleResults as $result) {
+			echo "$result <br />";
+		}
 		
+		/*
+			The final step is to return a view, passing it the following information:
+			1. $tagResults - contains all the results associated with the tags from the search. 
+				Access $tagResults->story_id to make a link in the view.
+			
+			2. $titleResults - contains all the results associated with the titles from the search.
+			
+		*/
+		/*
+		$this->search->GetStoryDescNPic($tagResults, $request->user());
+        return view('pagetype.index',
+        [
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0],
+        ]);*/
 		
 	}
 }

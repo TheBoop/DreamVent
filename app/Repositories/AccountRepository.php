@@ -146,6 +146,43 @@ class AccountRepository
 			if (in_array($word, $wordList)) return true;
 			else return false;
 	}
+	
+	public function containsTitleRequest($searchRequest) {
+		$pos = strpos($searchRequest, 'title:');
+		if ($pos === 0 || $pos) {
+			return true;
+		}
+		else 
+			return false;
+	}
+	
+	public function validateTitleRequest($searchRequest) {
+		$pos = strpos($searchRequest, 'title:');
+		$openQuotePos = $pos + strlen("title:");
+		$closeQuotePos = strpos($searchRequest, '"', $openQuotePos+1 );
+		
+		if ($closeQuotePos) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public function getFirstTitleOccurence(&$searchRequest) {		
+		$pos = strpos($searchRequest, 'title:');
+		$openQuotePos = $pos + strlen("title:");
+		$closeQuotePos = strpos($searchRequest, '"', $openQuotePos+1 );
+		//echo "open:$openQuotePos:$searchRequest[$openQuotePos] <br />"; 
+		//echo "close:$closeQuotePos:$searchRequest[$closeQuotePos] <br />";
+		$title = substr($searchRequest,$openQuotePos + 1, $closeQuotePos - $openQuotePos - 1);
+		//echo "title:$title <br />";
+
+		//echo "<br /> end title occurence function: ". substr($searchRequest, $pos, $closeQuotePos - $pos + 1) . " <br />";
+		
+		//remove title from search request
+		$searchRequest = str_replace(substr($searchRequest, $pos, $closeQuotePos - $pos + 1), "", $searchRequest);
+		
+		return $title;
+	}
 
 
 
