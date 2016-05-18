@@ -27,11 +27,24 @@ class SearchController extends Controller
 	}
 	
 	public function postSearch(Request $request) {
+		
+		//Check to see if submission is empty.
+		$this->validate($request, [
+			'keyword' => 'required'
+		]);
+		
+		//Test: repeat the search phrase.
 		echo "Input: $request->keyword <br /><br />";
 		
-		//Parse through to find title requests, put them in the Title Array
-		echo "<br /> Title requests: <br />";
+		//Put the search phrase into a variable so it can be modified.
 		$searchRequest = $request->keyword;
+		
+		/*
+			Parse through the search phrase to find title requests, put them in 
+			an array containing titles to search for, and remove them from the 
+			search phrase.
+		*/
+		echo "<br /> Title requests: <br />";
 		$titles = array();
 		
 		//process titles from the search request
@@ -44,12 +57,12 @@ class SearchController extends Controller
 		}
 		
 		//Get story_ids with matching titles
-		$titleResults = array();
+		$searchResults = array();
 		$collection = array();
 		$collection = Story::whereIn('title', $titles)->latest()->get();
 		foreach($collection as $collection)
         {
-            $titleResults[] = $collection->story_id;
+            $searchResults[] = $collection->story_id;
         }		
 		
 		foreach($titles as $title) {
@@ -61,7 +74,7 @@ class SearchController extends Controller
 		//parse search string
 		$search_words = array_map('trim', explode(",", $searchRequest));
 		
-		//find and remove stop words & additional spaces
+		//Find and remove stop words & additional spaces
 		echo " <br /> Stop Words and Additional Spaces: <br />";
 		foreach ($search_words as $key => $word) {
 			if ($this->search->isStopWord($word) || $word == '') {
@@ -80,53 +93,43 @@ class SearchController extends Controller
 		}
 		
 		//Get tag results for first term. we use this to obtain story_ids for next step.
-		$tagResults = Tags::where('tag_id', $search_words[0])->get();//->orderBy('created_at', 'desc');
-		
-		echo "<br /> results containing $search_words[0]: <br />";
-		foreach($tagResults as $result) {
-			echo $result . "<br />";
+		if (empty($searchResults)) {
+			$collection = Tags::where('tag_id', $search_words[0])->latest()->get();
+			foreach ($collection as $result) {
+				$searchResults[] = $result->story_id;
+			}
 		}
 		
-		//use the story ids to pull all tags of those stories?
+		/*echo "<br /> results containing $search_words[0]: <br />";
+		foreach($searchResults as $result) {
+			echo $result . "<br />";
+		}*/
 		
 		//if there are additional terms, remove each result that does not contain those terms
 		echo "<br /> during additional terms: <br />";
 		for($i = 1; $i < count($search_words); $i++) {
 			echo "results not containing $search_words[$i]: <br />";;
-			foreach($tagResults as $key => $result) {
-				if (!(Tags::where('story_id', $result->story_id)->where('tag_id', $search_words[$i])->first())) {
+			foreach($searchResults as $key => $result) {
+				if (!(Tags::where('story_id', $result)->where('tag_id', $search_words[$i])->first())) {
 					echo $key . ":" . $result . "<br/>";
-					unset($tagResults[$key]);
+					unset($searchResults[$key]);
 				}
 			}
 			echo "<br />";
 		}
 
-		echo "<br /> final results containing all search terms: <br />";
-		foreach($tagResults as $result) {
+		echo "<br /> final results containing matching titles/tags: <br />";
+		foreach($searchResults as $result) {
 			echo $result . "<br />";
 		}
 		
-		echo "<br /> final results containing all titles: <br />";
-		foreach($titleResults as $result) {
-			echo "$result <br />";
-		}
 		
-		/*
-			The final step is to return a view, passing it the following information:
-			1. $tagResults - contains all the results associated with the tags from the search. 
-				Access $tagResults->story_id to make a link in the view.
-			
-			2. $titleResults - contains all the results associated with the titles from the search.
-			
-		*/
-		/*
-		$this->search->GetStoryDescNPic($tagResults, $request->user());
+		$holdList = $this->search->GetStoryDescNPic($searchResults, $request->user());
         return view('pagetype.index',
         [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
-        ]);*/
+        ]);
 		
 	}
 }
