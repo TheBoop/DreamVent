@@ -7,7 +7,10 @@
 	body {
 		height:100%;
 	    font-family: 'Lato';
-	    background-color: rgb(115,205,100);
+	    background-color: rgb(0,100,200);
+	    background-image: url("http://www.splendidwallpaper.com/wp-content/uploads/2012/11/high-resolution-wallpaper-nature-1680x1050.jpg");
+	    background-repeat: no-repeat;
+	    background-position: center;
 	}
 	.fa-btn {
 	    margin-right: 6px;

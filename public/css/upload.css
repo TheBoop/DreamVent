@@ -1,39 +1,32 @@
 .main{
-	//position: absolute;
     //top: 30%;
     //left: 50%;
     //width: 50%;
     margin: auto;
     //margin-right: -50%;
     //transform: translate(-50%, -50%)
-    border-radius: 25px;
 }
 
-.send-button {
-    background: #428BCA;
-    color: #fff;
-    font-family: Sans-serif;
-    border-radius: 25px;
-    font-size: 20px;
-    line-height: 60px;
-    margin: 25px 25px;
-    text-align: center;
-    border: 0;
-    transition: all 0.3s ease 0s;
-}
-
-.send-button:hover {
-  background: #3071A9
-}
-
-
-p.centered {
+.innerblock {
+	width: 50%;
     margin-left: auto;
     margin-right: auto;
-    width: 6em
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 25px;
+    background-color:rgba(211,211,211, 0.7);
 }
 
 h1.title{
+	font-family: 'Lato'; 
+	color: rgb(0,0,51);
+	margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    text-align: center;
+}
+
+h1.submit{
 	font-family: Sans-serif;
     margin-left: auto;
     margin-right: auto;
@@ -42,3 +35,29 @@ h1.title{
     //margin: auto;
 	color: white;
 }
+.send-button {
+    background: rgb(0, 100, 200);
+    color: #fff;
+    font-family: Sans-serif;
+    border-radius: 25px;
+    font-size: 20px;
+    line-height: 50px;
+    margin: 25px 25px;
+    padding: 0px 20px;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.send-button:hover {
+  background: rgb(40, 140, 240);
+}
+
+p.centered {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+}
+
+
+
