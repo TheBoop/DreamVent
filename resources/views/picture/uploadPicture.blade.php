@@ -14,7 +14,7 @@
 		@endif
 		<div class="innerblock">
 
-			<h1 class="title">Upload</h1>
+			<h1 class="title">Picture Upload</h1>
 
 			{!! Form::open(array('url'=>'/uploadPicture','method'=>'POST', 'files'=>true)) !!}
 			
@@ -36,8 +36,8 @@
 
 			<div id="success"> </div>
 			<h1 class="submit">
-			{!! Form::submit('Submit', array('class'=>'send-button')) !!}
-			{!! Form::close() !!}
+				{!! Form::submit('Submit', array('class'=>'send-button')) !!}
+				{!! Form::close() !!}
 			</h1>
 		</div>
 	</div>
