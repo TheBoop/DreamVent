@@ -8264,3 +8264,9 @@ Stack trace:
 [2016-05-17 22:55:42] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined method App\Repositories\AccountRepository::isFavoritedBySID()' in /var/www/Laravel/week7/DreamVent/app/Http/Controllers/ViewStoryComm/NonUserPostController.php:55
 Stack trace:
 #0 {main}  
+[2016-05-20 01:05:57] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'foreach' (T_FOREACH), expecting ',' or ';'' in /var/www/Laravel/week7/DreamVent/app/Http/Controllers/Search/SearchUserController.php:70
+Stack trace:
+#0 {main}  
+[2016-05-20 01:06:08] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'foreach' (T_FOREACH), expecting ',' or ';'' in /var/www/Laravel/week7/DreamVent/app/Http/Controllers/Search/SearchUserController.php:70
+Stack trace:
+#0 {main}  

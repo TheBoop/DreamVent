@@ -102,15 +102,23 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/uploadStory/', 'UploadStory\StoryController@storeParent');				//store parent
 	Route::post('/uploadStory/{picture_id}', 'UploadStory\StoryController@storeChild');
 
-
-	//Search stuff REALLLY DESPERATE FAST SEARCH.
+	/*
+	* =====================
+	* Search
+	* =====================
+	*/
+	//Search stuff REALLLY DESPERATE FAST SEARCH. - Chris
 	//It searches for description not tag for example 
 	Route::get('/searchtest', 'PageType\NonUserPageType@gettestSearch');
 	Route::post('/searchtest', 'PageType\NonUserPageType@posttestSearch');	//store child
 	
-	//new search
+	//Search Stories - Matt
 	Route::get('/search', 'Search\SearchController@getSearch');
 	Route::post('/search', 'Search\SearchController@postSearch');
+	
+	//Search Users - Matt
+	Route::get('/searchUser', 'Search\SearchUserController@getSearch');
+	Route::post('/searchUser', 'Search\SearchUserController@postSearch');
 	
 	/*
 	* =====================
