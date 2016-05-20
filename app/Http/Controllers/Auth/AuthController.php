@@ -64,6 +64,16 @@ class AuthController extends Controller
         ]);
     } 
 
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'username' => 'required|max:255|unique:USER,username',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:USER,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+    }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -90,7 +100,7 @@ class AuthController extends Controller
         $list[1] = "followlist";
         $list[2] = "contactlist";
         $list[3] = "pagelist";
-        $list[4] = "holder4";
+        $list[4] = "blocklist";
         $list[5] = "holder5";
         $list[6] = "holder6";
         $list[7] = "holder7";
@@ -118,7 +128,7 @@ class AuthController extends Controller
             'followlist_id' => $suv[1],
             'contactlist_id' => $suv[2],
             'pagelist_id' => $suv[3],
-            'holderid4' => $suv[4],
+            'blocklist_id' => $suv[4],
             'holderid5' => $suv[5],
             'holderid6' => $suv[6],
             'holderid7' => $suv[7],
