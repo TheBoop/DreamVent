@@ -11,6 +11,7 @@ use App\Favorites;
 use App\Http\Requests;
 use App\UserListContains;
 use App\Likes;
+use App\Tags;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -80,6 +81,26 @@ class AccountRepository
         $followlist_id = USER::find(Auth::user()->id)->followlist_id;
         //get collection of user_ids the user follows
         $collection = UserListContains::where('list_id', $followlist_id)->get(); 
+        //since we use get collect all data
+        foreach($collection as $collection)
+        {
+            $author_id[] = $collection->user_id;
+        }
+        //use data to give picture list
+        return $author_id;
+    }
+
+    /*
+     *  Get a list of the user's block list
+     *  Returns list of author_ids
+     */
+    public function blockListAuthorID()
+    {
+        //get authenticated user's id 
+        $author_id = array();
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        //get collection of user_ids the user follows
+        $collection = UserListContains::where('list_id', $blocklist_id)->get(); 
         //since we use get collect all data
         foreach($collection as $collection)
         {
@@ -414,6 +435,39 @@ class AccountRepository
 
     }
 
+    public function DeleteStoryBySID($story_id)
+    {
+        //Check if story ID matches user id
+        $user_id = Auth::user()->id;
+        $check = Story::where('story_id', $story_id)
+                        ->where('author_id', $user_id )->first();
+
+        if($check){
+            $grab_pic = GrabPics::where('story_id', $story_id)->first();
+            $check->delete();
+            $grab_pic->delete();
+            //maybe have a column for display/dontdisplay instead of deleting
+        }
+        return;
+    }
+    public function ReturnStoryTagsBySID($story_id)
+    {
+        //Check if story ID matches user id
+        $user_id = Auth::user()->id;
+        $check = Story::where('story_id', $story_id)
+                        ->where('author_id', $user_id )->first();
+
+        if($check){
+            $holdlist_tags = Tags::where('story_id', $story_id)->get();
+            $tagstr = "";
+            foreach ($holdlist_tags as $index => $holdlist_tag) {
+                $tagstr = $tagstr.$holdlist_tags[$index]->tag_id.',';
+            }
+            $tagstr = rtrim($tagstr,',');
+        }
+        return $tagstr;
+    }
+
 
      /*
      * ===================================================================
@@ -427,6 +481,22 @@ class AccountRepository
     public function getUserIDByUsername($username)
     {
        return User::where('username', $username)->first();
+    }
+
+    /*
+     * Get FollowList
+     * List of followers
+     */ 
+    public function GetFollowList()
+    {
+        //get Authenticated User's followlist_id
+        if(Auth::guest())
+            return 0;
+        $followlist_id = USER::find(Auth::user()->id)->followlist_id;
+        $list_id = UserListContains::
+                        where('list_id', $followlist_id)->get();
+        //return 0 or 1 depending if the user is followed or not
+        return $list_id;
     }
 
     /*
@@ -481,6 +551,99 @@ class AccountRepository
             $data->delete();
         return;
 
+    }
+
+    ////BLOCKED METHODS
+    /*
+     * Check if Username is blocked by person who is logged in
+     * Returns 0 or 1
+     */ 
+    public function isBlockedByUsername($username)
+    {
+        //get Authenticated User's followlist_id
+        if(Auth::guest())
+            return 0;
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $user_id = User::where('username', $username)->select('id')->first()->id;
+        $zero_or_one = UserListContains::
+                        where('list_id', $blocklist_id) 
+                        ->where('user_id', $user_id)->first();
+        //return 0 or 1 depending if the user is followed or not
+        return count($zero_or_one);
+    }
+
+
+    /*
+     * Store Block in database
+     */ 
+    public function StoreBlockByUsername($username, $block , $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->blocklist_id);
+        $block->list_id = USER::find(Auth::user()->id)->blocklist_id;
+        $block->user_id = USER::where('username', $username)->first()->id;
+
+        //error checking for ajax bug
+        $zero_or_one = UserListContains::
+                        where('list_id', $block->list_id)
+                        ->where('user_id', $block->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $block->save();
+    }
+
+    /*
+     * Destroy Block in database
+     */ 
+    public function RemoveBlockByUsername($username)
+    {
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $user_id = User::where('username', $username)->select('id')->first()->id;
+        //get column
+        $data = UserListContains::
+                        where('list_id', $blocklist_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
+    }
+
+    /*
+     * Get BlockList
+     * List of Blocked people
+     */ 
+    public function GetBlockList()
+    {
+        //get Authenticated User's blocklist_id
+        if(Auth::guest())
+            return 0;
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $list_id = UserListContains::
+                        where('list_id', $blocklist_id)->get();
+        return $list_id;
+    }
+
+    /*
+     * Get BlockList
+     * List of Blocked people
+     */ 
+    public function DeleteStoryCommentByID($comment_id)
+    {
+        //get Authenticated User's blocklist_id
+        if(Auth::guest())
+            return 0;
+        //get comment
+        $comment = StoryComment::where('comment_id',$comment_id)
+                                ->first();
+        //check if Story_id is owned by the author user
+        $check = Story::where('story_id', $comment->story_id)->first();
+        $check_2 = Story::where('author_id', Auth::user()->id)->first();
+        if ($comment == null)
+            return 0;
+
+        $comment->text = "Deleted";
+        $comment->save();
     }
 
 

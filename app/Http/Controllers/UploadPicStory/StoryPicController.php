@@ -18,6 +18,8 @@ use App\Picture; //Eloquent Model
 use App\Story;
 use App\GrabPics;
 use App\Tags;
+use App\Repositories\AccountRepository;
+
 class StoryPicController extends Controller
 {
 	//User must be authenticated.
@@ -35,7 +37,7 @@ class StoryPicController extends Controller
 	public function store(Request $request) {
 
 		//echo "POST";
-		
+
 		//new instance of model
 		$picture = new Picture();
 		

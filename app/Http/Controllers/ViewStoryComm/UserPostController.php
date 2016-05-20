@@ -17,6 +17,7 @@ use App\PictureComment;
 use App\StoryComment;
 use App\Favorites;
 use App\Likes;
+use App\Tags;
 use App\Repositories\AccountRepository;
 
 
@@ -45,7 +46,9 @@ class UserPostController extends Controller
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
 			 'story_ids' => $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id),
-			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id)
+			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id),
+			 'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
+		 	 'isliked' => $this->PostPageInstance->isLikedBySID($story_id),
 			]);
 
 	}
@@ -65,7 +68,9 @@ class UserPostController extends Controller
 		[
 		 'piclist'=> $this->PostPageInstance->getPicBasedOnSID($story_id),
 		 'story' => $this->PostPageInstance->getStoryBasedonSID($story_id),
-		 'comments' => $this->PostPageInstance->getStoryCommentBasedonSID($story_id)
+		 'comments' => $this->PostPageInstance->getStoryCommentBasedonSID($story_id),
+		 'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
+		 'isliked' => $this->PostPageInstance->isLikedBySID($story_id),
 		]);
 
 	}
@@ -93,6 +98,50 @@ class UserPostController extends Controller
     public function Unlike($story_id)
     {   
         $this->PostPageInstance->RemoveLikeBySID($story_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
+    public function DeleteStory($story_id)
+    {   
+        $this->PostPageInstance->DeleteStoryBySID($story_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
+    public function GetTags($story_id, Request $request) {
+		$currentTag = $this->PostPageInstance->ReturnStoryTagsBySID($story_id);
+		return view('postpage/edittags', 
+		[
+		 'piclist'=> $this->PostPageInstance->getPicBasedOnSID($story_id),
+		 'story' => $this->PostPageInstance->getStoryBasedonSID($story_id),
+		 'currentTag' => $currentTag,
+		]);
+		//return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+	}
+	public function StoreNewTags($story_id, Request $request)
+    {   
+    	$getTagColumn = Tags::where('story_id', $story_id);
+    	$getTagColumn->delete();
+
+    	//
+		if ($request->input('tag') != '')
+		{
+			$tags = new Tags();
+			$taglist = explode(',', $request->input('tag'));
+			foreach ($taglist as $index => $tag) {
+				$tags = new Tags();
+				$taglist[$index] = rtrim(ltrim($taglist[$index]));
+				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
+				$tags->tag_id = $taglist[$index];
+				$tags->story_id = $story_id;
+				$tags->save();
+			}
+
+		}
+    	//
+        return redirect('/post/story/'.$story_id);
+    }
+
+    public function DeleteComment($comment_id)
+    {   
+        $this->PostPageInstance->DeleteStoryCommentByID($comment_id);
         //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
     }
 }
