@@ -83,6 +83,9 @@ class SearchController extends Controller
 			} 
 		}
 		
+		//remove duplicates
+		$search_words = array_unique($search_words);
+		
 		//Reset index after unset.
 		$search_words = array_values($search_words);
 		

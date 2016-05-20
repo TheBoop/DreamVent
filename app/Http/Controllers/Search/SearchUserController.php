@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Search;
 
 use Illuminate\Http\Request;
-//use Illuminate\Pagination\Environment as Paginator;
+use Illuminate\Support\Collection;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -50,7 +50,10 @@ class SearchUserController extends Controller
 			} 
 		}
 		
-		//Reset index after unset.
+		//remove duplicates
+		$search_words = array_unique($search_words);
+		
+		//Reset array indices.
 		$search_words = array_values($search_words);
 		
 		//Test: Print list of actual search terms.
@@ -63,11 +66,21 @@ class SearchUserController extends Controller
 		$searchResults = array();
 		
 		//Get results
-		$searchResults = User::where('username', 'like', '%' . $search_words[0] . '%')->latest()->get();
+		//$searchResults = User::where('username', 'like', '%' . $search_words[0] . '%')->latest()->get();
 		
-		//Test: print results
+		//Get results in loop.
+		$collection = new Collection();
+		foreach ($search_words as $key => $word) {
+			$tmp = User::where('username', 'like', '%' . $word . '%')->get();
+			foreach($tmp as $tmpKey => $tmpResult) {
+				$collection->push($tmpResult);
+			}
+		}
+		
+		//Test: print results //TODO eliminate duplicates
 		echo "<br /> Results: <br />";
-		foreach ($searchResults as $key => $result) {
+		foreach ($collection as $key => $result) {
+		//foreach ($searchResults as $key => $result) {
 			echo "$key: $result <br />";
 		}
 	}

@@ -146,6 +146,7 @@ class AccountRepository
 			if (in_array($word, $wordList)) return true;
 			else return false;
 	}
+
 	
 	public function containsTitleRequest($searchRequest) {
 		$pos = strpos($searchRequest, 'title:');
