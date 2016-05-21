@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
 	* Page Types - Chris
 	* =====================
 	*/
-	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
+	Route::get('/', 'PageType\NonUserPageType@FeaturedFrontPage');
 	Route::get('/YourStories', 'PageType\UserPageType@YourStories');
 	Route::get('/Follows', 'PageType\UserPageType@FollowPage');
 	Route::get('/Favorites', 'PageType\UserPageType@FavoritePage');
@@ -126,6 +126,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('testprofile/{username}', 'UserList\NonUserListController@testProfile');
 	Route::post('followtest/{username}', 'UserList\UserListController@addFollower');
 	Route::post('unfollowtest/{username}', 'UserList\UserListController@removeFollower');
+
+	Route::get('blocktest/{username}', 'UserList\UserListController@addBlock');
+	Route::get('unblocktest/{username}', 'UserList\UserListController@removeBlock');
+
 
 	/*
 	* =====================
