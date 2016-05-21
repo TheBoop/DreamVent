@@ -33,11 +33,11 @@
 
 <div class="pictureContainer">
     <img src="{{asset($piclist->picture_link)}} ">  
-    <div class="storyContainer" >
-      {{$story->content}}
-    </div>
 </div>
 
+<div class="storyContainer" >
+    {{$story->content}}
+</div>
 
 <div id="comments-modal">
   <div id="comments" class="overlay">

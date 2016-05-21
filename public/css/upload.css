@@ -18,7 +18,7 @@
 }
 
 h1.title{
-	font-family: 'Lato'; 
+	font-family: Trebuchet MS,Trebuchet,sans-serif;
 	color: rgb(0,0,51);
 	margin-left: auto;
     margin-right: auto;
@@ -57,8 +57,12 @@ p.centered {
     margin-left: auto;
     margin-right: auto;
     width: 6em;
-
 }
 
-
-
+p.left {
+    padding: 0px -50px; 
+    font: 15px bold, Sans-serif; 
+    margin-left: auto;
+    margin-right: auto;
+     width: 50%
+}

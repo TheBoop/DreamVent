@@ -14,28 +14,19 @@
    		<h1 class="title">Picture+Story Upload</h1>
         {!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST', 'files'=>true)) !!}
 
-
-
-
-
-        	<div>
-                    FORMAT Story Title:
-                    <input type="text" name="title">
-                    </div>
-        	<p class="centered">
-
-
-
-
-
-
         	<p class="centered" style="margin-top: 30px; margin-bottom: 30px;">
 	        {!! Form::file('picture',array('style'=>'margin-left: -20px;')) !!}
 	        </p>
-	        <p class="centered" >
-	        <b >Description:</b>
+
+	        <p class="left" >
+	        <b >Image Description:</b>
 	        {!! Form::text('description') !!}
 	        </p>
+
+	        <p class="left">
+                <b>Story Title:</b>
+                <input type="text" name="title">
+            </p>
 
 	        <!--@if(Session::has('error'))
 	        	<p class="errors">{!!$errors->first('image')!!}</p>
@@ -43,12 +34,8 @@
 	        @endif -->
 
             	{!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST')) !!}
-              	<p style="padding: 0px -50px; 
-              	font: 25px bold, Sans-serif; 
-              	margin-left: auto;
-    			margin-right: auto;
-    			width: 50%">
-    			Story:
+              	<p class="left">
+    				<b>Story:</b>
     			</p>
 
     			<p style="
@@ -58,7 +45,7 @@
             	{{ Form::textarea('storyContent') }} 
             	</p>
 
-	        <p class="centered">
+	        <p class="left">
 		        <b>Tags:</b>
 		        <input type="text" name="tags" onKeyPress="return disableEnterKey(event)">
 		        <script>
