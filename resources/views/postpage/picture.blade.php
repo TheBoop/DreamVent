@@ -27,7 +27,7 @@
     <img src="{{asset($picture->picture_link)}} " width="780" height="380">
     
     <div class="storyGallery" >
-      @foreach (story as $story)
+      @foreach ($story as $story)
         <div class="thumbnailStory">
           <a href='/post/story/{{$story->story_id}}'>ok</a>
         </div>
