@@ -1,5 +1,5 @@
 .rightBox {
-    position: absolute;
+    position: relative;
     right: 70px;
     width: 202px;
     height: 386px;
@@ -9,7 +9,7 @@
 
 .bottomRightBox {
     position: relative;
-    right: 70px;
+    right: 0px;
     width: 202px;
     height: 386px;
     border: none;
@@ -17,10 +17,10 @@
 }
 
 .pictureContainer {
-    position: absolute;
-    left: 230px;
-    width: 786px;
-    height: 386px;
+    position: relative;
+    left: 0px;
+    width: maxwidth;
+    height: auto;
     border: 3px solid #73AD21;
 }
 

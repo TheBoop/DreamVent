@@ -9,29 +9,40 @@
 
 @section('content')
 
-<div class="rightBox">
-<a href="#" class="likeButton"; id="topButton">Likes</a>
-
-<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton"; id="buttonSpace">Favorite</a>
-
-<a href="#comments" class="commentButton"; id="buttonSpace"></a>
-
+<!--- Picture and buttons --->
+<dic class="container">
+  <div class="row-fluid">
+    <div class="col-md-9 col-md-offset-1">
+      <div class="pictureContainer">
+        <img src="{{asset($picture->picture_link)}} " width="100%" height="100%">
+      </div>
+    </div>
+    <div class="col-md-2 ">
+      <div class="rightBox">
+        <a href="#" class="likeButton"; id="topButton">Likes</a>
+        <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton"; id="buttonSpace">Favorite</a>
+        <a href="#comments" class="commentButton"; id="buttonSpace"></a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="row-fluid">
-<div class="pictureContainer">
-    <img src="{{asset($picture->picture_link)}} " width="780" height="380">
-    
+<!--- Story Gallery --->
+<?php
+  $storyCount=0;
+?>
+<div class="container">
+  <div class="row-fluid">
     <div class="storyGallery" >
       @foreach ($story as $story)
-        <div class="thumbnailStory">
-          <a href='/post/story/{{$story->story_id}}'>ok</a>
-        </div>
+
+        <?php endswitch ?>   
       @endforeach
     </div>
-</div>
+  </div>
 </div>
 
+<!--- Comment Modal --->
 <div id="comments" class="overlay">
 	<div class="popup">
 		<h2>Comments</h2>
@@ -39,7 +50,6 @@
 		<div class="content">
 			@foreach ($comments as $comment)
         {{$comment->content}} <br/>
-        
       @endforeach
 		</div>
 	</div>
