@@ -1,0 +1,29 @@
+.commentButton {
+  background: url("../Pictures/commentPic3.png") no-repeat scroll 0% 0% transparent;
+  background-size: Auto 50px;
+  background-position: 7px top;
+  vertical-align: bottom;
+  background-color: #FFFFFF;
+  width: 100px;
+  height:40px;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	border:3px solid #e7f0e7;
+	display:inline-block;
+	cursor:pointer;
+	color:#4d214d;
+	font-family:Arial;
+	font-size:17px;
+	padding:14px 12px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #d2e6cf;
+}
+.commentButton:hover {
+	background-color:#ffffff;
+  highline: none;
+}
+.commentButton:active {
+	position:relative;
+	top:1px;
+}

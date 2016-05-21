@@ -1,52 +1,51 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="{{ URL::asset('css/pictureContainer.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/storyContainer.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/APIcontainer.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/likeButton.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/postButton.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/commentButton.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/padding.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/commentWindow.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/thumbnailStory.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/storyGallery.css') }}">
+
 @section('content')
 
-<!-- display image -->
-<img class="img-rounded"
-     src="{{asset($picture->picture_link)}}"> 
-</img>
-<br/>
+<div class="rightBox">
+<a href="#" class="likeButton"; id="topButton">Likes</a>
 
-<!-- display story links -->
-There are story ids attached to this picture. <br/>
-@foreach ($story_ids as $story_id)
-	{{$story_id->story_id}} <br/>
-@endforeach
+<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton"; id="buttonSpace">Favorite</a>
 
-<!-- display comments -->
-These are comments attached to this picture. <br/>
-@foreach ($comments as $comment)
-	{{$comment->text}} <br/>
-@endforeach
+<a href="#comments" class="commentButton"; id="buttonSpace"></a>
 
-<!-- comment text area-->
-<div class="about-section">
-   <div class="text-content">
-     <div class="span7 offset1">
-        @if(Session::has('success'))
-          <div class="alert-box success">
-          <h2>{!! Session::get('success') !!}</h2>
-          </div>
-        @endif
-        <div class="secure">Post Comment</div>
-			{!! Form::open(array('url'=>'/post/picture/'.$picture->picture_id,'method'=>'POST')) !!}
-         <div class="control-group">
-          <div class="controls">
-			{{ Form::textarea('comment') }} 
-			
-	  <p class="errors">{!!$errors->first('story')!!}</p> <!-- I'm not sure what this line is actually for, or if I'm doing it right. -->
-	@if(Session::has('error'))
-	<p class="errors">{!! Session::get('error') !!}</p>
-	@endif
-        </div>
-        </div>
-        <div id="success"> </div>
-      {!! Form::submit('Submit', array('class'=>'send-btn')) !!}
-      {!! Form::close() !!}
-      </div>
-   </div>
 </div>
 
+<div class="row-fluid">
+<div class="pictureContainer">
+    <img src="{{asset($picture->picture_link)}} " width="780" height="380">
+    
+    <div class="storyGallery" >
+      @foreach ($story_ids as $story)
+        <div class="thumbnailStory">
+          <a href='/post/story/{{$story->story_id}}'>ok</a>
+        </div>
+      @endforeach
+    </div>
+</div>
+</div>
 
+<div id="comments" class="overlay">
+	<div class="popup">
+		<h2>Comments</h2>
+		<a class="close" href="#">x</a>
+		<div class="content">
+			@foreach ($comments as $comment)
+        {{$comment->content}} <br/>
+        
+      @endforeach
+		</div>
+	</div>
+</div>
 @endsection
