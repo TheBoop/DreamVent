@@ -70,4 +70,9 @@ class UserListController extends Controller
         //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
     }
 
+    public function myProfile()
+    {
+        return view('profile.personal_profile');
+    }
+
 }

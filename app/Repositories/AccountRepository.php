@@ -546,10 +546,9 @@ class AccountRepository
         $user_id = Auth::user()->id;
         $check = Story::where('story_id', $story_id)
                         ->where('author_id', $user_id )->first();
-
+        $tagstr = "";
         if($check){
             $holdlist_tags = Tags::where('story_id', $story_id)->get();
-            $tagstr = "";
             foreach ($holdlist_tags as $index => $holdlist_tag) {
                 $tagstr = $tagstr.$holdlist_tags[$index]->tag_id.',';
             }
@@ -563,16 +562,8 @@ class AccountRepository
      * =================      Username              ======================
      * ===================================================================
      */
-     /*
-     * Get UserID associated with username
-     * Returns table USER matching
-     */ 
-    public function getUserIDByUsername($username)
-    {
-       return User::where('username', $username)->first();
-    }
 
-    /*
+     /*
      * Get FollowList
      * List of followers
      */ 
@@ -586,6 +577,30 @@ class AccountRepository
                         where('list_id', $followlist_id)->get();
         //return 0 or 1 depending if the user is followed or not
         return $list_id;
+    }
+
+    /*
+     * Get BlockList
+     * List of Blocked people
+     */ 
+    public function GetBlockList()
+    {
+        //get Authenticated User's blocklist_id
+        if(Auth::guest())
+            return 0;
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $list_id = UserListContains::
+                        where('list_id', $blocklist_id)->get();
+        return $list_id;
+    }
+
+     /*
+     * Get UserID associated with username
+     * Returns table USER matching
+     */ 
+    public function getUserIDByUsername($username)
+    {
+       return User::where('username', $username)->first();
     }
 
     /*
@@ -696,21 +711,6 @@ class AccountRepository
             $data->delete();
         return;
 
-    }
-
-    /*
-     * Get BlockList
-     * List of Blocked people
-     */ 
-    public function GetBlockList()
-    {
-        //get Authenticated User's blocklist_id
-        if(Auth::guest())
-            return 0;
-        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
-        $list_id = UserListContains::
-                        where('list_id', $blocklist_id)->get();
-        return $list_id;
     }
 
     /*

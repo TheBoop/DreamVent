@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->hasOne('App\UserList','list_id');
    }
 
+   public function blocklist_id()
+   {
+        return $this->hasOne('App\UserList','list_id');
+   }
+
    public function favorite_list()
    {
         return $this->hasMany('App\Favorites','user_id');
