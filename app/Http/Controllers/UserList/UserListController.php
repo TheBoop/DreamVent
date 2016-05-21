@@ -70,6 +70,19 @@ class UserListController extends Controller
         //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
     }
 
+    public function Favorite_pic($picture_id, Request $request)
+    {
+        $like = new Favorites();
+        $this->UserList->StoreFavoriteByPID($picture_id, $like, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+
+    }
+    public function Unfavorite_pic($picture_id)
+    {   
+        $this->UserList->RemoveFavoriteByPID($picture_id);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+    }
+
     public function myProfile()
     {
         return view('profile.personal_profile');

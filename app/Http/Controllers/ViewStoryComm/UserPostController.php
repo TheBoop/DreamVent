@@ -117,30 +117,27 @@ class UserPostController extends Controller
 	}
 	public function StoreNewTags($story_id, Request $request)
     {   
-		$author_id = Story::find($story_id)->first()->author_id;
+		$author_id = Story::find($story_id)->author_id;
 	
 		//Delete Tags
     	$getTagColumn = Tags::where('story_id', $story_id);
 		
 		//Update Tag Occurences before delete
 		foreach($getTagColumn->get() as $key => $tag) {
-			//echo "before: $key: $tag <br />";
-			$tag_occurence = TagOccurence::where('tag', $tag->tag_id)->where('user_id', $author_id);
+			$tag_occurence = TagOccurence::where('tag', $tag->tag_id)->where('user_id', $author_id)->first();
 			
-			/*if ($tag_occurence) { //If exists, decrement num_occurences, make sure its not less than 0;
-				
+			if ($tag_occurence) { //If exists, decrement num_occurences, make sure its not less than 0;
+				if ($tag_occurence->num_occurences > 0) {
+					$tag_occurence->num_occurences -= 1;
+					$tag_occurence->save();
+				}
 			}
-			else { 
-				$tag_occurence = new TagOccurence();
-				$tag_occurence->user_id = $author_id;
-				$tag_occurence->
-				$tag_occurence->
-			}*/
+			else {
+				//technically this shouldn't happen.
+			}
 		}
 		
     	$getTagColumn->delete();
-
-		//TODO
 
     	//Insert Tags
 		if ($request->input('tag') != '')
@@ -158,12 +155,24 @@ class UserPostController extends Controller
 				}
 				
 				//Update Tag Occurences after insert
-				//TODO
+				$tag_occurence = TagOccurence::where('tag', $tags->tag_id)->where('user_id', $author_id)->first();
+				
+				if ($tag_occurence) { //If exists, increment num_occurences.
+					$tag_occurence->num_occurences += 1;
+					$tag_occurence->save();
+				}
+				else { //If it doesn't exist, create an entry and set num occurences to 1.
+					$tag_occurence = new TagOccurence();
+					$tag_occurence->user_id = $author_id;
+					$tag_occurence->tag = $tags->tag_id;
+					$tag_occurence->num_occurences = 1;
+					$tag_occurence->save();
+				}
 			}
 
 		}
     	//
-        return redirect('/post/story/'.$story_id);
+       return redirect('/post/story/'.$story_id);
     }
 
     public function DeleteComment($comment_id)
