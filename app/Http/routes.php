@@ -140,6 +140,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('followtest/{username}', 'UserList\UserListController@addFollower');
 	Route::post('unfollowtest/{username}', 'UserList\UserListController@removeFollower');
 
+	Route::get('blocktest/{username}', 'UserList\UserListController@addBlock');
+	Route::get('unblocktest/{username}', 'UserList\UserListController@removeBlock');
+
+
 	/*
 	* =====================
 	* Favorite/Unfavorite Stories  - Chris

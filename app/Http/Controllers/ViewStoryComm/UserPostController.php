@@ -42,11 +42,10 @@ class UserPostController extends Controller
 		]);
 		
 		$this->PostPageInstance->StorePicCommentMethod($request, $picture_id, $comment);
-
 		return view('postpage/picture', 
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
-			 'story_ids' => $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id),
+			 'story' =>  $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id),
 			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id),
 			 'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
 		 	 'isliked' => $this->PostPageInstance->isLikedBySID($story_id),

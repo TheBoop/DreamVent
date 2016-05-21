@@ -1,0 +1,10 @@
+.storyGallery { 
+    margin-top: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 786px;
+    left: -3px;
+    height: 386px;
+    border: none;
+    background-color : transparent;
+}
