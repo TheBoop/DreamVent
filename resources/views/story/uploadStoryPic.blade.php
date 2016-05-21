@@ -14,6 +14,21 @@
    		<h1 class="title">Pictory Upload</h1>
         {!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST', 'files'=>true)) !!}
 
+
+
+
+
+        	<div>
+                    FORMAT Story Title:
+                    <input type="text" name="title">
+                    </div>
+        	<p class="centered">
+
+
+
+
+
+
         	<p class="centered" style="margin-top: 30px; margin-bottom: 30px;">
 	        {!! Form::file('picture',array('style'=>'margin-left: -20px;')) !!}
 	        </p>
