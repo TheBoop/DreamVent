@@ -14,7 +14,19 @@
    		<h1 class="title">Picture and Story Upload</h1>
         {!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST', 'files'=>true)) !!}
 
+
+
+
+        	<div>
+                    FORMAT Story Title:
+                    <input type="text" name="title">
+                    </div>
         	<p class="centered">
+
+
+
+
+
 	        {!! Form::file('picture',array('style'=>'margin-left: -20px;')) !!}
 	        <b>Description:</b>
 	        {!! Form::text('description') !!}
