@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\pageType;
+namespace App\Http\Controllers\PageType;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +41,14 @@ class UserPageType extends Controller
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
+        ]);
+    }
+
+    public function YourPictures(Request $request)
+    {
+        $picture_id = $this->UserPagePreference->viewYourOwnPicture(Auth::user());
+        return view('pagetype.index', [
+            'pictureList' => $picture_id,
         ]);
     }
 

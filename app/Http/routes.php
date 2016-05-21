@@ -28,10 +28,12 @@ Route::group(['middleware' => ['web']], function () {
 	* Page Types - Chris
 	* =====================
 	*/
-	Route::get('/', 'pageType\NonUserPageType@FeaturedFrontPage');
-	Route::get('/YourStories', 'pageType\UserPageType@YourStories');
-	Route::get('/Follows', 'pageType\UserPageType@FollowPage');
-	Route::get('/Favorites', 'pageType\UserPageType@FavoritePage');
+	Route::get('/', 'PageType\NonUserPageType@FeaturedFrontPage');
+	Route::get('/YourStories', 'PageType\UserPageType@YourStories');
+	Route::get('/Follows', 'PageType\UserPageType@FollowPage');
+	Route::get('/Favorites', 'PageType\UserPageType@FavoritePage');
+	Route::get('/YourPictures', 'PageType\UserPageType@YourPictures');
+
 
 
 	/*
@@ -39,7 +41,6 @@ Route::group(['middleware' => ['web']], function () {
 	* Authentication - Laravel / Chris
 	* =====================
 	*/
-	Route::auth();
 	
 	Route::controllers([
 	   'password' => 'Auth\PasswordController',
@@ -51,9 +52,9 @@ Route::group(['middleware' => ['web']], function () {
 	* User Page 
 	* =====================
 	*/
-	Route::get('profile/{username}', function($username){
+	Route::get('profile/myprofile', function(){
 		//echo $username;
-		return view('profile.foreign_profile');
+		return view('profile.personal_profile');
 	});
 	
 	/*
@@ -149,10 +150,16 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('likeStory/{story_id}', 'ViewStoryComm\UserPostController@Like');
 	Route::delete('unlikeStory/{story_id}', 'ViewStoryComm\UserPostController@Unlike');
-
+	//need a form or method to this route
+	Route::delete('deleteStory/{story_id}', 'ViewStoryComm\UserPostController@DeleteStory');
+	Route::get('/editTag/{story_id}', 'ViewStoryComm\UserPostController@GetTags');
+	Route::post('/editTag/{story_id}', 'ViewStoryComm\UserPostController@StoreNewTags');
+	Route::post('deleteStoryComment/{comment_id}', 'ViewStoryComm\UserPostController@DeleteComment');
 
 	//
-	Route::post('likePicture/{picture_d}', 'UserList\UserListController@Like_pic');
-	Route::post('unlikePicture/{picture_d}', 'UserList\UserListController@Unlike_pic');
+	Route::post('likePicture/{picture_id}', 'UserList\UserListController@Like_pic');
+	Route::post('unlikePicture/{picture_id}', 'UserList\UserListController@Unlike_pic');
+	
 });
 
+Route::auth();

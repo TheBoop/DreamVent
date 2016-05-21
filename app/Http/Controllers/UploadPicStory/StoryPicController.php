@@ -17,6 +17,8 @@ use Session;
 use App\Picture; //Eloquent Model
 use App\Story;
 use App\GrabPics;
+use App\Tags;
+use App\Repositories\AccountRepository;
 
 class StoryPicController extends Controller
 {
@@ -35,7 +37,7 @@ class StoryPicController extends Controller
 	public function store(Request $request) {
 
 		//echo "POST";
-		
+
 		//new instance of model
 		$picture = new Picture();
 		
@@ -71,6 +73,7 @@ class StoryPicController extends Controller
 		$story->author_id = Auth::user()->id;
 		$story->content = $request->storyContent;
 		$story->username = Auth::user()->username;
+		$story->title = $request->title;
 		$story->save();
 
 		//fill grab_pics relation table
@@ -78,7 +81,25 @@ class StoryPicController extends Controller
 		$grab_pics->story_id = $story->story_id;
 		$grab_pics->picture_id = $picture->getKey();
 		$grab_pics->save();
+
+
+		if ($request->tags != '')
+		{
+			$tags = new Tags();
+			$taglist = explode(',', $request->tags);
+			foreach ($taglist as $index => $tag) {
+				$tags = new Tags();
+				$taglist[$index] = rtrim(ltrim($taglist[$index]));
+				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
+				$tags->tag_id = $taglist[$index];
+				$tags->story_id = $story->story_id;
+				$tags->save();
+			}
+
+		}
 		return redirect('post/story/'.$grab_pics->story_id);
 		
 	}
 }
+
+?>

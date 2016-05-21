@@ -44,6 +44,19 @@ class UserListController extends Controller
         //return redirect()->action('UserList\NonUserListController@testProfile', [$username]);
     }
 
+    public function addBlock($username, Request $request)
+    {
+        $block = new UserListContains();
+        $this->UserList->StoreBlockByUsername($username, $block, $request);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$username]);
+
+    }
+    public function removeBlock($username)
+    {   
+        $this->UserList->RemoveBlockByUsername($username);
+        //return redirect()->action('UserList\NonUserListController@testProfile', [$username]);
+    }
+
     public function Like_pic($picture_id, Request $request)
     {
         $like = new Likes();
