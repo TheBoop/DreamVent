@@ -1,13 +1,18 @@
+<link rel="stylesheet" href="{{ URL::asset('css/search.css') }}">
+
 @extends('layouts.app')
 @section('content')
 <body>
-<div class="container">
-    search user here. Currently only searches first word; i.e. searching <br />
-	for 'test, foobar' without quotation marks returns results containing 'test'.
-    {{Form::open(array('url' =>'/searchUser'))}}
-      {{Form::text('keyword', null, array('placeholder'=>'search by keyword'))}}
-      {{Form::submit('search')}}
-    {{Form::close()}}
+
+
+
+    <div class="search">
+        Find other users (comma separated)
+        {{Form::open(array('url' =>'/searchUser'))}}
+            {{Form::text('keyword', null, array('class'=>'searchbox', 'placeholder'=>'search by username'))}}
+            {{Form::submit('search')}}
+        {{Form::close()}}
+    </div>
 
 </div>
 
