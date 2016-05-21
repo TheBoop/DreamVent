@@ -158,7 +158,9 @@ Route::group(['middleware' => ['web']], function () {
 
 	//
 	Route::post('likePicture/{picture_id}', 'UserList\UserListController@Like_pic');
-	Route::post('unlikePicture/{picture_id}', 'UserList\UserListController@Unlike_pic');
+	Route::delete('unlikePicture/{picture_id}', 'UserList\UserListController@Unlike_pic');
+	Route::post('favoritePicture/{picture_id}', 'UserList\UserListController@Favorite_pic');
+	Route::delete('unfavoritePicturePicture/{picture_id}', 'UserList\UserListController@UnfavoritePicture_pic');
 	
 });
 
