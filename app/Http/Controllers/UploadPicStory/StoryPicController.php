@@ -80,6 +80,8 @@ class StoryPicController extends Controller
 		$picture->save();
 		$grab_pics->story_id = $story->story_id;
 		$grab_pics->picture_id = $picture->getKey();
+		$grab_pics->username = Auth::user()->username;
+		$grab_pics->title =  $request->title;
 		$grab_pics->save();
 
 
