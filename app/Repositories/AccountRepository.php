@@ -475,6 +475,39 @@ class AccountRepository
 
     }
 
+    public function StoreFavoriteByPID($picture_id, $favorite , $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->followlist_id);
+
+        $favorite->picture_id = $picture_id;
+        $favorite->user_id = $request->user()->id;
+
+        //error checking for ajax bug
+        $zero_or_one = Favorites::
+                        where('picture_id', $favorite->picture_id)
+                        ->where('user_id', $favorite->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $favorite->save();
+    }
+
+    /*
+     * Destroy Foller in database
+     */ 
+    public function RemoveFavoriteByPID($picture_id)
+    {
+        $user_id = Auth::user()->id;
+        $picture_id = $picture_id;
+        //get column
+        $data = Favorites::
+                        where('picture_id', $picture_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
+    }
 
     public function getNumOfLikesBySID($story_id)
     {
