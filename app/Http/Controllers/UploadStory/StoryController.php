@@ -16,6 +16,8 @@ use App\Story;
 use App\Picture; 
 use App\GrabPics; 
 use App\Abort;
+use App\Tags;
+
 class StoryController extends Controller
 {
     //User must be authenticated.
