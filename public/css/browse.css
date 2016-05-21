@@ -1,10 +1,9 @@
-.main{
+.main {
     margin: auto;
 }
 .cell {
     position: relative;
     padding: 10px;
-    padding-bottom: 0px;
     width: 250px;
     max-height: 300px;
     border-radius: 10px;

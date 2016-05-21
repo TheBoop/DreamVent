@@ -11,7 +11,7 @@
         </div>
     @endif
     <div class="innerblock" style="width: 70%;">
-   		<h1 class="title">Pictory Upload</h1>
+   		<h1 class="title">Picture+Story Upload</h1>
         {!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST', 'files'=>true)) !!}
 
 

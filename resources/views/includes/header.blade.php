@@ -18,7 +18,7 @@
             <li><a href="/browse">Browse</a></li>
             <li><a href="/Follows">Follows</a></li>
             <li><a href="/Favorites">Favorites</a></li>
-            <li><a href="/searchtest">Search</a></li>
+            <li><a href="/search">Search</a></li>
             <li><a href="/uploadPicture">Picture Upload</a></li>
             <li><a href="/uploadStoryPic">Story Upload</a></li>
             <li><a href="/YourStories">Your Stories</a></li>

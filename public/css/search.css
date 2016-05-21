@@ -1,20 +1,19 @@
-.main{
+.main {
     margin: auto;
 }
 
-.cell {
+.search {
     padding: 10px;
-    padding-bottom: 0px;
-    width: 250px;
-    max-height: 300px;
+    padding-top: 20px;
+    border: 0 0;
     border-radius: 10px;
     background: rgba(211, 211, 211, 0.6);
     text-align: center;
-    transition: all 0.3s ease 0s;
+    font-size: 20px;
 }
 
-.cell:hover {
-  background: rgba(211, 211, 211, 0.9);
+.searchbox {
+    width: 400px;
 }
 
 .cell img {
