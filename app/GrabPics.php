@@ -16,7 +16,9 @@ class GrabPics extends Model
 	public $incrementing = false; 
 	protected $fillable = [
 		'picture_id',
-		'story_id'
+		'story_id',
+		'username',
+		'title'
 	];
 
 	public function Picture()
