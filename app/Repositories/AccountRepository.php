@@ -381,9 +381,10 @@ class AccountRepository
      *  return two objects [Story Object, Picture Object]
      *  Order is made by previous functions (Ordering of story_id)
      */
-
     public function GetStoryDescNPic($story_id, $request)
     {   
+		$piclist = array();
+		
         //error cases with guest/nonguest
         if ($request==null)
             $user_id = 0;
@@ -391,7 +392,6 @@ class AccountRepository
             $user_id = $request->id;
         if (empty($story_id))
             return;
-        
         $piclist = array();
 
         foreach ($story_id as $index => $value) {
@@ -404,7 +404,7 @@ class AccountRepository
         if (!empty($piclist))
             return [
                 Story::whereIn('story_id', $story_id)->orderByRaw("FIELD(story_id, $storyids_ordered)")->paginate(12),
-                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(12)
+                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(12),
                 ];
         return;
     }

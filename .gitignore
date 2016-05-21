@@ -2,12 +2,14 @@
 /bootstrap/cache/compiled.php
 storage/logs/laravel.log
 /database
+/public/Pictures
 
 # Logs and databases #
 ######################
 *.log
 *.sql
 *.sqlite
+*.swp
 
 # OS generated files #
 ######################

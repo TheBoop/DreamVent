@@ -18,6 +18,7 @@ use App\StoryComment;
 use App\Favorites;
 use App\Likes;
 use App\Tags;
+use App\TagOccurence;
 use App\Repositories\AccountRepository;
 
 
@@ -116,10 +117,32 @@ class UserPostController extends Controller
 	}
 	public function StoreNewTags($story_id, Request $request)
     {   
+		$author_id = Story::find($story_id)->author_id)->first();
+	
+		//Delete Tags
     	$getTagColumn = Tags::where('story_id', $story_id);
+		
+		//Update Tag Occurences before delete
+		foreach($getTagColumn->get() as $key => $tag) {
+			//echo "before: $key: $tag <br />";
+			$tag_occurence = TagOccurence::where('tag', $tag->tag_id)->where('user_id', $author_id);
+			
+			/*if ($tag_occurence) { //If exists, decrement num_occurences, make sure its not less than 0;
+				
+			}
+			else { 
+				$tag_occurence = new TagOccurence();
+				$tag_occurence->user_id = $author_id;
+				$tag_occurence->
+				$tag_occurence->
+			}*/
+		}
+		
     	$getTagColumn->delete();
 
-    	//
+		//TODO
+
+    	//Insert Tags
 		if ($request->input('tag') != '')
 		{
 			$tags = new Tags();
@@ -131,6 +154,9 @@ class UserPostController extends Controller
 				$tags->tag_id = $taglist[$index];
 				$tags->story_id = $story_id;
 				$tags->save();
+				
+				//Update Tag Occurences after insert
+				//TODO
 			}
 
 		}
