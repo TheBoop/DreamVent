@@ -14,7 +14,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 25px;
-    background-color:rgba(211,211,211, 0.7);
+    background-color:rgba(210,210,230, 0.5);
 }
 
 h1.title{
@@ -22,7 +22,7 @@ h1.title{
 	color: rgb(0,0,51);
 	margin-left: auto;
     margin-right: auto;
-    width: 6em;
+    width: auto;
     text-align: center;
 }
 
@@ -56,7 +56,8 @@ h1.submit{
 p.centered {
     margin-left: auto;
     margin-right: auto;
-    width: 6em
+    width: 6em;
+
 }
 
 
