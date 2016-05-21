@@ -33,7 +33,7 @@ class NonUserPostController extends Controller
 		return view('postpage/picture', 
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
-			 'story_ids' => $this->PostPageInstance->getStoryIDsBasedonPID($picture_id),
+			 'story' => $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id),
 			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id)
 			 ]);
 	}
@@ -47,6 +47,7 @@ class NonUserPostController extends Controller
 	}
 	
 	public function ViewStory ($story_id) {
+		//Event::fire('story.view',$story_id);
 		return view('postpage/story', 
 		[
 		 	'piclist'=> $this->PostPageInstance->getPicBasedOnSID($story_id),

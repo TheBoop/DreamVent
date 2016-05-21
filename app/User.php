@@ -23,7 +23,8 @@ class User extends Authenticatable
         'followlist_id', 
 		'contactlist_id', 
 		'pagelist_id', 
-		'holderid4', 'holderid5', 'holderid6','holderid7','holderid8', 'holderid9',
+		'blocklist_id', 
+        'holderid5', 'holderid6','holderid7','holderid8', 'holderid9',
     ];
 	
     /**
