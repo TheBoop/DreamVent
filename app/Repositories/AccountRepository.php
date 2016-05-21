@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\UserListContains;
 use App\Likes;
 use App\Tags;
+use App\Favorites;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -270,6 +271,8 @@ class AccountRepository
     {
        return Story::find($story_id);
     }
+
+
 
     /*
      *  Get Story based on SID
@@ -668,5 +671,20 @@ class AccountRepository
 
         $comment->text = "Deleted";
         $comment->save();
+    }
+
+    /*
+     *  Get a list of StoryIDs associated by Author_id
+     *  Returns list of story IDS Sorted by latest
+     */
+    public function favoriteListStoryID($author_id)
+    { 
+        $story_id = array();
+        $collection = Favorites::where('user_id', $author_id)->latest()->get();
+        foreach($collection as $collection)
+        {
+            $story_id[] = $collection->story_id;
+        }
+        return $story_id;
     }
 }
