@@ -36,7 +36,7 @@
 </div>
 
 <div class="pictureContainer">
-    <img src="{{asset($picture->picture_link)}} " width="780" height="380">  
+    <img src="{{asset($piclist->picture_link)}} " width="780" height="380">  
     <div class="storyContainer" >
       {{$story->content}}
     </div>
