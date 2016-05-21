@@ -1,0 +1,32 @@
+#unfavoritebuttonSpace{
+  float: bottom;
+  margin-bottom: 60px;
+  margin-left: 70px;
+}
+#favoritebuttonSpace{
+  float: bottom;
+  margin-bottom: 60px;
+  margin-left: 70px;
+}
+#buttonSpace{
+  float: bottom;
+  margin-bottom: 60px;
+  margin-left: 70px;
+}
+#liketopButton{
+  float: bottom;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  margin-left: 70px;
+}#unliketopButton{
+  float: bottom;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  margin-left: 70px;
+}
+#topButton{
+  float: bottom;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  margin-left: 70px;
+}

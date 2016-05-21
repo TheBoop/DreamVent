@@ -5,11 +5,13 @@
 <style>
 	html,
 	body {
-		margin:0;
-		padding:0;
 		height:100%;
 	    font-family: 'Lato';
-	    background-color: rgb(115,205,100);
+        background: rgb(128, 178, 228);
+	    //background-color: rgba(0,100,200,0.5);
+	    //background-image: url("http://www.splendidwallpaper.com/wp-content/uploads/2012/11/high-resolution-wallpaper-nature-1680x1050.jpg");
+	    background-repeat: no-repeat;
+	    background-position: center;
 	}
 	.fa-btn {
 	    margin-right: 6px;
@@ -17,7 +19,8 @@
 	
 	#wrapper {
 		min-height:100%;
-		position:relative;
+		width: 1200px; 
+		margin: 0 auto; 
 	}
 	#header {
 		padding:10px;
@@ -28,7 +31,6 @@
 	#footer {
 		width:100%;
 		height:100px;
-		position:absolute;
 		bottom:0;
 	}
 </style>

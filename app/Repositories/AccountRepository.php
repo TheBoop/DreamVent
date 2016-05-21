@@ -313,8 +313,8 @@ class AccountRepository
         //I think i can get reduce query ask of Picture::whereIn and improve speed
         if (!empty($piclist))
             return [
-                Story::whereIn('story_id', $story_id)->orderByRaw("FIELD(story_id, $storyids_ordered)")->paginate(4),
-                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(4),
+                Story::whereIn('story_id', $story_id)->orderByRaw("FIELD(story_id, $storyids_ordered)")->paginate(12),
+                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(12),
                 ];
         return;
     }
