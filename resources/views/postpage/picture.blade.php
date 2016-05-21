@@ -36,7 +36,6 @@
     <div class="storyGallery" >
       @foreach ($story as $story)
 
-        <?php endswitch ?>   
       @endforeach
     </div>
   </div>
