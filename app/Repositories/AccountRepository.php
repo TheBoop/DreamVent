@@ -19,6 +19,40 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountRepository
 {
+
+    /*
+     * @param   
+     * @return an ordered list of story_id
+     */
+    public function featuredList()
+    {
+        //search algorithm
+        $collection = Story::orderBy('num_likes', 'DESC')->get();
+
+        //get all story IDS we might have to limit for past 2 days or whatever
+        $story_id = array();
+        foreach($collection as $collection)
+        {
+            $story_id[] = $collection->story_id;
+        }
+        return $story_id; 
+    }
+
+    /*
+     *  Get a list of StoryIDs associated by Author_id
+     *  Returns list of story IDS Sorted by latest
+     */
+    public function favoriteListStoryID($author_id)
+    { 
+        $story_id = array();
+        $collection = Favorites::where('user_id', $author_id)->latest()->get();
+        foreach($collection as $collection)
+        {
+            $story_id[] = $collection->story_id;
+        }
+        return $story_id;
+    }
+
     /*
      * @param  User  $user
      * @return Set of Columns.Picture in which the user owns (4)
@@ -105,24 +139,6 @@ class AccountRepository
             $story_id[] = $collection->story_id;
         }
         return $story_id;
-    }
-
-    /*
-     * @param   
-     * @return an ordered list of story_id
-     */
-    public function featuredList()
-    {
-        //search algorithm
-        $collection = Story::orderBy('num_likes', 'DESC')->get();
-
-        //get all story IDS we might have to limit for past 2 days or whatever
-        $story_id = array();
-        foreach($collection as $collection)
-        {
-            $story_id[] = $collection->story_id;
-        }
-        return $story_id; 
     }
 	
 	/*  ===========================================
@@ -255,6 +271,52 @@ class AccountRepository
         $comment->author_id = Auth::user()->id;
 
         $comment->save();
+    }
+    public function getNumOfLikesByPID($picture_id)
+    {
+        $data = Likes:: where('picture_id', $picture_id);
+        return count($data);
+
+    }
+
+    public function getNumOfFavoritesByPID($picture_id)
+    {
+        $data = Favorites:: where('picture_id', $picture_id);
+        return count($data);
+
+    }
+
+    public function StoreLikeByPID($picture_id, $like, $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->followlist_id);
+        $like->picture_id = $picture_id;
+        $like->user_id = $request->user()->id;
+        //error checking for ajax bug
+        $zero_or_one = Likes::
+                        where('picture_id', $like->picture_id)
+                        ->where('user_id', $like->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $like->save();
+    }
+
+    /*
+     * Destroy Like in database
+     */ 
+    public function RemoveLikeByPID($picture_id)
+    {
+        $user_id = Auth::user()->id;
+        $picture_id = $picture_id;
+
+        //get column
+        $data = Likes::
+                        where('picture_id', $picture_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
     }
 
     /*
@@ -671,20 +733,5 @@ class AccountRepository
 
         $comment->text = "Deleted";
         $comment->save();
-    }
-
-    /*
-     *  Get a list of StoryIDs associated by Author_id
-     *  Returns list of story IDS Sorted by latest
-     */
-    public function favoriteListStoryID($author_id)
-    { 
-        $story_id = array();
-        $collection = Favorites::where('user_id', $author_id)->latest()->get();
-        foreach($collection as $collection)
-        {
-            $story_id[] = $collection->story_id;
-        }
-        return $story_id;
     }
 }
