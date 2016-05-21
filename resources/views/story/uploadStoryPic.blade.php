@@ -11,12 +11,14 @@
         </div>
     @endif
     <div class="innerblock" style="width: 70%;">
-   		<h1 class="title">Picture and Story Upload</h1>
+   		<h1 class="title">Pictory Upload</h1>
         {!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST', 'files'=>true)) !!}
 
-        	<p class="centered">
+        	<p class="centered" style="margin-top: 30px; margin-bottom: 30px;">
 	        {!! Form::file('picture',array('style'=>'margin-left: -20px;')) !!}
-	        <b>Description:</b>
+	        </p>
+	        <p class="centered" >
+	        <b >Description:</b>
 	        {!! Form::text('description') !!}
 	        </p>
 
@@ -26,8 +28,20 @@
 	        @endif -->
 
             	{!! Form::open(array('url'=>'/uploadStoryPic','method'=>'POST')) !!}
-              	<h3><b>Story:</b></h3>
+              	<p style="padding: 0px -50px; 
+              	font: 25px bold, Sans-serif; 
+              	margin-left: auto;
+    			margin-right: auto;
+    			width: 50%">
+    			Story:
+    			</p>
+
+    			<p style="
+              	margin-left: 25%;
+    			margin-right: auto;
+    			width: 15em;">
             	{{ Form::textarea('storyContent') }} 
+            	</p>
 
 	        <p class="centered">
 		        <b>Tags:</b>
