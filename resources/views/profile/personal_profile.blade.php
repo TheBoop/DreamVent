@@ -43,37 +43,6 @@
 		            </div>
 		        </div>
 		    </div>
-
-			<div class="tab-content">
-		        <div class="tab-pane active" id="Follower_tab">
-		            <div class="form-group">
-		                <label class="col-xs-3 control-label">Full name</label>
-		                <div class="col-xs-5">
-		                    <input type="text" class="form-control" name="fullName" />
-		                </div>
-		            </div>
-
-		            <div class="form-group">
-		                <label class="col-xs-3 control-label">Company</label>
-		                <div class="col-xs-5">
-		                    <input type="text" class="form-control" name="company" />
-		                </div>
-		            </div>
-
-		            <div class="form-group">
-		                <label class="col-xs-3 control-label">Job title</label>
-		                <div class="col-xs-5">
-		                    <input type="text" class="form-control" name="jobTitle" />
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-
-		    <div class="form-group" style="margin-top: 15px;">
-		        <div class="col-xs-5 col-xs-offset-3">
-		            <button type="submit" class="btn btn-default">Validate</button>
-		        </div>
-		    </div>
 		</form>
     </div>
 

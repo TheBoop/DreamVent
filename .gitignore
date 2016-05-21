@@ -9,6 +9,7 @@ storage/logs/laravel.log
 *.log
 *.sql
 *.sqlite
+*.swp
 
 # OS generated files #
 ######################
