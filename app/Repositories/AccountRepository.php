@@ -19,6 +19,40 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountRepository
 {
+
+    /*
+     * @param   
+     * @return an ordered list of story_id
+     */
+    public function featuredList()
+    {
+        //search algorithm
+        $collection = Story::orderBy('num_likes', 'DESC')->get();
+
+        //get all story IDS we might have to limit for past 2 days or whatever
+        $story_id = array();
+        foreach($collection as $collection)
+        {
+            $story_id[] = $collection->story_id;
+        }
+        return $story_id; 
+    }
+
+    /*
+     *  Get a list of StoryIDs associated by Author_id
+     *  Returns list of story IDS Sorted by latest
+     */
+    public function favoriteListStoryID($author_id)
+    { 
+        $story_id = array();
+        $collection = Favorites::where('user_id', $author_id)->latest()->get();
+        foreach($collection as $collection)
+        {
+            $story_id[] = $collection->story_id;
+        }
+        return $story_id;
+    }
+
     /*
      * @param  User  $user
      * @return Set of Columns.Picture in which the user owns (4)
@@ -105,24 +139,6 @@ class AccountRepository
             $story_id[] = $collection->story_id;
         }
         return $story_id;
-    }
-
-    /*
-     * @param   
-     * @return an ordered list of story_id
-     */
-    public function featuredList()
-    {
-        //search algorithm
-        $collection = Story::orderBy('num_likes', 'DESC')->get();
-
-        //get all story IDS we might have to limit for past 2 days or whatever
-        $story_id = array();
-        foreach($collection as $collection)
-        {
-            $story_id[] = $collection->story_id;
-        }
-        return $story_id; 
     }
 	
 	/*  ===========================================
@@ -256,6 +272,52 @@ class AccountRepository
 
         $comment->save();
     }
+    public function getNumOfLikesByPID($picture_id)
+    {
+        $data = Likes:: where('picture_id', $picture_id);
+        return count($data);
+
+    }
+
+    public function getNumOfFavoritesByPID($picture_id)
+    {
+        $data = Favorites:: where('picture_id', $picture_id);
+        return count($data);
+
+    }
+
+    public function StoreLikeByPID($picture_id, $like, $request)
+    {
+        //select foreign key holy moly one to one magic relationship
+        //var_dump(USER::find(6)->followlist_id);
+        $like->picture_id = $picture_id;
+        $like->user_id = $request->user()->id;
+        //error checking for ajax bug
+        $zero_or_one = Likes::
+                        where('picture_id', $like->picture_id)
+                        ->where('user_id', $like->user_id)->first();
+         if (count($zero_or_one))
+             return;
+         $like->save();
+    }
+
+    /*
+     * Destroy Like in database
+     */ 
+    public function RemoveLikeByPID($picture_id)
+    {
+        $user_id = Auth::user()->id;
+        $picture_id = $picture_id;
+
+        //get column
+        $data = Likes::
+                        where('picture_id', $picture_id) 
+                        ->where('user_id', $user_id)->first();
+        if (count($data))
+            $data->delete();
+        return;
+
+    }
 
     /*
      * ===================================================================
@@ -271,6 +333,8 @@ class AccountRepository
     {
        return Story::find($story_id);
     }
+
+
 
     /*
      *  Get Story based on SID
@@ -317,8 +381,6 @@ class AccountRepository
      *  return two objects [Story Object, Picture Object]
      *  Order is made by previous functions (Ordering of story_id)
      */
-
-
     public function GetStoryDescNPic($story_id, $request)
     {   
 		$piclist = array();
@@ -330,7 +392,7 @@ class AccountRepository
             $user_id = $request->id;
         if (empty($story_id))
             return;
-        
+        $piclist = array();
 
         foreach ($story_id as $index => $value) {
             //confusing for someone new to relations but I used relations for find look at models
@@ -346,7 +408,6 @@ class AccountRepository
                 ];
         return;
     }
-
 
     public function StoreFavoriteBySID($story_id, $favorite , $request)
     {
@@ -485,10 +546,9 @@ class AccountRepository
         $user_id = Auth::user()->id;
         $check = Story::where('story_id', $story_id)
                         ->where('author_id', $user_id )->first();
-
+        $tagstr = "";
         if($check){
             $holdlist_tags = Tags::where('story_id', $story_id)->get();
-            $tagstr = "";
             foreach ($holdlist_tags as $index => $holdlist_tag) {
                 $tagstr = $tagstr.$holdlist_tags[$index]->tag_id.',';
             }
@@ -502,16 +562,8 @@ class AccountRepository
      * =================      Username              ======================
      * ===================================================================
      */
-     /*
-     * Get UserID associated with username
-     * Returns table USER matching
-     */ 
-    public function getUserIDByUsername($username)
-    {
-       return User::where('username', $username)->first();
-    }
 
-    /*
+     /*
      * Get FollowList
      * List of followers
      */ 
@@ -525,6 +577,30 @@ class AccountRepository
                         where('list_id', $followlist_id)->get();
         //return 0 or 1 depending if the user is followed or not
         return $list_id;
+    }
+
+    /*
+     * Get BlockList
+     * List of Blocked people
+     */ 
+    public function GetBlockList()
+    {
+        //get Authenticated User's blocklist_id
+        if(Auth::guest())
+            return 0;
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $list_id = UserListContains::
+                        where('list_id', $blocklist_id)->get();
+        return $list_id;
+    }
+
+     /*
+     * Get UserID associated with username
+     * Returns table USER matching
+     */ 
+    public function getUserIDByUsername($username)
+    {
+       return User::where('username', $username)->first();
     }
 
     /*
@@ -641,21 +717,6 @@ class AccountRepository
      * Get BlockList
      * List of Blocked people
      */ 
-    public function GetBlockList()
-    {
-        //get Authenticated User's blocklist_id
-        if(Auth::guest())
-            return 0;
-        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
-        $list_id = UserListContains::
-                        where('list_id', $blocklist_id)->get();
-        return $list_id;
-    }
-
-    /*
-     * Get BlockList
-     * List of Blocked people
-     */ 
     public function DeleteStoryCommentByID($comment_id)
     {
         //get Authenticated User's blocklist_id
@@ -674,4 +735,3 @@ class AccountRepository
         $comment->save();
     }
 }
-

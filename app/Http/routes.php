@@ -52,10 +52,8 @@ Route::group(['middleware' => ['web']], function () {
 	* User Page 
 	* =====================
 	*/
-	Route::get('profile/myprofile', function(){
-		//echo $username;
-		return view('profile.personal_profile');
-	});
+	Route::get('myprofile/', 'UserList\UserListController@myProfile');
+	Route::get('profile/{username}', 'UserList\NonUserListController@userProfile');
 	
 	/*
 	* =====================
@@ -107,12 +105,7 @@ Route::group(['middleware' => ['web']], function () {
 	* =====================
 	* Search
 	* =====================
-	*/
-	//Search stuff REALLLY DESPERATE FAST SEARCH. - Chris
-	//It searches for description not tag for example 
-	Route::get('/searchtest', 'PageType\NonUserPageType@gettestSearch');
-	Route::post('/searchtest', 'PageType\NonUserPageType@posttestSearch');	//store child
-	
+	*/	
 	//Search Stories - Matt
 	Route::get('/search', 'Search\SearchController@getSearch');
 	Route::post('/search', 'Search\SearchController@postSearch');
@@ -136,12 +129,11 @@ Route::group(['middleware' => ['web']], function () {
 	* Add/Remove People You Follow - Chris
 	* =====================
 	*/
-	Route::get('testprofile/{username}', 'UserList\NonUserListController@testProfile');
-	Route::post('followtest/{username}', 'UserList\UserListController@addFollower');
-	Route::post('unfollowtest/{username}', 'UserList\UserListController@removeFollower');
+	Route::post('follow/{username}', 'UserList\UserListController@addFollower');
+	Route::post('unfollow/{username}', 'UserList\UserListController@removeFollower');
 
-	Route::get('blocktest/{username}', 'UserList\UserListController@addBlock');
-	Route::get('unblocktest/{username}', 'UserList\UserListController@removeBlock');
+	Route::post('block/{username}', 'UserList\UserListController@addBlock');
+	Route::post('unblock/{username}', 'UserList\UserListController@removeBlock');
 
 
 	/*
@@ -158,6 +150,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::delete('deleteStory/{story_id}', 'ViewStoryComm\UserPostController@DeleteStory');
 	Route::get('/editTag/{story_id}', 'ViewStoryComm\UserPostController@GetTags');
 	Route::post('/editTag/{story_id}', 'ViewStoryComm\UserPostController@StoreNewTags');
+
+	Route::get('/editStoryContent/{story_id}', 'ViewStoryComm\UserPostController@GetStoryContent');
+	Route::post('/editStoryContent/{story_id}', 'ViewStoryComm\UserPostController@StoreNewStoryContent');
+
 	Route::post('deleteStoryComment/{comment_id}', 'ViewStoryComm\UserPostController@DeleteComment');
 
 	//

@@ -26,13 +26,17 @@ class NonUserListController extends Controller
         $this->UserList = $UserList;
     }
 
-    public function testProfile($username)
-    {
-        return view('profile.test_profile', 
+    public function userProfile($username)
+    {   
+        if (Auth::guest() == false)
+            if ($username == Auth::user()->username){
+                return redirect('myprofile/');
+            }
+        return view('profile.foreign_profile', 
             [
               'User' => $this->UserList->getUserIDByUsername($username),
-              'IsFollowed' => $this->UserList->isFollowedByUsername($username)
+              'IsFollowed' => $this->UserList->isFollowedByUsername($username),
+              'IsBlocked' =>$this->UserList->isBlockedByUsername($username),
             ]);
     }
-
 }

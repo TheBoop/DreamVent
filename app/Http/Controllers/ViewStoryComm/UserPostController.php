@@ -117,7 +117,7 @@ class UserPostController extends Controller
 	}
 	public function StoreNewTags($story_id, Request $request)
     {   
-		$author_id = Story::find($story_id)->author_id)->first();
+		$author_id = Story::find($story_id)->first()->author_id;
 	
 		//Delete Tags
     	$getTagColumn = Tags::where('story_id', $story_id);
@@ -151,9 +151,11 @@ class UserPostController extends Controller
 				$tags = new Tags();
 				$taglist[$index] = rtrim(ltrim($taglist[$index]));
 				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
-				$tags->tag_id = $taglist[$index];
-				$tags->story_id = $story_id;
-				$tags->save();
+				if (strlen($taglist[$index]) != 0){
+					$tags->tag_id = $taglist[$index];
+					$tags->story_id = $story_id;
+					$tags->save();
+				}
 				
 				//Update Tag Occurences after insert
 				//TODO

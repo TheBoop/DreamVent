@@ -17,6 +17,7 @@ use App\PictureComment;
 use App\StoryComment;
 use App\Favorites;
 use App\Likes;
+use App\Tags;
 use App\Repositories\AccountRepository;
 
 
