@@ -18,6 +18,7 @@ use App\Picture; //Eloquent Model
 use App\Story;
 use App\GrabPics;
 use App\Tags;
+use App\TagOccurence;
 use App\Repositories\AccountRepository;
 
 class StoryPicController extends Controller
@@ -96,6 +97,21 @@ class StoryPicController extends Controller
 				$tags->tag_id = $taglist[$index];
 				$tags->story_id = $story->story_id;
 				$tags->save();
+				
+				//Update Tag Occurences after insert
+				$tag_occurence = TagOccurence::where('tag', $tags->tag_id)->where('user_id', Auth::user()->id)->first();
+				
+				if ($tag_occurence) { //If exists, increment num_occurences.
+					$tag_occurence->num_occurences += 1;
+					$tag_occurence->save();
+				}
+				else { //If it doesn't exist, create an entry and set num occurences to 1.
+					$tag_occurence = new TagOccurence();
+					$tag_occurence->user_id = Auth::user()->id;
+					$tag_occurence->tag = $tags->tag_id;
+					$tag_occurence->num_occurences = 1;
+					$tag_occurence->save();
+				}
 			}
 
 		}
