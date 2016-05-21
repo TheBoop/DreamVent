@@ -20,7 +20,7 @@
 			
 			<div class="control-group">
 				<div class="controls">
-					<p class="centered">
+					<p class="centered" style="margin-top: 30px; margin-bottom: 30px;">
 						{!! Form::file('picture', array('style'=>'margin-left: -20px;')) !!}
 					</p>
 					<p class="centered" style="margin-top: 10px;">

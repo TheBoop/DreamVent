@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="{{ URL::asset('css/pictureContainer.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/storyContainer.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/APIcontainer.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/likeButton.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/postButton.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/commentButton.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/containers.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/padding.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/commentWindow.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/thumbnailStory.css') }}">

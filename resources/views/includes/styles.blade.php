@@ -7,9 +7,9 @@
 	body {
 		height:100%;
 	    font-family: 'Lato';
-        background: rgb(128, 178, 228);
-	    //background-color: rgba(0,100,200,0.5);
-	    //background-image: url("http://www.splendidwallpaper.com/wp-content/uploads/2012/11/high-resolution-wallpaper-nature-1680x1050.jpg");
+        //background: rgb(128, 178, 228);
+	    background-color: rgba(0,100,200,0.5);
+	    background-image: url("http://www.psdgraphics.com/file/underwater.jpg");
 	    background-repeat: no-repeat;
 	    background-position: center;
 	}
