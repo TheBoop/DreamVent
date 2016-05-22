@@ -9,8 +9,9 @@
 
 @section('content')
 
-<!--- Picture and buttons --->
-<div class="container">
+
+<!-- Picture and buttons -->
+<dic class="container">
   <div class="row-fluid">
     <div class="col-md-9 col-md-offset-1">
       <div class="pictureContainer">
@@ -27,7 +28,7 @@
   </div>
 </div>
 
-<!--- Story Gallery --->
+<!-- Story Gallery -->
 <?php
   static $storyCount=0;
 ?>
@@ -73,7 +74,7 @@
   </div>
 </div>
 
-<!--- Comment Modal --->
+<!-- Comment Modal -->
 <div id="comments" class="overlay">
 	<div class="popup">
 		<h2>Comments</h2>
