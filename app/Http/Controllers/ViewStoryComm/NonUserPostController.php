@@ -40,7 +40,9 @@ class NonUserPostController extends Controller
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
 			 'story' => $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id),
-			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id)
+			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id),
+			 'isfavorited' => $this->PostPageInstance->isFavoritedByPID($picture_id),
+		 	 'isliked' => $this->PostPageInstance->isLikedByPID($picture_id),
 			 ]);
 	}
 
