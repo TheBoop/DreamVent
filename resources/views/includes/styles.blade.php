@@ -9,8 +9,9 @@
 	    font-family: 'Lato';
         //background: rgb(128, 178, 228);
 	    background-color: rgba(0,100,200,0.5);
-	    background-image: url("http://www.psdgraphics.com/file/underwater.jpg");
-	    background-repeat: no-repeat;
+	    //background-image: url("http://www.psdgraphics.com/file/underwater.jpg");
+        background-image: url("http://i.imgur.com/jhQUt14.jpg");
+	    background-repeat: repeat;
 	    background-position: center;
 	}
 	.fa-btn {

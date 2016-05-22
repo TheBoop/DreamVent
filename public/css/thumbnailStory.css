@@ -1,11 +1,18 @@
-.thumbnailStory {
-    border-radius: 25px;
+#thumbnailStory {
+    position: relative;
     border: none;
-    padding: 20px; 
+    padding: none; 
     width: 190px;
-    height: 150px; 
+    height: 120px; 
     background-color: white;
 }
 .thumbnailStory:hover {
     opacity: 0.8;
 }
+.fill-div { 
+    background-color: white;
+    display: block;
+    width: 190px;
+    height: 120px;
+    padding-left:10px;
+}   
