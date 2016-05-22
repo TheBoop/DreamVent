@@ -26,7 +26,7 @@ class NonUserListController extends Controller
         $this->UserList = $UserList;
     }
 
-    public function userProfile($username)
+    public function userProfile($username, Request $request)
     {   
         if (Auth::guest() == false)
             if ($username == Auth::user()->username){
@@ -34,7 +34,7 @@ class NonUserListController extends Controller
             }
         $authorid[] = $this->UserList->getUserIDByUsername($username)->id;
         $list_story_id = $this->UserList->followListStoryID($authorid);
-        $holdList = $this->UserList->GetStoryDescNPic($list_story_id, $request->user()); 
+        $holdList = $this->UserList->GetStoryDescNPic($list_story_id, $request); 
         return view('profile.foreign_profile', 
             [
               'User' => $this->UserList->getUserIDByUsername($username),
