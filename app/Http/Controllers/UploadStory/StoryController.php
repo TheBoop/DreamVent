@@ -63,6 +63,10 @@ class StoryController extends Controller
 	//Storing a child involves a picture_id of some sort.
 	public function storeChild (Request $request, $picture_id) {
 		//new instance of model
+		$check = Picture::find($picture_id)->original_picid;
+    	if(count($check)){
+    		$picture_id = $check;
+    	}	
 		$picture = new Picture();
 		$story = new Story();
 		$grab_pics = new GrabPics();
@@ -106,7 +110,7 @@ class StoryController extends Controller
 			}
 
 		}
-		//return redirect('post/story/'.$grab_pics->story_id);
+		return redirect('post/story/'.$grab_pics->story_id);
 }
 	
 	//May delete later, here just in case I can use a single function to handle
