@@ -5,38 +5,42 @@
 <link rel="stylesheet" href="{{ URL::asset('css/padding.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/commentWindow.css') }}">
 
-
 @section('content')
-<div class="rightBox">
-  @if ($isliked)
-    <form>         
-      <input type="submit" class="likeButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
-    </form>
-    @else
-    <form>
-      <input type="submit" class="likeButton" id="liketopButton" value ="Like" onclick ="return like()">
-    </form>
-  @endif
-  @if ($isfavorited)
-    <form>         
-      <input type="submit" class="uploadButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
-    </form>
-    @else
-    <form>
-      <input type="submit" class="uploadButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
-    </form>
-    @endif
-  
-  <a href="#comments" class="commentButton"; id="buttonSpace"></a>
 
-</div>
-
-<div class="pictureContainer">
-    <img src="{{asset($piclist->picture_link)}} ">  
-</div>
-
-<div class="storyContainer" >
-    {{$story->content}}
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="pictureContainer">
+                <img src="{{asset($piclist->picture_link)}} ">  
+            </div>
+            <div class="storyContainer" >
+                {{$story->content}}
+            </div>
+        </div>
+        <div class-"col-md-2">
+            <div class="rightBox">
+                @if ($isliked)
+                    <form>         
+                    <input type="submit" class="likeButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
+                    </form>
+                @else
+                    <form>
+                    <input type="submit" class="likeButton" id="liketopButton" value ="Like" onclick ="return like()">
+                    </form>
+                @endif
+                @if ($isfavorited)
+                    <form>         
+                    <input type="submit" class="uploadButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
+                    </form>
+                @else
+                    <form>
+                    <input type="submit" class="uploadButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
+                    </form>
+                @endif
+                <a href="#comments" class="commentButton"; id="buttonSpace"></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="comments-modal">
