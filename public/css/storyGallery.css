@@ -2,9 +2,9 @@
     margin-top: 10px;
     margin-bottom: 20px;
     position: relative;
-    width: 700px;
-    left: -3px;
-    height: 386px;
+    max-width: 760px;
+    left: 105px;
+    height: auto;
     border: none;
-    background-color : transparent;
+    background-color : gray;
 }

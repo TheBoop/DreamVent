@@ -10,7 +10,7 @@
 @section('content')
 
 <!--- Picture and buttons --->
-<dic class="container">
+<div class="container">
   <div class="row-fluid">
     <div class="col-md-9 col-md-offset-1">
       <div class="pictureContainer">
@@ -29,14 +29,45 @@
 
 <!--- Story Gallery --->
 <?php
-  $storyCount=0;
+  static $storyCount=0;
 ?>
 <div class="container">
   <div class="row-fluid">
     <div class="storyGallery" >
       @foreach ($story as $story)
-
-        <?php endswitch ?>   
+        <?php switch ($storyCount):
+          case 0: ?>
+            <div class="col-md-3">
+              <div class="thumbnailStory">
+                <a href='/post/story/{{$story->story_id}}'>  
+                  <div class="fill-div">
+                    {{$story->title}}<br/>
+                    By: {{$story->username}}
+                  </div>  
+                </a>  
+              </div>
+            </div>
+            <?php break; ?>
+          <?php case 1: ?>
+          <?php case 2: ?>
+          <?php case 3: ?>
+            <div class="col-md-3">
+              <div class="thumbnailStory">
+                <a href='/post/story/{{$story->story_id}}'>  
+                  <div class="fill-div">
+                    {{$story->title}}<br/>
+                    By: {{$story->username}}
+                  </div>  
+                </a>  
+              </div>
+            </div>
+            <?php 
+                if($storyCount==3)
+                  $storyCount=-1;
+            ?>  
+            <?php break; ?>
+        <?php endswitch ?>  
+        <?php $storyCount++ ?>  
       @endforeach
     </div>
   </div>
