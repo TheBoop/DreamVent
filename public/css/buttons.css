@@ -28,18 +28,19 @@
 	top:1px;
 }
 
-.likeButton {
-
+.sideButton {
+	cursor:pointer;
 	opacity:0.4;
-
+	transition: all 0.5s;
+	border-radius: 100%;
 }
 
-.likeButton:hover {
-	opacity:0.8;
+.sideButton:hover {
+	opacity:1;
 }
 
-.likeButton:active {
-
+.sideButton:active {
+	opacity:0.5;
 }
 
 .uploadButton {

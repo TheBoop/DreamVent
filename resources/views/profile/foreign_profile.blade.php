@@ -95,27 +95,33 @@
 @else
 	<div class="container">
 		@if ($User->username !=  Auth::user()->username)
-		<div>
-			@if ($IsFollowed)
-			<form>         
-				<input type="submit" id="unfollow" value ="Unfollow" onclick ="return unfollowuser()">
-			</form>
-			@else
-			<form>
-				<input type="submit" id="follow" value ="Follow" onclick ="return followuser()">
-			</form>
-			@endif
-			@if ($IsBlocked)
-			<form>         
-				<input type="submit" id="unblock" value ="Unblock" onclick ="return unblockuser()">
-			</form>
-			@else
-			<form>
-				<input type="submit" id="block" value ="Block" onclick ="return blockuser()">
-			</form>
-			@endif
-		@endif
+        <div class="row">
+            <h1 class="col-md-9">
+                {{$User->username}}
+            </h1>
+
+    		<div class="col-md-3">
+        		@if ($IsFollowed)
+        			<form>         
+        			<input type="submit" id="unfollow" value ="Unfollow" onclick ="return unfollowuser()">
+        			</form>
+    			@else
+        			<form>
+    				<input type="submit" id="follow" value ="Follow" onclick ="return followuser()">
+        			</form>
+    			@endif
+    			@if ($IsBlocked)
+        			<form>         
+       				<input type="submit" id="unblock" value ="Unblock" onclick ="return unblockuser()">
+        			</form>
+    			@else
+        			<form>
+    				<input type="submit" id="block" value ="Block" onclick ="return blockuser()">
+        			</form>
+    			@endif
+            </div>
 		</div>
+        @endif
 	</div>
 @endif
 

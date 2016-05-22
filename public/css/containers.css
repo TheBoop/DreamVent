@@ -1,10 +1,6 @@
-.rightBox {
-    position: relative;
-    right: 70px;
-    width: 202px;
-    height: 386px;
-    border: none;
-
+.centered {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bottomRightBox {
@@ -17,7 +13,7 @@
 
 .contentContainer {
     float: left;
-    width: 80%;
+    width: 85%;
 }
 
 .pictureContainer {
@@ -46,8 +42,7 @@
 
 .buttonContainer {
     float: right;
-    width: 20%;
-    padding: 10px;
+    width: 15%;
 }
 
 .commentContainer {
