@@ -9,24 +9,24 @@
 
 <div class="contentContainer">
     <div class="pictureContainer">
-        <img src="{{asset($piclist->picture_link)}} " width="100%" height="100%">
+        <img src="{{asset($piclist->picture_link)}}">
     </div>
     <div class="storyContainer" >
         {{$story->content}}
     </div>
 </div>
 <div class="buttonContainer">
-    <div class="centered">
+    <div class="rightBox">
         @if ($isliked)
-            <input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" onclick ="return unlike()">
+            <input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
         @else
-            <input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" onclick ="return like()">
+            <input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
         @endif
 
-        @if ($isfavorited)
-            <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="unliketopButton" onclick ="return unfavorite()">
+        @if ($isfavorited)       
+            <input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
         @else
-            <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="liketopButton" onclick ="return favorite()">
+            <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
         @endif
         <a href="#comments" class="commentButton"; id="buttonSpace"></a>
     </div>
@@ -44,5 +44,93 @@
   </div>
 </div>
 
+<script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
+<script>
+    function like() {
+        $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }});
+        $.ajax({
+            type:"POST",
+            url: "/likeStory/{{$story->story_id}}",
+            cache:false,
+            success: function(data){
+                $('#liketopButton').attr('onclick', 'unlike()')
+                $('#liketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
+                $('#liketopButton').val('Unlike');
+                $('#unliketopButton').attr('onclick', 'unlike()')
+                $('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
+                $('#unliketopButton').val('Unlike');
+                
+            }
+        });
+        return false;
+    }
+    function unlike() {
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }});
+        $.ajax({
+
+            type:"delete",
+            url: "/unlikeStory/{{$story->story_id}}",
+            cache:false,
+            success: function(data){
+                $('#liketopButton').attr('onclick', 'like()')
+                $('#liketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
+                $('#liketopButton').val('Like');
+                $('#unliketopButton').attr('onclick', 'like()')
+                $('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
+                $('#unliketopButton').val('Like');
+                
+            }
+        });
+        return false;
+    }
+    function favorite() {
+        $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }});
+        $.ajax({
+            type:"POST",
+            url: "/favoriteStory/{{$story->story_id}}",
+            cache:false,
+            success: function(data){
+                $('#favoritebuttonSpace').attr('onclick', 'unfavorite()')
+                $('#favoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
+                $('#favoritebuttonSpace').val('Unfavorite');
+                $('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()')
+                $('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
+                $('#unfavoritebuttonSpace').val('Unfavorite');
+            }
+        });
+        return false;
+    }
+    function unfavorite() {
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }});
+        $.ajax({
+
+            type:"delete",
+            url: "/unfavoriteStory/{{$story->story_id}}",
+            cache:false,
+            success: function(data){
+                $('#unfavoritebuttonSpace').attr('onclick', 'favorite()')
+                $('#unfavoritebuttonSpace').val('Favorite');
+                $('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart.png')}}')
+                $('#favoritebuttonSpace').attr('onclick', 'favorite()')
+                $('#favoritebuttonSpace').val('Favorite');
+                $('#favoritebuttonSpace').attr('src', '{{asset('assets/images/heart.png')}}')
+                
+            }
+        });
+        return false;
+    }
+</script> 
 @endsection
 
