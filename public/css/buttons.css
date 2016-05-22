@@ -21,7 +21,7 @@
 }
 .commentButton:hover {
 	background-color:#ffffff;
-  highline: none;
+  	highline: none;
 }
 .commentButton:active {
 	position:relative;
