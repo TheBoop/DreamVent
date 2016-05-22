@@ -34,6 +34,10 @@ class UserPostController extends Controller
 	
 	public function StoreImageComment (Request $request, $picture_id) {
 		//make new instance of comment.
+		$check = Picture::find($picture_id)->original_picid;
+    	if(count($check)){
+    		$picture_id = $check;
+    	}	
 		$comment = new PictureComment();
 		
 		//required field

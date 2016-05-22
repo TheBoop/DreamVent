@@ -63,6 +63,7 @@ class StoryController extends Controller
 	//Storing a child involves a picture_id of some sort.
 	public function storeChild (Request $request, $picture_id) {
 		//new instance of model
+		$picture = new Picture();
 		$story = new Story();
 		$grab_pics = new GrabPics();
 		
@@ -70,17 +71,25 @@ class StoryController extends Controller
 		$this->validate($request, [
 			'storyContent' => 'required'
 		]);
-		
+		$og_pic = Picture::find($picture_id);
+		$picture->original_picid = $picture_id;
+		$picture->author_id = $og_pic->author_id;
+		$picture->description = $og_pic->description;
+		$picture->picture_link = $og_pic->picture_link;
+		$picture->username = $og_pic->username;
+
 		//fill out fields in model
 		$story->author_id = Auth::user()->id;
 		$story->content = $request->storyContent;
 		$story->username =  Auth::user()->username;
+		$story->title = $request->storyTitle;
 		$story->save();
-		
+		$picture->save();
 		//fill grab_pics relation table
 		$grab_pics->story_id = $story->story_id;
-		$grab_pics->picture_id = $picture_id;
-		
+		$grab_pics->picture_id = $picture->picture_id;
+		$grab_pics->username = Auth::user()->username;
+		$grab_pics->title = $request->storyTitle;
 		$grab_pics->save();
 		
 		if ($request->tags != '')
@@ -97,7 +106,7 @@ class StoryController extends Controller
 			}
 
 		}
-		return redirect('post/story/'.$grab_pics->story_id);
+		//return redirect('post/story/'.$grab_pics->story_id);
 }
 	
 	//May delete later, here just in case I can use a single function to handle

@@ -12,14 +12,15 @@ use App\UserListContains;
 use App\Likes;
 use App\Tags;
 use App\Favorites;
+use DB;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 
 class AccountRepository
 {
-
     /*
      * @param   
      * @return an ordered list of story_id
@@ -269,7 +270,7 @@ class AccountRepository
         $comment->text = $request->comment;
         $comment->picture_id = $picture_id;
         $comment->author_id = Auth::user()->id;
-
+        $comment->username = Auth::user()->username;
         $comment->save();
     }
     public function getNumOfLikesByPID($picture_id)
@@ -372,7 +373,7 @@ class AccountRepository
         $comment->text = $request->comment;
         $comment->story_id = $story_id;
         $comment->author_id = Auth::user()->id;
-
+        $comment->username = Auth::user()->username;
         $comment->save();
     }
 
@@ -383,7 +384,6 @@ class AccountRepository
      */
     public function GetStoryDescNPic($story_id, $request)
     {   
-		$piclist = array();
 		
         //error cases with guest/nonguest
         if ($request==null)
@@ -392,19 +392,19 @@ class AccountRepository
             $user_id = $request->id;
         if (empty($story_id))
             return;
-        $piclist = array();
-
+        $picture_id = array();
         foreach ($story_id as $index => $value) {
             //confusing for someone new to relations but I used relations for find look at models
-            $piclist[$index] = Picture::find(
+            $picture_id[$index] = Picture::find(
                                 Story::find($story_id[$index])->pic_id->picture_id)->picture_id;
         }
         $storyids_ordered = implode(',', $story_id);
-        $picids_ordered = implode(',', $piclist);
-        if (!empty($piclist))
+        $picids_ordered = implode(',', $picture_id);
+        //$storypiclist = DB::table('users')
+        if (!empty($picture_id))
             return [
                 Story::whereIn('story_id', $story_id)->orderByRaw("FIELD(story_id, $storyids_ordered)")->paginate(12),
-                Picture::whereIn('picture_id', $piclist)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(12),
+                Picture::whereIn('picture_id', $picture_id)->orderByRaw("FIELD(picture_id, $picids_ordered)")->paginate(12),
                 ];
         return;
     }
