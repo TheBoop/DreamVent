@@ -30,7 +30,12 @@ class NonUserPostController extends Controller
         $this->PostPageInstance = $PostPageInstance;
     }
 
-    public function ViewImage($picture_id) {		
+    public function ViewImage($picture_id) {
+    	//fix route for not og pic
+    	$check = Picture::find($picture_id)->original_picid;
+    	if(count($check)){
+    		$picture_id = $check;
+    	}	
 		return view('postpage/picture', 
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
