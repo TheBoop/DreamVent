@@ -18,22 +18,15 @@
 <div class="buttonContainer">
     <div class="rightBox">
         @if ($isliked)
-            <form>         
-            <input type="submit" class="likeButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
-            </form>
+            <input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
         @else
-            <form>
-            <input type="submit" class="likeButton" id="liketopButton" value ="Like" onclick ="return like()">
-            </form>
+            <input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
         @endif
-        @if ($isfavorited)
-            <form>         
-            <input type="submit" class="uploadButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
-            </form>
+
+        @if ($isfavorited)       
+            <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
         @else
-            <form>
-            <input type="submit" class="uploadButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
-            </form>
+            <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
         @endif
         <a href="#comments" class="commentButton"; id="buttonSpace"></a>
     </div>
@@ -41,18 +34,17 @@
 
 <div id="comments-modal">
   <div id="comments" class="overlay">
-  	<div class="popup">
-  		<h2>Comments</h2>
-  		<a class="close" href="#">x</a>
-  		<div class="content">
-  			{{$comments}}
-  		</div>
-  	</div>
+    <div class="popup">
+        <h2>Comments</h2>
+        <a class="close" href="#">x</a>
+        <div class="content">
+            {{$comments}}
+        </div>
+    </div>
   </div>
 </div>
 
-@endsection
-
+<!--
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
 <script>
     function favorite() {
@@ -126,4 +118,7 @@
         });
         return false;
     }
-</script>
+</script> 
+-->
+@endsection
+
