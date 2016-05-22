@@ -19,9 +19,16 @@
 
 <div class="buttonContainer">
     <div class="centered">
-      <a href="#" class="likeButton"; id="topButton">Likes</a>
-      <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton"; id="buttonSpace">Favorite</a>
-      <a href="#comments" class="commentButton"; id="buttonSpace"></a>
+
+            <input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" onclick ="return like()">
+
+            <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="unliketopButton" onclick ="return unfavorite()">
+
+        <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" id="buttonSpace">
+          <img src="{{asset('assets/images/document.png')}}" class="sideButton">
+        </a>
+
+        <a href="#comments" class="commentButton"; id="buttonSpace"></a>
     </div>
 </div>
 

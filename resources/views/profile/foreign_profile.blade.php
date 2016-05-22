@@ -1,5 +1,36 @@
 @extends('layouts.app')
 <!DOCTYPE html>
+<style>
+.userbar {
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    background: rgba(211, 211, 211, 0.5);
+}
+h1 {
+    font-weight: bold;
+}
+h3 {
+    font-style: italic;
+    opacity: 0.6;
+}
+.followblock {
+    margin: auto;
+    margin-top: 20px;
+    text-align: right;
+}
+.userbuttons {
+    background-color: rgb(0, 100, 200); 
+    border: 0 none;
+    border-radius: 20px;
+    width: 100px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+
 <html lang="en">
 	<script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
 	<script>
@@ -95,34 +126,76 @@
 @else
 	<div class="container">
 		@if ($User->username !=  Auth::user()->username)
-        <div class="row">
-            <h1 class="col-md-9">
-                {{$User->username}}
-            </h1>
+        <div class="row userbar">
+            <div class="col-md-10">
+                <h1>
+                    {{$User->username}}
+                </h1>
+                <h3>
+                    {{$User->name}}
+                </h3>
+            </div>
 
-    		<div class="col-md-3">
+    		<div class="col-md-2 followblock">
         		@if ($IsFollowed)
         			<form>         
-        			<input type="submit" id="unfollow" value ="Unfollow" onclick ="return unfollowuser()">
+        			<input type="submit" class="userbuttons" id="unfollow" value ="Unfollow" onclick ="return unfollowuser()">
         			</form>
     			@else
         			<form>
-    				<input type="submit" id="follow" value ="Follow" onclick ="return followuser()">
+    				<input type="submit" class="userbuttons" id="follow" value ="Follow" onclick ="return followuser()">
         			</form>
     			@endif
+                <br />
     			@if ($IsBlocked)
         			<form>         
-       				<input type="submit" id="unblock" value ="Unblock" onclick ="return unblockuser()">
+       				<input type="submit" class="userbuttons" id="unblock" value ="Unblock" onclick ="return unblockuser()">
         			</form>
     			@else
         			<form>
-    				<input type="submit" id="block" value ="Block" onclick ="return blockuser()">
+    				<input type="submit" class="userbuttons" id="block" value ="Block" onclick ="return blockuser()">
         			</form>
     			@endif
             </div>
 		</div>
         @endif
 	</div>
+    <div class="container-fluid">
+        @if(isset($pictureList))
+            <div class="row">
+                @foreach ($pictureList as $index => $piclist )
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="cell">
+                            <a href="/post/picture/{{$pictureList[$index]->picture_id}}">
+                                <img src="{{ URL::to('/') }}{{$piclist->picture_link}}" />
+                            </a>
+                            <div class="overlay">
+                                @if(isset($storyList))
+                                    <p class="titleauthor">
+                                        <a href="/post/story/{{$storyList[$index]->story_id}}" class="title">
+                                            {{$storyList[$index]->title}}
+                                        </a>
+                                        <br />
+                                        by
+                                        <a href="/post/story/{{$storyList[$index]->author_id}}" class="author">
+                                            {{$storyList[$index]->username}}
+                                        </a>
+                                        <p class="storypreview">
+                                            {{$storyList[$index]->content}}
+                                        </p>
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                @endforeach
+            </div>
+            {!! $pictureList->render() !!}
+        @endif
+    </div>
+</div>
 @endif
 
 @endsection
