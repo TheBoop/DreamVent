@@ -1,3 +1,7 @@
+textarea { 
+    resize:vertical ; 
+}
+
 .main{
     //top: 30%;
     //left: 50%;
@@ -13,7 +17,7 @@
     margin-right: auto;
     padding-top: 20px;
     padding-bottom: 20px;
-    border-radius: 25px;
+    border-radius: 10px;
     background-color:rgba(210,210,230, 0.5);
 }
 
@@ -64,5 +68,5 @@ p.left {
     font: 15px bold, Sans-serif; 
     margin-left: auto;
     margin-right: auto;
-     width: 50%
+    width: 50%
 }
