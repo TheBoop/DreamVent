@@ -11,21 +11,18 @@
 
 
 <!-- Picture and buttons -->
-<dic class="container">
-  <div class="row-fluid">
-    <div class="col-md-9 col-md-offset-1">
-      <div class="pictureContainer">
-        <img src="{{asset($picture->picture_link)}} " width="100%" height="100%">
-      </div>
-    </div>
-    <div class="col-md-2 ">
-      <div class="rightBox">
-        <a href="#" class="likeButton"; id="topButton">Likes</a>
-        <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton"; id="buttonSpace">Favorite</a>
-        <a href="#comments" class="commentButton"; id="buttonSpace"></a>
-      </div>
-    </div>
+<dic class="contentContainer">
+  <div class="pictureContainer">
+    <img src="{{asset($picture->picture_link)}} " width="100%" height="100%">
   </div>
+</div>
+
+<div class="buttonContainer">
+    <div class="centered">
+      <a href="#" class="likeButton"; id="topButton">Likes</a>
+      <a href="{{ url('/uploadStory/'.$picture->picture_id) }}" class="uploadButton"; id="buttonSpace">Favorite</a>
+      <a href="#comments" class="commentButton"; id="buttonSpace"></a>
+    </div>
 </div>
 
 <!-- Story Gallery -->
