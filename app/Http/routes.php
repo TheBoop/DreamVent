@@ -60,12 +60,10 @@ Route::group(['middleware' => ['web']], function () {
 	* Browsing - Matt
 	* =====================
 	*/
-	//deprecated: content: pictures, stories
+	//content: pictures, stories
 	Route::get('/browse', 'Browse\BrowseController@defaultBrowse');
 	//users
 	Route::get('/browseUsers', 'Browse\BrowseController@defaultBrowseUser');
-	//Browse
-	Route::get('/Browse', 'Browse\BrowseController@BrowseContent');
 	
 
 	/*
