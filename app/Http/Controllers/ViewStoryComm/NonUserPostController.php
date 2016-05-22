@@ -61,6 +61,7 @@ class NonUserPostController extends Controller
 		 	'comments' => $this->PostPageInstance->getStoryCommentBasedonSID($story_id),
 		 	'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
 		 	'isliked' => $this->PostPageInstance->isLikedBySID($story_id),
+		 	'tags' => $this->PostPageInstance->ReturnStoryTagsArrayBySID($story_id),
 		]);
 	}
 	

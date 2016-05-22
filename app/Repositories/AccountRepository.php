@@ -602,6 +602,13 @@ class AccountRepository
         return $tagstr;
     }
 
+    public function ReturnStoryTagsArrayBySID($story_id)
+    {
+        //Check if story ID matches user id
+        $tag = Tags::where('story_id', $story_id)->get();
+        return $tag;
+    }
+
      /*
      * ===================================================================
      * =================      Username              ======================
