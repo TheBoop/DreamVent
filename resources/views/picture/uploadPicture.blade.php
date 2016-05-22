@@ -27,6 +27,12 @@
 					<b>Description:</b>
 					{!! Form::text('description') !!}
 					</p>
+
+					</p>
+					<p class="centered" style="margin-top: 10px;">
+					<b>Tags:</b>
+					{!! Form::text('tags') !!}
+					</p>
 				   <!--<p class="errors">{!!$errors->first('image')!!}</p>
 						@if(Session::has('error'))
 				   	<p class="errors">{!! Session::get('error') !!}</p>
