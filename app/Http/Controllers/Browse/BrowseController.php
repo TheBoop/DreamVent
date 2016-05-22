@@ -13,6 +13,8 @@ use App\Repositories\AccountRepository;
 use App\Story; 
 use App\Picture; 
 use App\TagOccurence; 
+use App\Favorites;
+use App\Tags;
 use App\User as User;
 
 
@@ -45,14 +47,46 @@ class BrowseController extends Controller
 	
 	public function BrowseContent() {
 		echo "Browse <br />";
+		/*
+			======= Liked Content Tags =======
+		*/
 		//TODO
 		//Get tags of stuff you like and count them
 		$likedTags = array();
 		
-		//TODO
-		//Get tags of stuff you fav and count them
-		$favedTags = array();
-			
+		/*
+			======= Favorited Content Tags =======
+		*/
+		//Get IDs of stories you've faved, and find the tags associated with them.
+		$faveStoryIDCollection = array();
+		$faves = Favorites::where('user_id', Auth::user()->id)->get();
+		foreach($faves as $result) {
+			$faveStoryIDCollection[] = $result->story_id;
+		}
+		$favedTags = Tags::whereIn('story_id', $faveStoryIDCollection)->get();
+
+		//Count them and put the result in $favedTagNumOccurences
+		$favedTagNumOccurences = array();
+		echo "<br /> favedTags: <br />";
+		foreach($favedTags as $key => $value) {
+			echo "$key: $value->tag_id <br>";
+			$lowercaseValue = strtolower($value->tag_id);
+			if (array_key_exists($lowercaseValue, $favedTagNumOccurences)) { //If the key exists, increment
+				$favedTagNumOccurences[$lowercaseValue] += 1;
+			}
+			else { //If the key doesn't exist, create it, and give that element a value of 1.
+				$favedTagNumOccurences[$lowercaseValue] = 1;
+			}
+		}
+		
+		echo "OCCURENCES<br>";
+		foreach ($favedTagNumOccurences as $key => $value) {
+			echo "$key: $value <br>";
+		}
+		
+		/*
+			======= Your Uploaded Content Tags =======
+		*/	
 		//Get number of occurences of tags of content you've uploaded. This is just a lookup.
 		$yourTags = TagOccurence::select('tag', 'num_occurences')->where('user_id', Auth::user()->id)->get();
 		
@@ -61,10 +95,32 @@ class BrowseController extends Controller
 			echo "$key: $value <br /> ";
 		}
 		
+		//Count them and put the results in $yourTagNumOccurences
+		$yourTagNumOccurences = array();
+		foreach($yourTags as $key => $value) {
+			$lowercaseValue = strtolower($value->tag);
+			if (array_key_exists($lowercaseValue, $yourTagNumOccurences)) { //If the key exists, increment
+				$yourTagNumOccurences[$lowercaseValue] += $value->num_occurences;
+			}
+			else {
+				$yourTagNumOccurences[$lowercaseValue] = $value->num_occurences;
+			}
+		}
+		echo "OCCURENCES<br>";
+		foreach ($yourTagNumOccurences as $key => $value) {
+			echo "$key: $value <br>";
+		}
+		
+		
+		/*
+			======= Followed User Content Tags =======
+		*/
 		//Get number of occurences of tags of content people you follow have uploaded. This is just a lookup.
 		$followedTags = TagOccurence::select('tag', 'num_occurences')->whereIn('user_id', $this->Browser->followListAuthorID())->get();
-		
-		echo "<br /> followedTags: <br />";
+		//TODO: addition is required here: ex: you follow 2 users who uploaded tag "test", one 4 times, and the other once. Combine to get 5 total.
+		$numFollowing = count($this->Browser->followListAuthorID());
+		echo "<br /> following $numFollowing users <br />"; 
+		echo "followedTags: <br />";
 		if ($followedTags) {
 			foreach($followedTags as $key => $value) {
 				echo "$key: $value <br /> ";
@@ -74,14 +130,33 @@ class BrowseController extends Controller
 			echo "no results <br /> ";
 		}
 		
-		//TODO
-		//use those to calculate tag weights. http://stackoverflow.com/questions/2794272/tag-keyword-based-recommendation
+		//Count them and put the results in $followedTagNumOccurences
+		$followedTagNumOccurences = array();
+		foreach($followedTags as $key => $value) {
+			$lowercaseValue = strtolower($value->tag);
+			if (array_key_exists($lowercaseValue, $followedTagNumOccurences)) { //If the key exists, increment
+				$followedTagNumOccurences[$lowercaseValue] += $value->num_occurences;
+			}
+			else {
+				$followedTagNumOccurences[$lowercaseValue] = $value->num_occurences;
+			}
+		}
+		echo "OCCURENCES<br>";
+		foreach ($followedTagNumOccurences as $key => $value) {
+			echo "$key: $value <br>";
+		}
+		
+		
+		/*
+			======= Tag Ranking =======
+		*/
+		//Use those to calculate tag weights. http://stackoverflow.com/questions/2794272/tag-keyword-based-recommendation
 		$tagWeights = array();
 		
 		//Test:
 		echo "<br /> Extra Testing stuff: <br />";
 		//var_dump($this->Browser->followListAuthorID());
-		//var_dump($followedTags);
+		//echo "<pre>" .var_dump($followedTags)."<pre />;
 		
 	
 	}
