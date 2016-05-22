@@ -250,8 +250,20 @@ class AccountRepository
      */
     public function getStoryIDsBasedonPID($picture_id)
     {
-       return GrabPics::where('picture_id', $picture_id)->get();
+       //get list of sids with pic_id
+        $pic_id = Picture::where('original_picid', $picture_id)->latest()->get();
+        $holdpicid = array();
+        array_push($holdpicid, intval($picture_id));
+        foreach ($pic_id as $key => $value) {
+            array_push($holdpicid, $pic_id[$key]->picture_id);
+        }
+        $picids_ordered = implode(',', $holdpicid);
+        //var_dump($holdpicid);
+        //var_dump($picids_ordered);
+        return GrabPics::whereIn('picture_id', $holdpicid)->orderByRaw("FIELD(picture_id, $picids_ordered)")->get();
     }
+
+    //return GrabPics::where('picture_id', $picture_id)->get();
 
     /*
      * Get Comments associated with PID
