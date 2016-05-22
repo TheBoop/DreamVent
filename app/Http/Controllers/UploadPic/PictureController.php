@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth; //for Auth::user()
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Tags;
+use App\TagOccurence;
 
 use Validator;
 use Redirect;
@@ -58,10 +60,39 @@ class PictureController extends Controller
 			$file->move(public_path().'/Pictures/', $name);
 		}
 		$picture->save();
+
+
+		if ($request->tags != '')
+		{
+			$tags = new Tags();
+			$taglist = explode(',', $request->tags);
+			foreach ($taglist as $index => $tag) {
+				$tags = new Tags();
+				$taglist[$index] = rtrim(ltrim($taglist[$index]));
+				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
+				$tags->tag_id = $taglist[$index];
+				$tags->picture_id = $picture->picture_id;
+				$tags->save();
+				
+				//Update Tag Occurences after insert
+				$tag_occurence = TagOccurence::where('tag', $tags->tag_id)->where('user_id', Auth::user()->id)->first();
+				
+				if ($tag_occurence) { //If exists, increment num_occurences.
+					$tag_occurence->num_occurences += 1;
+					$tag_occurence->save();
+				}
+				else { //If it doesn't exist, create an entry and set num occurences to 1.
+					$tag_occurence = new TagOccurence();
+					$tag_occurence->user_id = Auth::user()->id;
+					$tag_occurence->tag = $tags->tag_id;
+					$tag_occurence->num_occurences = 1;
+					$tag_occurence->save();
+				}
+			}
 		return redirect('/YourPictures');
 		//I don't know what this line does exactly, and it causes an error.
 		//return $this->create()->with('success', 'what black magic is this?!?!'); 
-		
+		}
 	}
 }
 

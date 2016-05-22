@@ -75,6 +75,7 @@ class UserPostController extends Controller
 		 'comments' => $this->PostPageInstance->getStoryCommentBasedonSID($story_id),
 		 'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
 		 'isliked' => $this->PostPageInstance->isLikedBySID($story_id),
+		 'tags' => $this->PostPageInstance->ReturnStoryTagsArrayBySID($story_id),
 		]);
 
 	}
@@ -177,6 +178,66 @@ class UserPostController extends Controller
 		}
     	//
        return redirect('/post/story/'.$story_id);
+    }
+
+    public function StoreNewTags_pic($picture_id, Request $request)
+    {   
+		$author_id = Picture::find($picture_id)->author_id;
+	
+		//Delete Tags
+    	$getTagColumn = Tags::where('picture_id', $picture_id);
+		
+		//Update Tag Occurences before delete
+		foreach($getTagColumn->get() as $key => $tag) {
+			$tag_occurence = TagOccurence::where('tag', $tag->tag_id)->where('user_id', $author_id)->first();
+			
+			if ($tag_occurence) { //If exists, decrement num_occurences, make sure its not less than 0;
+				if ($tag_occurence->num_occurences > 0) {
+					$tag_occurence->num_occurences -= 1;
+					$tag_occurence->save();
+				}
+			}
+			else {
+				//technically this shouldn't happen.
+			}
+		}
+		
+    	$getTagColumn->delete();
+
+    	//Insert Tags
+		if ($request->input('tag') != '')
+		{
+			$tags = new Tags();
+			$taglist = explode(',', $request->input('tag'));
+			foreach ($taglist as $index => $tag) {
+				$tags = new Tags();
+				$taglist[$index] = rtrim(ltrim($taglist[$index]));
+				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
+				if (strlen($taglist[$index]) != 0){
+					$tags->tag_id = $taglist[$index];
+					$tags->picture_id = $picture_id;
+					$tags->save();
+				}
+				
+				//Update Tag Occurences after insert
+				$tag_occurence = TagOccurence::where('tag', $tags->tag_id)->where('user_id', $author_id)->first();
+				
+				if ($tag_occurence) { //If exists, increment num_occurences.
+					$tag_occurence->num_occurences += 1;
+					$tag_occurence->save();
+				}
+				else { //If it doesn't exist, create an entry and set num occurences to 1.
+					$tag_occurence = new TagOccurence();
+					$tag_occurence->user_id = $author_id;
+					$tag_occurence->tag = $tags->tag_id;
+					$tag_occurence->num_occurences = 1;
+					$tag_occurence->save();
+				}
+			}
+
+		}
+    	//
+       return redirect('/post/picture/'.$picture_id);
     }
 
     public function DeleteComment($comment_id)
