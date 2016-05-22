@@ -46,7 +46,7 @@ class PictureController extends Controller
 		//fill out fields in model
 		$picture->description = $request->description;
 		$picture->author_id = Auth::user()->id;
-		
+		$picture->username = Auth::user()->username;
 		if ($request->hasFile('picture')) {
 			$file = Input::file('picture');
 			
