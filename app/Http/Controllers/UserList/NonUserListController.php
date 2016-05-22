@@ -32,11 +32,16 @@ class NonUserListController extends Controller
             if ($username == Auth::user()->username){
                 return redirect('myprofile/');
             }
+        $authorid[] = $this->UserList->getUserIDByUsername($username)->id;
+        $list_story_id = $this->UserList->followListStoryID($authorid);
+        $holdList = $this->UserList->GetStoryDescNPic($list_story_id, $request->user()); 
         return view('profile.foreign_profile', 
             [
               'User' => $this->UserList->getUserIDByUsername($username),
               'IsFollowed' => $this->UserList->isFollowedByUsername($username),
               'IsBlocked' =>$this->UserList->isBlockedByUsername($username),
+              'pictureList' => $holdList[1],
+              'storyList' => $holdList[0],
             ]);
     }
 }

@@ -333,6 +333,38 @@ class AccountRepository
     }
 
     /*
+     * Check if PID is favorited by user
+     */ 
+    public function isFavoritedByPID($picture_id)
+    {
+        if(Auth::guest())
+            return 0;
+        $user_id = Auth::user()->id;
+        $picture_id = $picture_id;
+        //get column
+        $data = Favorites::
+                        where('picture_id', $picture_id) 
+                        ->where('user_id', $user_id)->first();
+        return count($data);
+
+    }
+
+    public function isLikedByPID($picture_id)
+    {
+        if(Auth::guest())
+            return 0;
+        $user_id = Auth::user()->id;
+        $picture_id = $picture_id;
+        //get column
+        $data = Likes::
+                        where('picture_id', $picture_id) 
+                        ->where('user_id', $user_id)->first();
+        return count($data);
+
+    }
+  
+
+    /*
      * ===================================================================
      * =================      story_id              ======================
      * ===================================================================
