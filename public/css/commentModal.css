@@ -38,15 +38,6 @@
     cursor: pointer;
 }
 
-.commentBtn {
-    width:38%;
-    margin-left: 42%;
-    opacity: 0.5;
-}
-
-.commentBtn:hover {
-    opacity: 1;
-}
 
 div.commentBox {
     width:90%; 
