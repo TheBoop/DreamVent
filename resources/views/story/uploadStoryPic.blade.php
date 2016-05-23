@@ -21,6 +21,30 @@
 				{!! Form::text('description') !!}
 			</p>
 
+
+			<p class="left">
+			    <b>Picture tags:</b>
+			    <input type="text" name="pic_tags" onKeyPress="return disableEnterKey(event)">
+			    <script>
+			        var textarea = document.querySelector('input[name="pic_tags"]');
+			        textarea.addEventListener("keydown", function(event) {
+			        // The key code for F2 happens to be 113
+			        	if (event.keyCode == 13) {
+			            	replaceSelection(textarea, ",");
+			            	event.preventDefault();
+			          	}
+			        });
+			        function replaceSelection(field, word) {
+			          var from = field.selectionStart, to = field.selectionEnd;
+			          field.value = field.value.slice(0, from) + word +
+			                        field.value.slice(to);
+			          // Put the cursor after the word
+			          field.selectionStart = field.selectionEnd =
+			            from + word.length;
+			        }
+			    </script>
+			</p>
+
 			<p class="left">
 		        <b>Story Title:</b>
 		        <input type="text" name="title">
@@ -44,10 +68,10 @@
 		    </p>
 
 			<p class="left">
-			    <b>Tags:</b>
-			    <input type="text" name="tags" onKeyPress="return disableEnterKey(event)">
+			    <b>Story tags:</b>
+			    <input type="text" name="story_tags" onKeyPress="return disableEnterKey(event)">
 			    <script>
-			        var textarea = document.querySelector('input[name="tags"]');
+			        var textarea = document.querySelector('input[name="story_tags"]');
 			        textarea.addEventListener("keydown", function(event) {
 			        // The key code for F2 happens to be 113
 			        	if (event.keyCode == 13) {

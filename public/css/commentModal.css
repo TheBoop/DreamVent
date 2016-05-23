@@ -1,0 +1,101 @@
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin-left: 80%;
+    border: 1px solid #888;
+    height: 90%;
+    width: 20%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    padding-right: 2%;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.commentBtn {
+    width:38%;
+    margin-left: 42%;
+    opacity: 0.5;
+}
+
+.commentBtn:hover {
+    opacity: 1;
+}
+
+div.commentBox {
+    width:90%; 
+    height:auto;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    padding-left: 2%;
+    border-radius: 5px;
+    background-color: lightblue;
+}
+
+div.commentSection {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 70%;
+    width:100%;
+}
+
+.userName {
+    color: black;
+    text-decoration: underline;
+}
+
+.date {
+    top: 0;
+    font-size: 80%;
+}
+
+.comment {
+    top: 0;
+}
+
+div.submitComment {
+    bottom: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10%;
+    padding-left:5%;
+    height: 20%;
+    background-color:gray;
+}
+
+.textarea {
+    width: 10px;
+    height: 10px;
+}
+
+.post {
+    font-size: 80%;
+}

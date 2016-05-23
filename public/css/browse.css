@@ -11,6 +11,11 @@
     text-align: center;
 }
 .cell:hover {
+    opacity:0.8;
+    -webkit-transition: opacity 400ms;
+    -moz-transition: opacity 400ms;
+    -o-transition: opacity 400ms;
+    transition: opacity 400ms;
 }
 .cell:hover > .overlay  {
     opacity: 0.8;
