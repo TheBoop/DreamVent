@@ -5,13 +5,6 @@
 @section('content')
 <div class="main">
 	<div class="block">
-		@if(Session::has('success'))
-
-		<!--<div class="alert-box success">
-			<h2>{!! Session::get('success') !!}</h2>
-		</div>-->
-
-		@endif
 		<div class="innerblock">
 
 			<h1 class="title">Picture Upload</h1>
@@ -33,10 +26,7 @@
 					<b>Tags:</b>
 					{!! Form::text('tags') !!}
 					</p>
-				   <!--<p class="errors">{!!$errors->first('image')!!}</p>
-						@if(Session::has('error'))
-				   	<p class="errors">{!! Session::get('error') !!}</p>
-			   	@endif -->
+
 			  	</div>
 			</div>
 

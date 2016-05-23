@@ -9,7 +9,7 @@
 
 .contentContainer {
     float: left;
-    width: 85%;
+    width: 83%;
 }
 
 .pictureContainer {
@@ -44,6 +44,28 @@
 .commentContainer {
   border: round;
   width: 70%;
-  height; 30px;
+  height: 30px;
   background-color: lightgray;
+}
+
+.pictureDescriptionContainer {
+  width: 100%;
+  height: 10%;
+  padding-left: 3%;
+  background-color: white;
+  opacity: 0.5;
+}
+
+.descriptionChild {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+p.descriptionFont {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
 }

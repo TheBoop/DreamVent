@@ -23,7 +23,7 @@
                             </a>
                             <br />
                             by
-                            <a href="/post/story/{{$storyList[$index]->author_id}}" class="author">
+                            <a href="/profile/{{$storyList[$index]->username}}" class="author">
                                 {{$storyList[$index]->username}}
                             </a>
                             <p class="storypreview">

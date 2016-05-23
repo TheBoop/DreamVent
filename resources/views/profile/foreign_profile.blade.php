@@ -1,11 +1,20 @@
 @extends('layouts.app')
-<!DOCTYPE html>
+<link rel="stylesheet" href="{{ URL::asset('css/browse.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/thumbnailPic.css') }}">
 <style>
 .userbar {
     padding: 5px;
     width: 100%;
-    border-radius: 10px;
-    background: rgba(211, 211, 211, 0.5);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: rgba(211, 211, 211,1);
+}
+
+.userpost{
+    background-color:white;
+    padding-top:6em;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 h1 {
     font-weight: bold;
@@ -162,10 +171,10 @@ h3 {
 	</div>
     <div class="container-fluid">
         @if(isset($pictureList))
-            <div class="row">
+            <div class="row userpost">
                 @foreach ($pictureList as $index => $piclist )
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="cell">
+                        <div class="cell" style="height: 400px;">
                             <a href="/post/picture/{{$pictureList[$index]->picture_id}}">
                                 <img src="{{ URL::to('/') }}{{$piclist->picture_link}}" />
                             </a>
