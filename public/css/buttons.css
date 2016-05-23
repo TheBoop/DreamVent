@@ -1,11 +1,11 @@
 .commentButton {
-  background: url("../Pictures/commentPic3.png") no-repeat scroll 0% 0% transparent;
-  background-size: Auto 50px;
-  background-position: 7px top;
-  vertical-align: bottom;
-  background-color: #FFFFFF;
-  width: 100px;
-  height:40px;
+	background: url("../Pictures/commentPic3.png") no-repeat scroll 0% 0% transparent;
+	background-size: Auto 50px;
+	background-position: 7px top;
+	vertical-align: bottom;
+	background-color: #FFFFFF;
+	width: 100px;
+	height:40px;
 	-moz-border-radius:42px;
 	-webkit-border-radius:42px;
 	border-radius:42px;
@@ -26,6 +26,7 @@
 .commentButton:active {
 	position:relative;
 	top:1px;
+	opacity:0.5;
 }
 
 .sideButton {
@@ -43,18 +44,34 @@
 	opacity:0.5;
 }
 
+.commentBtn {
+	cursor:pointer;
+    width:38%;
+    opacity:0.4;
+	transition: all 0.5s;
+	border-radius: 100%;
+}
+
+.commentBtn:hover {
+    opacity: 1;
+}
+
+.commentBtn:active {
+	opacity: 0.5;
+}
+
 .uploadButton {
-  background-color: #007dc1; 
-  text-align: center;
-  line-height: 10px;
-  width: 100px;
-  height:40px;
+	background-color: #007dc1; 
+	text-align: center;
+	line-height: 10px;
+	width: 100px;
+	height:40px;
 	-moz-border-radius:42px;
 	-webkit-border-radius:42px;
 	border-radius:42px;
 	border:3px solid #e7f0e7;
-  border-style: solid;
-  border-color: #007dc9;
+	border-style: solid;
+	border-color: #007dc9;
 	display:inline-block;
 	cursor:pointer;
 	color:#4d214d;
