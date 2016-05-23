@@ -131,9 +131,10 @@ Route::group(['middleware' => ['web']], function () {
 	*/
 	Route::post('follow/{username}', 'UserList\UserListController@addFollower');
 	Route::post('unfollow/{username}', 'UserList\UserListController@removeFollower');
-
+	Route::get('followlist/', 'UserList\UserListController@view_follower');
 	Route::post('block/{username}', 'UserList\UserListController@addBlock');
 	Route::post('unblock/{username}', 'UserList\UserListController@removeBlock');
+	Route::get('blocklist/', 'UserList\UserListController@view_block');
 
 
 	/*
