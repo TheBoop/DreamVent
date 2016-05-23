@@ -10,7 +10,6 @@
 @section('content')
 <!-- Comment Modal -->
 <div id="myModal" class="modal">
-
   <!-- Modal content -->
   <div class="modal-content">
     <div class="row">
@@ -81,6 +80,8 @@
       <input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="myBtn">
     </div>
 </div>
+
+
 
 <!-- Picture Description -->
 
