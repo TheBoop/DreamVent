@@ -39,6 +39,12 @@ h1.submit{
     //margin: auto;
 	color: white;
 }
+img.displayCenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3em;
+}
 .send-button {
     background: rgb(0, 100, 200);
     color: #fff;
@@ -57,10 +63,10 @@ h1.submit{
   background: rgb(40, 140, 240);
 }
 
-p.centered {
+.centered {
     margin-left: auto;
     margin-right: auto;
-    width: 6em;
+    width:6em;
 }
 
 p.left {
@@ -68,5 +74,5 @@ p.left {
     font: 15px bold, Sans-serif; 
     margin-left: auto;
     margin-right: auto;
-    width: 50%
+    width: 50%;
 }

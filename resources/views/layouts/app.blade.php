@@ -6,7 +6,7 @@
     @include('includes.styles')
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="warpper">
         <div class ="container">
             <div id="header" class="row">
                 @include('includes.header')

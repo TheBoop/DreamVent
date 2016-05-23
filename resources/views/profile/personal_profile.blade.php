@@ -49,7 +49,8 @@
     <div class="sidebar">
 	    <ul class="nav nav-stacked">
 		    <li class="active"><a href="#Posts_tab" data-toggle="tab">Posts</a></li>
-		    <li class="active"><a href="#Follower_tab" data-toggle="tab" >Follower</a></li>
+		    <li class="active"><a href="/followlist" data-toggle="tab" >Following</a></li>
+		    <li class="active"><a href="/blocklist" data-toggle="tab" >Blocked</a></li>
 		    <li class="active"><a href="#Setting_tab" data-toggle="tab">Settings</a></li>
 		</ul>
     </div>

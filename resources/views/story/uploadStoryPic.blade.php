@@ -1,7 +1,6 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ URL::asset('css/upload.css') }}">
 
-<html lang="en">
 @section('content')
 <div class="main">
   	<div class="block">

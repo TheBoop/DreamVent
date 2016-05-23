@@ -21,7 +21,6 @@
             <li><a href="/search">Search</a></li>
             <li><a href="/uploadPicture">Picture Upload</a></li>
             <li><a href="/uploadStoryPic">Story Upload</a></li>
-            <li><a href="/YourStories">Your Stories</a></li>
         </ul>
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
@@ -35,6 +34,9 @@
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
+                        <li><a href="/myprofile">Your Profile</a></li>
+                        <li><a href="/YourPictures">Your Pictures</a></li>
+                        <li><a href="/YourStories">Your Stories</a></li>
                         <li><a href="{{ url('logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                     </ul>
                 </li>
