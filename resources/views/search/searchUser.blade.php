@@ -3,9 +3,6 @@
 @extends('layouts.app')
 @section('content')
 <body>
-
-
-
     <div class="search">
         Find other users (comma separated)
         {{Form::open(array('url' =>'/searchUser'))}}
