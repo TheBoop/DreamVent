@@ -18,6 +18,7 @@
 			<p class="centered" style="float:center">
 				{!! Form::open(array('url'=>'/uploadStory/'.$picture_id,'method'=>'POST')) !!}
 			</p>
+			
 			<p class="left"><b>Story Title:</b>
 				<input type="input" name="storyTitle">
 			</p>
