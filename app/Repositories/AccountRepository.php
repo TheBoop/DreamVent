@@ -332,6 +332,18 @@ class AccountRepository
 
     }
 
+    public function CountLikesPicture($picture_id)
+    {
+        $data = Likes::where('picture_id', $picture_id)->get();
+        return count($data);
+    }
+
+    public function CountLikesStory($story_id)
+    {
+        $data = Likes::where('story_id', $story_id)->get();
+        return count($data);
+    }
+
     /*
      * Check if PID is favorited by user
      */ 
@@ -714,6 +726,7 @@ class AccountRepository
         //var_dump(USER::find(6)->followlist_id);
         $follow->list_id = USER::find(Auth::user()->id)->followlist_id;
         $follow->user_id = USER::where('username', $username)->first()->id;
+         $follow->username = $username;
 
         //error checking for ajax bug
         $zero_or_one = UserListContains::
@@ -770,6 +783,7 @@ class AccountRepository
         //var_dump(USER::find(6)->blocklist_id);
         $block->list_id = USER::find(Auth::user()->id)->blocklist_id;
         $block->user_id = USER::where('username', $username)->first()->id;
+        $block->username = $username;
 
         //error checking for ajax bug
         $zero_or_one = UserListContains::

@@ -53,6 +53,7 @@ class UserPostController extends Controller
 			 'comments' => $this->PostPageInstance->getPicCommentBasedonPID($picture_id),
 			 'isfavorited' => $this->PostPageInstance->isFavoritedByPID($picture_id),
 		 	 'isliked' => $this->PostPageInstance->isLikedByPID($picture_id),
+		 	 'number_of_likes' => $this->PostPageInstance->CountLikesPicture($picture_id),
 			]);
 
 	}
@@ -76,6 +77,7 @@ class UserPostController extends Controller
 		 'isfavorited' => $this->PostPageInstance->isFavoritedBySID($story_id),
 		 'isliked' => $this->PostPageInstance->isLikedBySID($story_id),
 		 'tags' => $this->PostPageInstance->ReturnStoryTagsArrayBySID($story_id),
+		 'number_of_likes' => $this->PostPageInstance->CountLikesStory($story_id),
 		]);
 
 	}
