@@ -248,12 +248,12 @@ class BrowseController extends Controller
 			======= Liked Content Tags =======
 		*/
 		//Get IDs of stories you've faved, and find the tags associated with them.
-		$likedStoryIDCollection = array();
+		$likedPictureIDCollection = array();
 		$likes = Likes::where('user_id', Auth::user()->id)->get();
 		foreach($likes as $result) {
-			$likedStoryIDCollection[] = $result->story_id;
+			$likedStoryIDCollection[] = $result->picture_id;
 		}
-		$likedTags = Tags::whereIn('story_id', $likedStoryIDCollection)->get();
+		$likedTags = Tags::whereIn('picture_id', $likedPictureIDCollection)->get();
 		
 		//Count them and put the result in $likedTagNumOccurences
 		$likedTagNumOccurences = array();
@@ -278,12 +278,12 @@ class BrowseController extends Controller
 			======= Favorited Content Tags =======
 		*/
 		//Get IDs of stories you've faved, and find the tags associated with them.
-		$faveStoryIDCollection = array();
+		$favePictureIDCollection = array();
 		$faves = Favorites::where('user_id', Auth::user()->id)->get();
 		foreach($faves as $result) {
-			$faveStoryIDCollection[] = $result->story_id;
+			$favePictureIDCollection[] = $result->story_id;
 		}
-		$favedTags = Tags::whereIn('story_id', $faveStoryIDCollection)->get();
+		$favedTags = Tags::whereIn('picture_id', $favePictureIDCollection)->get();
 
 		//Count them and put the result in $favedTagNumOccurences
 		$favedTagNumOccurences = array();
@@ -413,24 +413,23 @@ class BrowseController extends Controller
 		}
 		
 		//get story ids with these tags
-		$storyIDs = array();
-		$collection = Tags::whereNotNull('story_id')->whereIn('tag_id', $topTags)->get();
-		foreach($collection->unique('story_id') as $k=>$c) {
+		$pictureIDs = array();
+		$collection = Tags::whereNotNull('picture_id')->whereIn('tag_id', $topTags)->get();
+		foreach($collection->unique('picture_id') as $k=>$c) {
 			echo "$k: $c <br>";
-			$storyIDs[] = $c->story_id;
+			$pictureIDs[] = $c->picture_id;
 		}
-		//$storyIDs = array_unique($storyIDs);
+		//$pictureIDs = array_unique($pictureIDs);
 		
-		foreach($storyIDs as $k => $v) {
+		foreach($pictureIDs as $k => $v) {
 			echo "$k: $v <br>";
 		}
 		
 		//return
-		$holdList = $this->Browser->GetStoryDescNPic($storyIDs, $request->user());
+		$holdList = Picture::distinct('picture_link')->whereIn('picture_id', $pictureIDs)->latest()->paginate(12);//$this->Browser->GetStoryDescNPic($storyIDs, $request->user());
         return view('pagetype.index',
         [
-            'pictureList' => $holdList[1],
-            'storyList' => $holdList[0],
+            'pictureList' => $holdList,
         ]);
 		
 		

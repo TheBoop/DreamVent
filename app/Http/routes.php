@@ -60,13 +60,17 @@ Route::group(['middleware' => ['web']], function () {
 	* Browsing - Matt
 	* =====================
 	*/
-	//content: pictures, stories
-	Route::get('/browse', 'Browse\BrowseController@defaultBrowse');
+	//Deprecated: content: pictures, stories
+	//Route::get('/browse', 'Browse\BrowseController@defaultBrowse');
+	
 	//users
 	Route::get('/browseUsers', 'Browse\BrowseController@defaultBrowseUser');
 	
-	//Browse, the actual one - in progress
+	//Browse Stories
 	Route::get('/Browse', 'Browse\BrowseController@BrowseContent');
+	
+	//Browse Pictures
+	Route::get('/BrowsePictures', 'Browse\BrowseController@BrowsePictureContent');
 	
 
 	/*
