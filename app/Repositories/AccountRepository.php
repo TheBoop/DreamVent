@@ -225,8 +225,19 @@ class AccountRepository
 		return $title;
 	}
 
-
-
+    /*
+     * ===================================================================
+     * =================            Browse Helper        ====================
+     * ===================================================================
+     */
+	public function updateTaglistFromTagOccurence(array &$tagList, array &$occurenceList) {
+		foreach($occurenceList as $key => $value) {
+			if (!array_key_exists($key, $tagList)) {
+				$tagList[$key] = 0;
+			}
+		}
+		return;
+	}
 
 
     /*

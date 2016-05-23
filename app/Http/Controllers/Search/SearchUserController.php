@@ -79,13 +79,13 @@ class SearchUserController extends Controller
 		
 		//Test: print results //TODO eliminate duplicates
 		echo "<br /> Results: <br />";
-		foreach ($collection as $key => $result) {
+		foreach ($collection->unique() as $key => $result) {
 			echo "$key: $result <br />";
 		}
 		
 		return view('search.searchUserResults',
         [
-            'users' => $collection
+            'users' => $collection->unique()
         ]);
 	}
 }
