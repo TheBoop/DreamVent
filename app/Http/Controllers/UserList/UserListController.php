@@ -88,4 +88,20 @@ class UserListController extends Controller
         return view('profile.personal_profile');
     }
 
+    public function view_follower()
+    {   
+        return view('search.searchUser', 
+        [
+            'users'=> $this->UserList->GetFollowList(),
+        ]);
+    }
+
+    public function view_block()
+    {   
+        return view('search.searchUser', 
+        [
+            'users'=> $this->UserList->GetBlockList(),
+        ]);
+    }
+
 }

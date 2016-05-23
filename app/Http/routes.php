@@ -131,9 +131,10 @@ Route::group(['middleware' => ['web']], function () {
 	*/
 	Route::post('follow/{username}', 'UserList\UserListController@addFollower');
 	Route::post('unfollow/{username}', 'UserList\UserListController@removeFollower');
-
+	Route::get('followlist/', 'UserList\UserListController@view_follower');
 	Route::post('block/{username}', 'UserList\UserListController@addBlock');
 	Route::post('unblock/{username}', 'UserList\UserListController@removeBlock');
+	Route::get('blocklist/', 'UserList\UserListController@view_block');
 
 
 	/*
@@ -160,7 +161,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('likePicture/{picture_id}', 'UserList\UserListController@Like_pic');
 	Route::delete('unlikePicture/{picture_id}', 'UserList\UserListController@Unlike_pic');
 	Route::post('favoritePicture/{picture_id}', 'UserList\UserListController@Favorite_pic');
-	Route::delete('unfavoritePicturePicture/{picture_id}', 'UserList\UserListController@UnfavoritePicture_pic');
+	Route::delete('unfavoritePicture/{picture_id}', 'UserList\UserListController@Unfavorite_pic');
 	
 });
 

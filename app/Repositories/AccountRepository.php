@@ -61,7 +61,7 @@ class AccountRepository
     public function viewYourOwnPicture(User $user)
     {
        return Picture::where('author_id', $user->id)
-                    ->paginate(4);
+                    ->paginate(12);
     }
 
     /*
@@ -84,7 +84,7 @@ class AccountRepository
         }
         */
         return Picture::where('description', $keyword)
-                    ->paginate(4);
+                    ->paginate(12);
     }
 
     /*
