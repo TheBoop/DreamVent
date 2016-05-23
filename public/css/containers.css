@@ -34,6 +34,8 @@
     position: relative;
     min-height: 400px;
     background-color: #DDD;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .buttonContainer {

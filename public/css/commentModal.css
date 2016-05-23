@@ -65,11 +65,17 @@ div.commentSection {
     width:100%;
 }
 
-h6.date {
+.userName {
+    color: black;
+    text-decoration: underline;
+}
+
+.date {
     top: 0;
     font-size: 80%;
 }
-h5.comment {
+
+.comment {
     top: 0;
 }
 
