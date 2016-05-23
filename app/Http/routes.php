@@ -65,6 +65,9 @@ Route::group(['middleware' => ['web']], function () {
 	//users
 	Route::get('/browseUsers', 'Browse\BrowseController@defaultBrowseUser');
 	
+	//Browse, the actual one - in progress
+	Route::get('/Browse', 'Browse\BrowseController@BrowseContent');
+	
 
 	/*
 	* =====================
