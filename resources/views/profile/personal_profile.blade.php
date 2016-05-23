@@ -48,9 +48,9 @@
 
     <div class="sidebar">
 	    <ul class="nav nav-stacked">
-		    <li class="active"><a href="/followlist" data-toggle="tab" >Following</a></li>
-		    <li class="active"><a href="/blocklist" data-toggle="tab" >Blocked</a></li>
-		    <li class="active"><a href="#Setting_tab" data-toggle="tab">Settings</a></li>
+		    <li class="active"><a href="/followlist">Following</a></li>
+		    <li class="active"><a href="/blocklist">Blocked</a></li>
+		    <li class="active"><a href="#Setting_tab">Settings</a></li>
 		</ul>
     </div>
 </div>
