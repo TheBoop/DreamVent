@@ -113,6 +113,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/search', 'Search\SearchController@getSearch');
 	Route::post('/search', 'Search\SearchController@postSearch');
 	
+	//Search Stories - Matt
+	Route::get('/searchPicture', 'Search\SearchController@getPictureSearch');
+	Route::post('/searchPicture', 'Search\SearchController@postPictureSearch');
+	
 	//Search Users - Matt
 	Route::get('/searchUser', 'Search\SearchUserController@getSearch');
 	Route::post('/searchUser', 'Search\SearchUserController@postSearch');
