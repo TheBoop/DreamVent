@@ -3,10 +3,29 @@
 <link rel="stylesheet" href="{{ URL::asset('css/containers.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/padding.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/commentWindow.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/commentModal.css') }}">
 
 @section('content')
+<!-- Comment Modal -->
+<div id="myModal" class="modal">
 
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="row">
+      <div class="col-md-12">
+        <span class="close">x</span>
+      </div>
+      
+    @foreach($comments as $comment)
+      <div class="col-md-12">
+        $comment
+      </div>
+    @endforeach
+    
+    </div>
+  </div>
+
+</div>
 <div class="contentContainer">
     <div class="pictureContainer">
         <img src="{{asset($piclist->picture_link)}}">
@@ -28,19 +47,8 @@
         @else
             <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
         @endif
-        <a href="#comments" class="commentButton"; id="buttonSpace"></a>
-    </div>
-</div>
-
-<div id="comments" class="overlay">
-    <div class="popup">
-        <h2>Comments</h2>
-        <a class="close" href="#">x</a>
-        <div class="content">
-        @foreach ($comments as $comment)
-            {{$comment->text}} <br/>
-        @endforeach
-        </div>
+        <!-- Trigger Comment Modal -->
+        <input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="myBtn">
     </div>
 </div>
 
@@ -67,6 +75,7 @@
 </div>
 
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
+<script type="text/javascript" src="{{URL::to('/')}}/js/commentsBtn.js"></script>
 <script>
     function like() {
         $.ajaxSetup({

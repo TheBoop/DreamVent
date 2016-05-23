@@ -4,15 +4,30 @@
     padding: none; 
     width: 190px;
     height: 120px; 
-    background-color: white;
 }
 .thumbnailStory:hover {
     opacity: 0.8;
 }
 .fill-div { 
     background-color: white;
+    background-image: linear-gradient(white, black);
+    background: black;
+    background: linear-gradient(white, black);
+    background-color: white;
     display: block;
     width: 190px;
     height: 120px;
     padding-left:10px;
 }   
+
+.fill-div:hover { 
+    background-color: white;
+    background-image: linear-gradient(white, white);
+    background: white;
+    background: linear-gradient(white, white);
+    display: block;
+    width: 190px;
+    height: 120px;
+    padding-left:10px;
+}   
+
