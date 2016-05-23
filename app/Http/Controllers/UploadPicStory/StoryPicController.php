@@ -85,21 +85,20 @@ class StoryPicController extends Controller
 		$grab_pics->title =  $request->title;
 		$grab_pics->save();
 
-
-		if ($request->tags != '')
+		if ($request->pic_tags != '')
 		{
-			$tags = new Tags();
-			$taglist = explode(',', $request->tags);
+			$pic_tags = new Tags();
+			$taglist = explode(',', $request->pic_tags);
 			foreach ($taglist as $index => $tag) {
-				$tags = new Tags();
+				$pic_tags = new Tags();
 				$taglist[$index] = rtrim(ltrim($taglist[$index]));
 				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
-				$tags->tag_id = $taglist[$index];
-				$tags->story_id = $story->story_id;
-				$tags->save();
+				$pic_tags->tag_id = $taglist[$index];
+				$pic_tags->picture_id = $picture->picture_id;
+				$pic_tags->save();
 				
 				//Update Tag Occurences after insert
-				$tag_occurence = TagOccurence::where('tag', $tags->tag_id)->where('user_id', Auth::user()->id)->first();
+				$tag_occurence = TagOccurence::where('tag', $pic_tags->tag_id)->where('user_id', Auth::user()->id)->first();
 				
 				if ($tag_occurence) { //If exists, increment num_occurences.
 					$tag_occurence->num_occurences += 1;
@@ -108,7 +107,37 @@ class StoryPicController extends Controller
 				else { //If it doesn't exist, create an entry and set num occurences to 1.
 					$tag_occurence = new TagOccurence();
 					$tag_occurence->user_id = Auth::user()->id;
-					$tag_occurence->tag = $tags->tag_id;
+					$tag_occurence->tag = $pic_tags->tag_id;
+					$tag_occurence->num_occurences = 1;
+					$tag_occurence->save();
+				}
+			}
+
+		}
+
+		if ($request->story_tags != '')
+		{
+			$story_tags = new Tags();
+			$taglist = explode(',', $request->story_tags);
+			foreach ($taglist as $index => $tag) {
+				$story_tags = new Tags();
+				$taglist[$index] = rtrim(ltrim($taglist[$index]));
+				$taglist[$index] = preg_replace('!\s+!', ' ', $taglist[$index]);
+				$story_tags->tag_id = $taglist[$index];
+				$story_tags->story_id = $story->story_id;
+				$story_tags->save();
+				
+				//Update Tag Occurences after insert
+				$tag_occurence = TagOccurence::where('tag', $story_tags->tag_id)->where('user_id', Auth::user()->id)->first();
+				
+				if ($tag_occurence) { //If exists, increment num_occurences.
+					$tag_occurence->num_occurences += 1;
+					$tag_occurence->save();
+				}
+				else { //If it doesn't exist, create an entry and set num occurences to 1.
+					$tag_occurence = new TagOccurence();
+					$tag_occurence->user_id = Auth::user()->id;
+					$tag_occurence->tag = $story_tags->tag_id;
 					$tag_occurence->num_occurences = 1;
 					$tag_occurence->save();
 				}

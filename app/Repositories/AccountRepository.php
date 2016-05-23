@@ -270,7 +270,7 @@ class AccountRepository
      * Returns all columns in Table:PictureComment
      */
     public function getPicCommentBasedonPID($picture_id)
-    {
+    {          
        return PictureComment::where('picture_id', $picture_id)->get();
     }
 
