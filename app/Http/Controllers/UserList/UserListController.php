@@ -90,7 +90,7 @@ class UserListController extends Controller
 
     public function view_follower()
     {   
-        return view('search.searchUser', 
+        return view('search.searchUserResults', 
         [
             'users'=> $this->UserList->GetFollowList(),
         ]);
@@ -98,7 +98,7 @@ class UserListController extends Controller
 
     public function view_block()
     {   
-        return view('search.searchUser', 
+        return view('search.searchUserResults', 
         [
             'users'=> $this->UserList->GetBlockList(),
         ]);
