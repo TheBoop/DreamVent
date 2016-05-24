@@ -38,6 +38,7 @@ class BrowseController extends Controller
 			 'stories' => $stories]);
 	}
 	
+	
 	public function defaultBrowseUser() {
 		//$users = User::->paginate(3);//->orderBy('created_at', 'desc')->get();
 		$users = NULL;
@@ -45,7 +46,6 @@ class BrowseController extends Controller
 	}
 	
 	public function BrowseContent(Request $request) {
-		echo "Browse <br />";
 		/*
 			======= Liked Content Tags =======
 		*/
@@ -59,9 +59,7 @@ class BrowseController extends Controller
 		
 		//Count them and put the result in $likedTagNumOccurences
 		$likedTagNumOccurences = array();
-		echo "<br /> likedTags: <br />";
 		foreach($likedTags as $key => $value) {
-			echo "$key: $value->tag_id <br>";
 			$lowercaseValue = strtolower($value->tag_id);
 			if (array_key_exists($lowercaseValue, $likedTagNumOccurences)) { //If the key exists, increment
 				$likedTagNumOccurences[$lowercaseValue] += 1;
@@ -69,11 +67,6 @@ class BrowseController extends Controller
 			else { //If the key doesn't exist, create it, and give that element a value of 1.
 				$likedTagNumOccurences[$lowercaseValue] = 1;
 			}
-		}
-		
-		echo "OCCURENCES<br>";
-		foreach ($likedTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
 		}
 		
 		/*
@@ -89,9 +82,7 @@ class BrowseController extends Controller
 
 		//Count them and put the result in $favedTagNumOccurences
 		$favedTagNumOccurences = array();
-		echo "<br /> favedTags: <br />";
 		foreach($favedTags as $key => $value) {
-			echo "$key: $value->tag_id <br>";
 			$lowercaseValue = strtolower($value->tag_id);
 			if (array_key_exists($lowercaseValue, $favedTagNumOccurences)) { //If the key exists, increment
 				$favedTagNumOccurences[$lowercaseValue] += 1;
@@ -101,21 +92,11 @@ class BrowseController extends Controller
 			}
 		}
 		
-		echo "OCCURENCES<br>";
-		foreach ($favedTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
-		}
-		
 		/*
 			======= Your Uploaded Content Tags =======
 		*/	
 		//Get number of occurences of tags of content you've uploaded. This is just a lookup.
 		$yourTags = TagOccurence::select('tag', 'num_occurences')->where('user_id', Auth::user()->id)->get();
-		
-		echo "<br /> yourTags: <br />";
-		foreach($yourTags as $key => $value) {
-			echo "$key: $value <br /> ";
-		}
 		
 		//Count them and put the results in $yourTagNumOccurences
 		$yourTagNumOccurences = array();
@@ -128,26 +109,12 @@ class BrowseController extends Controller
 				$yourTagNumOccurences[$lowercaseValue] = $value->num_occurences;
 			}
 		}
-		echo "OCCURENCES<br>";
-		foreach ($yourTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
-		}
-		
 		
 		/*
 			======= Followed User Content Tags =======
 		*/
 		//Get number of occurences of tags of content people you follow have uploaded. This is just a lookup.
 		$followedTags = TagOccurence::select('tag', 'num_occurences')->whereIn('user_id', $this->Browser->followListAuthorID())->get();
-		echo "followedTags: <br />";
-		if ($followedTags) {
-			foreach($followedTags as $key => $value) {
-				echo "$key: $value <br /> ";
-			}
-		}
-		else {
-			echo "no results <br /> ";
-		}
 		
 		//Count them and put the results in $followedTagNumOccurences
 		$followedTagNumOccurences = array();
@@ -160,12 +127,7 @@ class BrowseController extends Controller
 				$followedTagNumOccurences[$lowercaseValue] = $value->num_occurences;
 			}
 		}
-		echo "OCCURENCES<br>";
-		foreach ($followedTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
-		}
-		
-		
+			
 		/*
 			======= Tag Ranking =======
 		*/
@@ -194,11 +156,6 @@ class BrowseController extends Controller
 		//sort high to low
 		arsort($tagList);
 		
-		echo "<br> Sorted Tag Ranks: <br>";
-		foreach($tagList as $tag => $rank) {
-			echo "$tag: $rank <br>";
-		}
-		
 		//How many tags to search for
 		$maxTags = 10;
 		$numTags = count($tagList);
@@ -206,25 +163,15 @@ class BrowseController extends Controller
 		
 		//Get top tags, make em elements
 		$topTags = array_slice($tagList, 0, $numTags, true);
-		echo "<br> Top Tags <br>";
 		foreach($topTags as $key => $value) {
 			$topTags[$key] = $key;
-		}
-		foreach($topTags as $key => $value) {
-			echo "$key: $value <br>";
 		}
 		
 		//get story ids with these tags
 		$storyIDs = array();
 		$collection = Tags::whereNotNull('story_id')->whereIn('tag_id', $topTags)->get();
 		foreach($collection->unique('story_id') as $k=>$c) {
-			echo "$k: $c <br>";
 			$storyIDs[] = $c->story_id;
-		}
-		//$storyIDs = array_unique($storyIDs);
-		
-		foreach($storyIDs as $k => $v) {
-			echo "$k: $v <br>";
 		}
 		
 		//return
@@ -234,16 +181,9 @@ class BrowseController extends Controller
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
         ]);
-		
-		
-		//Test:
-		echo "<br /> Extra Testing stuff: <br />";
-		//var_dump($this->Browser->followListAuthorID());
-		//echo "<pre>" .var_dump($followedTags)."<pre />;
 	}
 	
 		public function BrowsePictureContent(Request $request) {
-		echo "Browse <br />";
 		/*
 			======= Liked Content Tags =======
 		*/
@@ -257,9 +197,7 @@ class BrowseController extends Controller
 		
 		//Count them and put the result in $likedTagNumOccurences
 		$likedTagNumOccurences = array();
-		echo "<br /> likedTags: <br />";
 		foreach($likedTags as $key => $value) {
-			echo "$key: $value->tag_id <br>";
 			$lowercaseValue = strtolower($value->tag_id);
 			if (array_key_exists($lowercaseValue, $likedTagNumOccurences)) { //If the key exists, increment
 				$likedTagNumOccurences[$lowercaseValue] += 1;
@@ -267,11 +205,6 @@ class BrowseController extends Controller
 			else { //If the key doesn't exist, create it, and give that element a value of 1.
 				$likedTagNumOccurences[$lowercaseValue] = 1;
 			}
-		}
-		
-		echo "OCCURENCES<br>";
-		foreach ($likedTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
 		}
 		
 		/*
@@ -287,9 +220,7 @@ class BrowseController extends Controller
 
 		//Count them and put the result in $favedTagNumOccurences
 		$favedTagNumOccurences = array();
-		echo "<br /> favedTags: <br />";
 		foreach($favedTags as $key => $value) {
-			echo "$key: $value->tag_id <br>";
 			$lowercaseValue = strtolower($value->tag_id);
 			if (array_key_exists($lowercaseValue, $favedTagNumOccurences)) { //If the key exists, increment
 				$favedTagNumOccurences[$lowercaseValue] += 1;
@@ -299,21 +230,11 @@ class BrowseController extends Controller
 			}
 		}
 		
-		echo "OCCURENCES<br>";
-		foreach ($favedTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
-		}
-		
 		/*
 			======= Your Uploaded Content Tags =======
 		*/	
 		//Get number of occurences of tags of content you've uploaded. This is just a lookup.
 		$yourTags = TagOccurence::select('tag', 'num_occurences')->where('user_id', Auth::user()->id)->get();
-		
-		echo "<br /> yourTags: <br />";
-		foreach($yourTags as $key => $value) {
-			echo "$key: $value <br /> ";
-		}
 		
 		//Count them and put the results in $yourTagNumOccurences
 		$yourTagNumOccurences = array();
@@ -326,26 +247,12 @@ class BrowseController extends Controller
 				$yourTagNumOccurences[$lowercaseValue] = $value->num_occurences;
 			}
 		}
-		echo "OCCURENCES<br>";
-		foreach ($yourTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
-		}
-		
 		
 		/*
 			======= Followed User Content Tags =======
 		*/
 		//Get number of occurences of tags of content people you follow have uploaded. This is just a lookup.
 		$followedTags = TagOccurence::select('tag', 'num_occurences')->whereIn('user_id', $this->Browser->followListAuthorID())->get();
-		echo "followedTags: <br />";
-		if ($followedTags) {
-			foreach($followedTags as $key => $value) {
-				echo "$key: $value <br /> ";
-			}
-		}
-		else {
-			echo "no results <br /> ";
-		}
 		
 		//Count them and put the results in $followedTagNumOccurences
 		$followedTagNumOccurences = array();
@@ -358,11 +265,6 @@ class BrowseController extends Controller
 				$followedTagNumOccurences[$lowercaseValue] = $value->num_occurences;
 			}
 		}
-		echo "OCCURENCES<br>";
-		foreach ($followedTagNumOccurences as $key => $value) {
-			echo "$key: $value <br>";
-		}
-		
 		
 		/*
 			======= Tag Ranking =======
@@ -392,11 +294,6 @@ class BrowseController extends Controller
 		//sort high to low
 		arsort($tagList);
 		
-		echo "<br> Sorted Tag Ranks: <br>";
-		foreach($tagList as $tag => $rank) {
-			echo "$tag: $rank <br>";
-		}
-		
 		//How many tags to search for
 		$maxTags = 10;
 		$numTags = count($tagList);
@@ -404,25 +301,17 @@ class BrowseController extends Controller
 		
 		//Get top tags, make em elements
 		$topTags = array_slice($tagList, 0, $numTags, true);
-		echo "<br> Top Tags <br>";
+
 		foreach($topTags as $key => $value) {
 			$topTags[$key] = $key;
 		}
-		foreach($topTags as $key => $value) {
-			echo "$key: $value <br>";
-		}
+
 		
 		//get story ids with these tags
 		$pictureIDs = array();
 		$collection = Tags::whereNotNull('picture_id')->whereIn('tag_id', $topTags)->get();
 		foreach($collection->unique('picture_id') as $k=>$c) {
-			echo "$k: $c <br>";
 			$pictureIDs[] = $c->picture_id;
-		}
-		//$pictureIDs = array_unique($pictureIDs);
-		
-		foreach($pictureIDs as $k => $v) {
-			echo "$k: $v <br>";
 		}
 		
 		//return
@@ -431,11 +320,5 @@ class BrowseController extends Controller
         [
             'pictureList' => $holdList,
         ]);
-		
-		
-		//Test:
-		echo "<br /> Extra Testing stuff: <br />";
-		//var_dump($this->Browser->followListAuthorID());
-		//echo "<pre>" .var_dump($followedTags)."<pre />;
 	}
 }
