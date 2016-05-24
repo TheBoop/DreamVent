@@ -28,7 +28,7 @@ class AccountRepository
     public function featuredList()
     {
         //search algorithm
-        $collection = Story::orderBy('num_likes', 'DESC')->get();
+        $collection = Story::latest()->get();
 
         //get all story IDS we might have to limit for past 2 days or whatever
         $story_id = array();
