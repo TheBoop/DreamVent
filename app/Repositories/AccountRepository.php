@@ -46,7 +46,8 @@ class AccountRepository
     public function favoriteListStoryID($author_id)
     { 
         $story_id = array();
-        $collection = Favorites::where('user_id', $author_id)->latest()->get();
+        $collection = Favorites::where('user_id', $author_id)
+                                ->whereNull('picture_id')->latest()->get();
         foreach($collection as $collection)
         {
             $story_id[] = $collection->story_id;
@@ -457,9 +458,12 @@ class AccountRepository
             $user_id = 0;
         else
             $user_id = $request->id;
-        if (empty($story_id))
+        if($story_id == null)
+            return;
+        if ($story_id[0] == 0)
             return;
         $picture_id = array();
+        //var_dump($story_id);
         foreach ($story_id as $index => $value) {
             //confusing for someone new to relations but I used relations for find look at models
             $picture_id[$index] = Picture::find(

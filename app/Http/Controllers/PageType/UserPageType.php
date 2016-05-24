@@ -71,6 +71,7 @@ class UserPageType extends Controller
     {
         //get lateststory
         $list_story_id = $this->UserPagePreference->favoriteListStoryID($request->user()->id);
+        //var_dump($list_story_id);
         //with each story ID grab story description and Pic
         //get picture listGetStoryDescNPic
         $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id, $request->user());
