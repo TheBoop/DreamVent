@@ -31,9 +31,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'PageType\NonUserPageType@FeaturedFrontPage');
 	Route::get('/YourStories', 'PageType\UserPageType@YourStories');
 	Route::get('/Follows', 'PageType\UserPageType@FollowPage');
-	Route::get('/Favorites', 'PageType\UserPageType@FavoritePage');
+	Route::get('/Favorites', 'PageType\UserPageType@FavoritePicPage');
 	Route::get('/YourPictures', 'PageType\UserPageType@YourPictures');
-
 
 
 	/*

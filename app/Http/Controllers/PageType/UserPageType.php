@@ -75,9 +75,28 @@ class UserPageType extends Controller
         //with each story ID grab story description and Pic
         //get picture listGetStoryDescNPic
         $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id, $request->user());
+        $piclist = $this->UserPagePreference->favoriteListPicID(Auth::user());
         return view('pagetype.index', [
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
+            'favpiclist' => $this->UserPagePreference->displayPics($piclist),
         ]);
     }
+
+    public function FavoritePicPage(Request $request)
+    {
+        //get lateststory
+        $list_story_id = $this->UserPagePreference->favoriteListStoryID($request->user()->id);
+        //var_dump($list_story_id);
+        //with each story ID grab story description and Pic
+        //get picture listGetStoryDescNPic
+        $holdList = $this->UserPagePreference->GetStoryDescNPic($list_story_id, $request->user());
+        $piclist = $this->UserPagePreference->favoriteListPicID(Auth::user());
+        return view('pagetype.favorite', [
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0],
+            'favpiclist' => $this->UserPagePreference->displayPics($piclist),
+        ]);
+    }
+
 }

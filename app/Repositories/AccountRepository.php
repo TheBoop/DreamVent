@@ -56,6 +56,33 @@ class AccountRepository
     }
 
     /*
+     *  Get a list of picIds associated by Author_id
+     *  Returns list of picids Sorted by latest
+     */
+    public function favoriteListPicID($user_id)
+    { 
+        $collection = Favorites::where('user_id', $user_id->id)
+                                ->whereNull('story_id')->latest()->get();
+        $picture_id = array();
+        foreach($collection as $collection)
+        {
+            $picture_id[] = $collection->picture_id;
+        }
+        return $picture_id;
+    }
+
+    /*
+     * @param  User  $user
+     * @return Set of Columns.Picture in which the user owns (4)
+     */
+    public function displayPics($picture_id)
+    {
+        $picids_ordered = implode(',', $picture_id);
+        return Picture::whereIn('picture_id', $picture_id)->orderByRaw("FIELD(picture_id, $picids_ordered)")->distinct('picture_link')->paginate(12);
+    }
+
+
+    /*
      * @param  User  $user
      * @return Set of Columns.Picture in which the user owns (4)
      */
