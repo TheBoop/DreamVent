@@ -30,12 +30,17 @@ class NonUserPostController extends Controller
         $this->PostPageInstance = $PostPageInstance;
     }
 
-    public function ViewImage($picture_id) {
+    public function ViewImage($picture_id, Request $request) {
     	//fix route for not og pic
     	$check = Picture::find($picture_id)->original_picid;
     	if(count($check)){
     		$picture_id = $check;
     	}	
+    	$hold = $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id);
+    	foreach ($hold as $key => $value) {
+    		$story_id[] = $value->story_id;
+    	}
+    	$holdlist =  $this->PostPageInstance->GetStoryDescNPic($story_id, $request->user());
 		return view('postpage/picture', 
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
@@ -44,6 +49,8 @@ class NonUserPostController extends Controller
 			 'isfavorited' => $this->PostPageInstance->isFavoritedByPID($picture_id),
 		 	 'isliked' => $this->PostPageInstance->isLikedByPID($picture_id),
 		 	 'number_of_likes' => $this->PostPageInstance->CountLikesPicture($picture_id),
+		 	 'pictureList' => $holdlist[1],
+             'storyList' => $holdlist[0],
 			 ]);
 	}
 
