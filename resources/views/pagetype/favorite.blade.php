@@ -6,11 +6,11 @@
 @section('content')
 
 <body>
-    <div class="innerblock" style="width: 70%;">
-        <b>Your Favorite Stories</b>
-    </div>
     <div class="container-fluid">
         @if(isset($pictureList))
+        <div class="innerblock" style="width: 70%;">
+            <b>Your Favorite Stories</b>
+        </div>
         <div class="row">
             @foreach ($pictureList as $index => $piclist )
             <div class="col-lg-3 col-md-4 col-sm-6">
