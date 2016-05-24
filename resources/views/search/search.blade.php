@@ -3,8 +3,7 @@
 @extends('layouts.app')
 @section('content')
 <body>
-
-    <div class="search">
+    <div class="search" id="tagSearch">
         Find stories and pictures by tag
         {{Form::open(array('url' =>'/search'))}}
             {{Form::text('keyword', null, array('class'=>'searchbox', 'placeholder'=>'search by tag (comma separated)'))}}
@@ -12,15 +11,23 @@
         {{Form::close()}}
     </div>
     <br />
-    <div class="search">
+    <div class="search" id="userSearch">
         Find other users
         {{Form::open(array('url' =>'/searchUser'))}}
             {{Form::text('keyword', null, array('class'=>'searchbox', 'placeholder'=>'search by username'))}}
             {{Form::submit('search')}}
         {{Form::close()}}
     </div>
-
+    <br />
+    <div class="search" id="pictureSearch">
+        Find pictures
+        {{Form::open(array('url' =>'/searchPicture'))}}
+            {{Form::text('keyword', null, array('class'=>'searchbox', 'placeholder'=>'search by pictures'))}}
+            {{Form::submit('search')}}
+        {{Form::close()}}
+    </div>
 
 </body>
+
 </html>
 @endsection
