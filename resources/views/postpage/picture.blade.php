@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<div class="commentBox">
 						<a href="/profile/{{$comment->username}}"class="userName">
-							{{$comment->username}}
+							<a class="userNameFont">{{$comment->username}}</a>
 						</a>
 						<h5 class="comment">{{$comment->text}}</h5>
 						<a class="date">{{$comment->created_at}}</a>
@@ -62,7 +62,7 @@
 <div class="row">
 	<div class="contentContainer">
 		<div class="pictureContainer">
-			<img src="{{asset($picture->picture_link)}} " width="100%" >
+			<img src="{{asset($picture->picture_link)}} " width="100%"; height="100%" >
 		</div>
 	</div>
 
