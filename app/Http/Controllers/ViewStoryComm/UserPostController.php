@@ -39,7 +39,7 @@ class UserPostController extends Controller
     		$picture_id = $check;
     	}	
     	$author = Picture::find($picture_id);
-    	$notblocked = $this->PostPageInstance->isBlockedByUsername(Auth::user(), $author);
+    	$notblocked = $this->PostPageInstance->isBlockedByUsernameComment(Auth::user(), $author);
     	if($notblocked)
     		return redirect('/');
 		$comment = new PictureComment();
@@ -72,7 +72,7 @@ class UserPostController extends Controller
 		]);
 
 		$author = Story::find($story_id);
-    	$notblocked = $this->PostPageInstance->isBlockedByUsername(Auth::user(), $author);
+    	$notblocked = $this->PostPageInstance->isBlockedByUsernameComment(Auth::user(), $author);
     	if($notblocked)
     		return redirect('/');
 		

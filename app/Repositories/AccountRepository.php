@@ -796,7 +796,7 @@ class AccountRepository
      * Check if Username is blocked by person who is logged in
      * Returns 0 or 1
      */ 
-    public function isBlockedByUsername($poster, $author)
+    public function isBlockedByUsernameComment($poster, $author)
     {
         //get Authenticated User's followlist_id
         if(Auth::guest())
@@ -810,7 +810,19 @@ class AccountRepository
         return count($zero_or_one);
     }
 
-
+    public function isBlockedByUsername($username)
+	{
+        //get Authenticated User's followlist_id
+        if(Auth::guest())
+            return 0;
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $user_id = User::where('username', $username)->select('id')->first()->id;
+        $zero_or_one = UserListContains::
+                        where('list_id', $blocklist_id) 
+                        ->where('user_id', $user_id)->first();
+        //return 0 or 1 depending if the user is followed or not
+        return count($zero_or_one); 
+	}
     /*
      * Store Block in database
      */ 
