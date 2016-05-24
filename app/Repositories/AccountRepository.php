@@ -77,7 +77,10 @@ class AccountRepository
      */
     public function displayPics($picture_id)
     {
+        if (count($picture_id) == 0)
+            return;
         $picids_ordered = implode(',', $picture_id);
+
         return Picture::whereIn('picture_id', $picture_id)->orderByRaw("FIELD(picture_id, $picids_ordered)")->distinct('picture_link')->paginate(12);
     }
 
