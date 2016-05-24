@@ -16,42 +16,43 @@
 			<div class="col-md-12">
 				<span class="close">x</span>
 			</div>
-		<div class="commentSection">  
-			@foreach($comments as $comment)
-				<div class="col-md-12">
-					<div class="commentBox">
-						<a href="/profile/{{$comment->username}}"class="userName">
-							{{$comment->username}}
-						</a>
-						<h5 class="comment">{{$comment->text}}</h5>
-						<a class="date">{{$comment->created_at}}</a>
-					</div>
-				</div>
-			@endforeach
-		</div>
-
-		<div class="submitComment">
-			<!-- comment text area-->
-			<div class="about-section">
-				 <div class="text-content">
-					 <div class="span7 offset1">
-							@if(Session::has('success'))
-								<div class="alert-box success">
-								<h2>{!! Session::get('success') !!}</h2>
-								</div>
-							@endif
-							<div class="post">Post Comment</div>
-							{!! Form::open(array('url'=>'/post/picture/'.$picture->picture_id,'method'=>'POST')) !!}
-								 <div class="control-group">
-										<div class="controls">
-										{{ Form::textarea('comment',null,['size' => '30x2']) }} 
-										</div>
-								 </div>
-							<div id="success"> </div>
-							{!! Form::submit('Submit', array('class'=>'submitButton')) !!}
-							{!! Form::close() !!}
+			<div class="commentSection">  
+				@foreach($comments as $comment)
+					<div class="col-md-12">
+						<div class="commentBox">
+							<a href="/profile/{{$comment->username}}"class="userName">
+								{{$comment->username}}
+							</a>
+							<h5 class="comment">{{$comment->text}}</h5>
+							<a class="date">{{$comment->created_at}}</a>
 						</div>
-				 </div>
+					</div>
+				@endforeach
+			</div>
+
+			<div class="submitComment">
+				<!-- comment text area-->
+				<div class="about-section">
+					 <div class="text-content">
+						 <div class="span7 offset1">
+								@if(Session::has('success'))
+									<div class="alert-box success">
+									<h2>{!! Session::get('success') !!}</h2>
+									</div>
+								@endif
+								<div class="post">Post Comment</div>
+								{!! Form::open(array('url'=>'/post/picture/'.$picture->picture_id,'method'=>'POST')) !!}
+									 <div class="control-group">
+											<div class="controls">
+											{{ Form::textarea('comment',null,['size' => '30x2']) }} 
+											</div>
+									 </div>
+								<div id="success"> </div>
+								{!! Form::submit('Submit', array('class'=>'submitButton')) !!}
+								{!! Form::close() !!}
+							</div>
+					 </div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -66,25 +67,35 @@
 </div>
 
 <div class="buttonContainer">
-		<div class="centered">
+	<div class="row">
+		<div class="col-md-12">
 			@if ($isliked)
 				<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 			@else
 				<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
 			@endif
+		</div>
 
-				@if ($isfavorited)  
-						<input type="image" src="{{asset('assets/images/heart1.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
-					@else
-						 <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
-				@endif
+		<div class="col-md-12">
+			@if ($isfavorited)  
+					<input type="image" src="{{asset('assets/images/heart1.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
+				@else
+					 <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
+			@endif
+		</div>
+
+		<div class="col-md-12">
 			<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" >
 	          	<img src="{{asset('assets/images/document.png')}}" class="sideButton" id="buttonSpace">
 	        </a>
+	    </div>
 
+	    <div class="col-md-12">
 			<!-- Trigger Comment Modal -->
-			<input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="commentBtn">
+			<input type="image" src="{{asset('assets/images/chat.png')}} " class="sideButton" id="commentBtn">
 		</div>
+	</div>
+
 </div>
 
 
