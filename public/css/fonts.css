@@ -1,0 +1,10 @@
+a.userNameFont {
+    opacity: 0.6;
+    color: black;
+    text-decoration: underline;
+}
+
+b.favoritePageHeader {
+    opacity: 0.8;
+    font-size: 120%;
+}

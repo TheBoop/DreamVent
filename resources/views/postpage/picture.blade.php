@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/commentModal.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/thumbnailStory.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/fonts.css') }}">
 
 
 @section('content')

@@ -13,12 +13,6 @@
     margin-right: 10px;
 }
 
-a.userNameFont {
-    opacity: 0.6;
-    color: black;
-    text-decoration: underline;
-}
-
 .contentContainer {
     float: left;
     width: 85%;
