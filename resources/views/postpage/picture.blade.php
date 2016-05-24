@@ -56,6 +56,7 @@
 		</div>
 	</div>
 </div>
+</div>
 
 <!-- Picture and buttons -->
 <div class="contentContainer">
