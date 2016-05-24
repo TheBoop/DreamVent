@@ -51,98 +51,72 @@
 							{!! Form::submit('Submit', array('class'=>'submitButton')) !!}
 							{!! Form::close() !!}
 						</div>
-				 </div>
+				 	</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-</div>
 
-<!-- Picture and buttons -->
-<div class="contentContainer">
-	<div class="pictureContainer">
-		<img src="{{asset($picture->picture_link)}} " width="100%" height="100%">
-	</div>
-</div>
 
-<div class="buttonContainer">
-		<div class="centered">
-			@if ($isliked)
-				<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
-			@else
-				<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
-			@endif
+<div class="row-fluid">
+	<div class="col-md-12">
+		<!-- Picture and buttons -->
+		<div class="contentContainer">
+			<div class="pictureContainer">
+				<img src="{{asset($picture->picture_link)}} " width="100%" height="100%">
+			</div>
+		</div>
 
-				@if ($isfavorited)  
-						<input type="image" src="{{asset('assets/images/heart1.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
-					@else
-						 <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
+		<div class="buttonContainer">
+			<div class="centered">
+				@if ($isliked)
+					<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
+				@else
+					<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
 				@endif
-			<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" >
-	          	<img src="{{asset('assets/images/document.png')}}" class="sideButton" id="buttonSpace">
-	        </a>
 
-			<!-- Trigger Comment Modal -->
-			<input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="commentBtn">
-		</div>
-</div>
+					@if ($isfavorited)  
+							<input type="image" src="{{asset('assets/images/heart1.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
+						@else
+							 <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
+					@endif
+				<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" >
+		          	<img src="{{asset('assets/images/document.png')}}" class="sideButton" id="buttonSpace">
+		        </a>
 
-
-
-<!-- Picture Description -->
-
-	<div class="row">
-		<div class="col-md-10">
-			<div class="pictureDescriptionContainer">
-				<div class="descriptionChild">
-					<p class="descriptionFont">{{$picture->description}}</p>
-				</div>
+				<!-- Trigger Comment Modal -->
+				<input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="commentBtn">
+			</div>
 		</div>
 	</div>
 
 
-<!-- Story Gallery -->
-<?php
-	static $storyCount=0;
-?>
-<div class="container">
-	<div class="row-fluid">
+	<!-- Picture Description -->
+	<div class="col-md-10">
+		<div class="pictureDescriptionContainer">
+			<div class="descriptionChild">
+				<p class="descriptionFont">{{$picture->description}}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-10">
 		<div class="storyGallery" >
-			@foreach ($story as $story)
-				<?php switch ($storyCount):
-					case 0: ?>
-						<div class="col-md-3">
-							<div class="thumbnailStory">
-								<a href='/post/story/{{$story->story_id}}'>  
-									<div class="fill-div">
-										{{$story->title}}<br/>
-										By: {{$story->username}}
-									</div>  
-								</a>  
-							</div>
+			<div class="row-fluid">
+				@foreach ($story as $story)
+					<div class="col-md-3">
+						<div class="thumbnailStory">
+							<a href='/post/story/{{$story->story_id}}'>  
+								<div class="fill-div">
+									{{$story->title}}<br/>
+									By: {{$story->username}}
+								</div>  
+							</a>  
 						</div>
-						<?php break; ?>
-					<?php case 1: ?>
-					<?php case 2: ?>
-					<?php case 3: ?>
-						<div class="col-md-3">
-							<div class="thumbnailStory">
-								<a href='/post/story/{{$story->story_id}}'>  
-									<div class="fill-div">
-										{{$story->title}}<br/>
-										By: {{$story->username}}
-									</div>  
-								</a>  
-							</div>
-						</div>
-						<?php 
-								if($storyCount==3)
-									$storyCount=-1;
-						?>  
-						<?php break; ?>
-				<?php endswitch ?>  
-				<?php $storyCount++ ?>  
-			@endforeach
+					</div>
+				@endforeach
+			</div>
 		</div>
 	</div>
 </div>

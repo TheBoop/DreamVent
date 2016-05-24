@@ -1,10 +1,14 @@
 .storyGallery { 
     margin-top: 10px;
     margin-bottom: 20px;
+    padding: 1%;
     position: relative;
-    max-width: 760px;
-    left: 105px;
-    height: auto;
-    border: none;
-    background-color : gray;
+    max-width: auto;
+    max-height: 450px;
+    width: auto;
+    height: 450px;
+    left: 0px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: gray;
 }
