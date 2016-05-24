@@ -9,7 +9,9 @@
     border-radius: 10px;
     background: rgba(211, 211, 211, 0.5);
     text-align: center;
+    box-shadow: 0 1px 0 #666, 0 5px 0 #424242, 0 6px 6px rgba(0,0,0,0.6);
 }
+
 .cell:hover {
     opacity:0.8;
     -webkit-transition: opacity 400ms;
@@ -17,6 +19,15 @@
     -o-transition: opacity 400ms;
     transition: opacity 400ms;
 }
+
+.cell:active{
+    box-shadow: 0 1px 0 #666, 0 2px 0 #424242, 0 2px 2px rgba(0,0,0,0.9);
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
+    -webkit-animation: none;
+    animation: none;
+}
+
 /*.cell:hover > .overlay  {*/
 .cell > .overlay  {
     opacity: 0.8;

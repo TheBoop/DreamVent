@@ -29,5 +29,13 @@
     width: 100%;
     height: 100%;
     padding-left:10px;
-}   
+}  
+
+.fill-div:active{
+    box-shadow: 0 1px 0 #666, 0 2px 0 #424242, 0 2px 2px rgba(0,0,0,0.9);
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
+    -webkit-animation: none;
+    animation: none;
+}
 

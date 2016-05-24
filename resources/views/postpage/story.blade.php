@@ -60,7 +60,9 @@
 <div class="row">
 	<div class="contentContainer">
 		<div class="pictureContainer">
-			<img src="{{asset($piclist->picture_link)}}" width="100%" >
+			<a href="/post/picture/{{$piclist->picture_id}}">
+				<img src="{{asset($piclist->picture_link)}}" width="100%" >
+			</a>
 		</div>
 	</div>
 
