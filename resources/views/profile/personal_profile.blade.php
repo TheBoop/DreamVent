@@ -48,25 +48,11 @@
 
     <div class="sidebar">
 	    <ul class="nav nav-stacked">
-		    <li class="active"><a href="#Posts_tab" data-toggle="tab">Posts</a></li>
-		    <li class="active"><a href="/followlist" data-toggle="tab" >Following</a></li>
-		    <li class="active"><a href="/blocklist" data-toggle="tab" >Blocked</a></li>
-		    <li class="active"><a href="#Setting_tab" data-toggle="tab">Settings</a></li>
+		    <li class="active"><a href="/followlist">Following</a></li>
+		    <li class="active"><a href="/blocklist">Blocked</a></li>
+		    <li class="active"><a href="#Setting_tab">Settings</a></li>
 		</ul>
     </div>
 </div>
 
-
-
-<script>
-function showPosts(){
-	document.getElementById("mainContent").innerHTML = "Here are your Posts";
-}
-function showFollowers(){
-	
-}
-function showSettings(){
-	document.getElementById("mainContent").innerHTML = "YOU CLICKED ME!";
-}
-</script>
 @stop

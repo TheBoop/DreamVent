@@ -9,22 +9,52 @@
 <!-- Comment Modal -->
 <div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
+    <!-- Modal content -->
+    <div class="modal-content">
     <div class="row">
-      <div class="col-md-12">
-        <span class="close">x</span>
-      </div>
-      
-    @foreach($comments as $comment)
-      <div class="col-md-12">
-        $comment
-      </div>
-    @endforeach
-    
+        <div class="col-md-12">
+            <span class="close">x</span>
+        </div>
+    <div class="commentSection">  
+        @foreach($comments as $comment)
+            <div class="col-md-12">
+                  <div class="commentBox">
+                    <a href="/profile/{{$comment->username}}"class="userName">
+                      {{$comment->username}}
+                    </a>
+                    <h5 class="comment">{{$comment->text}}</h5>
+                    <a class="date">{{$comment->created_at}}</a>
+                  </div>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="submitComment">
+        <!-- comment text area-->
+        <div class="about-section">
+            <div class="text-content">
+                <div class="span7 offset1">
+                    @if(Session::has('success'))
+                    <div class="alert-box success">
+                        <h2>{!! Session::get('success') !!}</h2>
+                    </div>
+                    @endif
+                    <div class="post">Post Comment</div>
+                        {!! Form::open(array('url'=>'/post/story/'.$story->story_id,'method'=>'POST')) !!}
+                    <div class="control-group">
+                        <div class="controls">
+                            {{ Form::textarea('comment', null,['size' => '30x2']) }} 
+                        </div>
+                    </div>
+                    <div id="success"> </div>
+                        {!! Form::submit('Submit', array('class'=>'submitButton')) !!}
+                        {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
   </div>
-
 </div>
 <div class="contentContainer">
     <div class="pictureContainer">
@@ -48,31 +78,10 @@
             <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
         @endif
         <!-- Trigger Comment Modal -->
-        <input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="myBtn">
+        <input type="image" src="{{asset('assets/images/chat.png')}} " class="commentBtn" id="commentBtn">
     </div>
 </div>
 
-<!-- comment text area-->
-<div class="about-section">
-   <div class="text-content">
-     <div class="span7 offset1">
-        @if(Session::has('success'))
-          <div class="alert-box success">
-          <h2>{!! Session::get('success') !!}</h2>
-          </div>
-        @endif
-      {!! Form::open(array('url'=>'/post/story/'.$story->story_id,'method'=>'POST')) !!}
-         <div class="control-group">
-          <div class="controls">
-      {{ Form::textarea('comment') }} 
-        </div>
-        </div>
-        <div id="success"> </div>
-      {!! Form::submit('Submit', array('class'=>'send-btn')) !!}
-      {!! Form::close() !!}
-      </div>
-   </div>
-</div>
 
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
 <script type="text/javascript" src="{{URL::to('/')}}/js/commentsBtn.js"></script>

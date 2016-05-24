@@ -60,10 +60,17 @@ Route::group(['middleware' => ['web']], function () {
 	* Browsing - Matt
 	* =====================
 	*/
-	//content: pictures, stories
-	Route::get('/browse', 'Browse\BrowseController@defaultBrowse');
+	//Deprecated: content: pictures, stories
+	//Route::get('/browse', 'Browse\BrowseController@defaultBrowse');
+	
 	//users
 	Route::get('/browseUsers', 'Browse\BrowseController@defaultBrowseUser');
+	
+	//Browse Stories
+	Route::get('/Browse', 'Browse\BrowseController@BrowseContent');
+	
+	//Browse Pictures
+	Route::get('/BrowsePictures', 'Browse\BrowseController@BrowsePictureContent');
 	
 
 	/*
@@ -109,6 +116,10 @@ Route::group(['middleware' => ['web']], function () {
 	//Search Stories - Matt
 	Route::get('/search', 'Search\SearchController@getSearch');
 	Route::post('/search', 'Search\SearchController@postSearch');
+	
+	//Search Stories - Matt
+	Route::get('/searchPicture', 'Search\SearchController@getPictureSearch');
+	Route::post('/searchPicture', 'Search\SearchController@postPictureSearch');
 	
 	//Search Users - Matt
 	Route::get('/searchUser', 'Search\SearchUserController@getSearch');

@@ -26,6 +26,10 @@ class SearchController extends Controller
 		return view('search.search');
 	}
 	
+	public function getPictureSearch(Request $request) {
+		return view('search.searchPicture');
+	}
+	
 	public function postSearch(Request $request) {
 		
 		//Check to see if submission is empty.
@@ -133,6 +137,104 @@ class SearchController extends Controller
             'pictureList' => $holdList[1],
             'storyList' => $holdList[0],
         ]);
+	}
+	
+	public function postPictureSearch(Request $request) {
 		
+		//Check to see if submission is empty.
+		$this->validate($request, [
+			'keyword' => 'required'
+		]);
+		
+		//Test: repeat the search phrase.
+		echo "Search Picture Input: $request->keyword <br /><br />";
+		
+		//Put the search phrase into a variable so it can be modified.
+		$searchRequest = $request->keyword;
+		
+		/*
+			Parse through the search phrase to find title requests, put them in 
+			an array containing titles to search for, and remove them from the 
+			search phrase.
+		*/
+		echo "<br /> Title requests: <br />";
+		$titles = array();
+		
+		//process titles from the search request
+		while ($this->search->containsTitleRequest($searchRequest)) {
+			if ($this->search->validateTitleRequest($searchRequest)) {
+				array_push($titles, $this->search->getFirstTitleOccurence($searchRequest));		
+			}
+			else
+				break;
+		}
+		
+		//Get picture_ids with matching titles
+		$searchResults = array();	
+		
+		echo "<br /> actual request: $searchRequest <br />";
+
+		//parse search string
+		$search_words = array_map('trim', explode(",", $searchRequest));
+		
+		//Find and remove stop words & additional spaces
+		echo " <br /> Stop Words and Additional Spaces: <br />";
+		foreach ($search_words as $key => $word) {
+			if ($this->search->isStopWord($word) || $word == '') {
+				echo $key . ":" . $word . "<br />";
+				unset($search_words[$key]);
+			} 
+		}
+		
+		//remove duplicates
+		$search_words = array_unique($search_words);
+		
+		//Reset index after unset.
+		$search_words = array_values($search_words);
+		
+		//Test: Print list of actual search terms.
+		echo "<br /> Search Words: <br />";
+		foreach ($search_words as $key => $word) {
+			echo $key . ":" . $word . "<br />";
+		}
+		
+		//Get tag results for first term. we use this to obtain story_ids for next step.
+		if (empty($searchResults)) {
+			$collection = Tags::where('tag_id', $search_words[0])->latest()->get();
+			foreach ($collection as $result) {
+				$searchResults[] = $result->picture_id;
+			}
+		}
+		
+		if (!empty($searchResults)) {
+			echo "<br /> results containing $search_words[0]: <br />";
+			foreach($searchResults as $result) {
+				echo $result . "<br />";
+			}
+		}
+		
+		//if there are additional terms, remove each result that does not contain those terms
+		echo "<br /> during additional terms: <br />";
+		for($i = 1; $i < count($search_words); $i++) {
+			echo "results not containing $search_words[$i]: <br />";;
+			foreach($searchResults as $key => $result) {
+				if (!(Tags::where('picture_id', $result)->where('tag_id', $search_words[$i])->first())) {
+					echo $key . ":" . $result . "<br/>";
+					unset($searchResults[$key]);
+				}
+			}
+			echo "<br />";
+		}
+
+		echo "<br /> final results containing matching titles/tags: <br />";
+		foreach($searchResults as $result) {
+			echo $result . "<br />";
+		}
+		
+		$holdlist = Picture::distinct('picture_link')->whereIn('picture_id', $searchResults)->latest()->paginate(12);
+        return view('pagetype.index',
+        [
+            'pictureList' => $holdlist, 
+        ]);
 	}
 }
