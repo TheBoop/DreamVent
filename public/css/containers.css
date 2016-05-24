@@ -46,6 +46,21 @@
 
 }
 
+.storyGallery { 
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 1%;
+    position: relative;
+    max-width: auto;
+    max-height: 450px;
+    width: auto;
+    height: 450px;
+    left: 0px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: rgb(38,64,78);
+}
+
 .storyContainer { 
     width: 85%;
     border-bottom-left-radius: 20px;
@@ -60,7 +75,6 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
-
 
 .commentContainer {
   border: round;

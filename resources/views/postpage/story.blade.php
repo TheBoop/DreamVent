@@ -91,6 +91,7 @@
 	</div>
 </div>
 
+<!-- ======================================SCRIPTS======================================-->
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
 <script type="text/javascript" src="{{URL::to('/')}}/js/commentsBtn.js"></script>
 <script>
