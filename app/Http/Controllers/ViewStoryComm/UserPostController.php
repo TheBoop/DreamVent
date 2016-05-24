@@ -38,6 +38,10 @@ class UserPostController extends Controller
     	if(count($check)){
     		$picture_id = $check;
     	}	
+    	$author = Picture::find($picture_id);
+    	$notblocked = $this->PostPageInstance->isBlockedByUsername(Auth::user(), $author);
+    	if($notblocked)
+    		return redirect('/');
 		$comment = new PictureComment();
 		
 		//required field
@@ -66,6 +70,11 @@ class UserPostController extends Controller
 		$this->validate($request, [
 			'comment' => 'required'
 		]);
+
+		$author = Story::find($story_id);
+    	$notblocked = $this->PostPageInstance->isBlockedByUsername(Auth::user(), $author);
+    	if($notblocked)
+    		return redirect('/');
 		
 		$this->PostPageInstance->StoreStoryCommentMethod($request, $story_id, $comment);
 
