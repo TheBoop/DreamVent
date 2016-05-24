@@ -33,7 +33,6 @@ class SearchUserController extends Controller
 		]);
 		
 		//Test: repeat the search phrase.
-		echo "Input: $request->keyword <br /><br />";
 		
 		//Put the search phrase into a variable so it can be modified.
 		$searchRequest = $request->keyword;
@@ -42,10 +41,8 @@ class SearchUserController extends Controller
 		$search_words = array_map('trim', explode(",", $searchRequest));
 		
 		//Find and remove stop words & additional spaces
-		echo " <br /> Stop Words and Additional Spaces: <br />";
 		foreach ($search_words as $key => $word) {
 			if ($this->search->isStopWord($word) || $word == '') {
-				echo $key . ":" . $word . "<br />";
 				unset($search_words[$key]);
 			} 
 		}
@@ -55,12 +52,6 @@ class SearchUserController extends Controller
 		
 		//Reset array indices.
 		$search_words = array_values($search_words);
-		
-		//Test: Print list of actual search terms.
-		echo "<br /> Search Words: <br />";
-		foreach ($search_words as $key => $word) {
-			echo $key . ":" . $word . "<br />";
-		}
 		
 		//declare results array
 		$searchResults = array();
@@ -75,12 +66,6 @@ class SearchUserController extends Controller
 			foreach($tmp as $tmpKey => $tmpResult) {
 				$collection->push($tmpResult);
 			}
-		}
-		
-		//Test: print results //TODO eliminate duplicates
-		echo "<br /> Results: <br />";
-		foreach ($collection->unique() as $key => $result) {
-			echo "$key: $result <br />";
 		}
 		
 		return view('search.searchUserResults',
