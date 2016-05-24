@@ -9,13 +9,13 @@
 
 .buttonContainer {
     float: right;
-    width: 15%;
+    width: 10%;
     margin-right: 10px;
 }
 
 .contentContainer {
     float: left;
-    width: 83%;
+    width: 85%;
     background-color: rgb(3,19,36);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -24,7 +24,7 @@
 .pictureContainer {
     position: relative;
     max-width: auto;
-    max-height: auto;
+    max-height: 100%;
     text-align: center;
 }
 .pictureContainer img {
@@ -36,9 +36,9 @@
 }
 
 .pictureDescriptionContainer {
-  width: 100%;
   height: 10%;
   padding-left: 3%;
+  width: 85%;
   background-color: white;
   opacity: 0.8;
   border-bottom-left-radius: 20px;
@@ -46,18 +46,35 @@
 
 }
 
-.storyContainer { 
+.storyGallery { 
     margin-top: 10px;
     margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 1%;
     position: relative;
-    min-height: 400px;
+    max-width: auto;
+    max-height: 450px;
+    width: auto;
+    height: 450px;
+    left: 0px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: rgb(38,64,78);
+}
+
+.storyContainer { 
+    width: 85%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: relative;
+    padding-top:1%;
+    padding-left:3%;
+    padding-right:3%;
+    padding-bottom:3%;
+    min-height: 200px;
     background-color: #DDD;
     overflow-x: hidden;
     overflow-y: scroll;
 }
-
 
 .commentContainer {
   border: round;

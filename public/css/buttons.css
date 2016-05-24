@@ -3,7 +3,8 @@
 	opacity:0.4;
 	transition: all 0.5s;
 	border-radius: 100%;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 10px;
 }
 
 .sideButton:hover {
