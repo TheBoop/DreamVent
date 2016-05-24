@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 <link rel="stylesheet" href="{{ URL::asset('css/containers.css') }}">
