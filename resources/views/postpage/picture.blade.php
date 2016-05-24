@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="{{ URL::asset('css/containers.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/buttons.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/padding.css') }}">
+
 <link rel="stylesheet" href="{{ URL::asset('css/commentModal.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/thumbnailStory.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/storyGallery.css') }}">
@@ -42,11 +42,11 @@
 								@endif
 								<div class="post">Post Comment</div>
 								{!! Form::open(array('url'=>'/post/picture/'.$picture->picture_id,'method'=>'POST')) !!}
-									 <div class="control-group">
-											<div class="controls">
-											{{ Form::textarea('comment',null,['size' => '30x2']) }} 
-											</div>
-									 </div>
+								<div class="control-group">
+									<div class="controls">
+									{{ Form::textarea('comment',null,['size' => '30x2']) }} 
+									</div>
+								</div>
 								<div id="success"> </div>
 								{!! Form::submit('Submit', array('class'=>'submitButton')) !!}
 								{!! Form::close() !!}
@@ -57,59 +57,49 @@
 		</div>
 	</div>
 </div>
-</div>
+
 
 <!-- Picture and buttons -->
-<div class="contentContainer">
-	<div class="pictureContainer">
-		<img src="{{asset($picture->picture_link)}} " width="100%" height="100%">
+<div class="row">
+	<div class="contentContainer">
+		<div class="pictureContainer">
+			<img src="{{asset($picture->picture_link)}} " width="100%" >
+		</div>
 	</div>
-</div>
 
-<div class="buttonContainer">
-	<div class="row">
-		<div class="col-md-12">
-			@if ($isliked)
-				<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
+	<div class="buttonContainer">
+
+		@if ($isliked)
+			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
+		@else
+			<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
+		@endif
+
+		@if ($isfavorited)  
+				<input type="image" src="{{asset('assets/images/heart1.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
 			@else
-				<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
-			@endif
-		</div>
+				 <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
+		@endif
 
-		<div class="col-md-12">
-			@if ($isfavorited)  
-					<input type="image" src="{{asset('assets/images/heart1.png')}}" class="sideButton" id="unfavoritebuttonSpace" value ="Unfavorite" onclick ="return unfavorite()">
-				@else
-					 <input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
-			@endif
-		</div>
+		<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" >
+		 	<img src="{{asset('assets/images/document.png')}}" class="sideButton" id="buttonSpace">
+		</a>
 
-		<div class="col-md-12">
-			<a href="{{ url('/uploadStory/'.$picture->picture_id) }}" >
-	          	<img src="{{asset('assets/images/document.png')}}" class="sideButton" id="buttonSpace">
-	        </a>
-	    </div>
-
-	    <div class="col-md-12">
-			<!-- Trigger Comment Modal -->
-			<input type="image" src="{{asset('assets/images/chat.png')}} " class="sideButton" id="commentBtn">
-		</div>
+		<!-- Trigger Comment Modal -->
+		<input type="image" src="{{asset('assets/images/chat.png')}} " class="sideButton" id="commentBtn">
 	</div>
-
 </div>
-
 
 
 <!-- Picture Description -->
 
-	<div class="row">
-		<div class="col-md-10">
-			<div class="pictureDescriptionContainer">
-				<div class="descriptionChild">
-					<p class="descriptionFont">{{$picture->description}}</p>
-				</div>
+<div class="row">
+	<div class="pictureDescriptionContainer">
+		<div class="descriptionChild">
+			<p class="descriptionFont">{{$picture->description}}</p>
 		</div>
 	</div>
+</div>
 
 
 <!-- Story Gallery -->
