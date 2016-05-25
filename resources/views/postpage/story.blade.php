@@ -61,13 +61,15 @@
 	<div class="contentContainer">
 		<div class="pictureContainer">
 			<a href="/post/picture/{{$piclist->picture_id}}">
-				<img src="{{asset($piclist->picture_link)}}" width="100%" >
+				<img src="{{asset($piclist->picture_link)}}" width="100%" height="100%">
 			</a>
 		</div>
 	</div>
 
 	<div class="buttonContainer">
-
+		<div class="numLikeContainer" >
+        	<h2 style="color:green">{{$number_of_likes}}</h2>
+    	</div>
 		@if ($isliked)
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
