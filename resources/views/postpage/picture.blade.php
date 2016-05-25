@@ -68,7 +68,10 @@
 	</div>
 
 	<div class="buttonContainer">
+    <div class="numLikeContainer" >
 
+        <h2 style="color:green">{{$number_of_likes}}</h2>
+    </div>
 		@if ($isliked)
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
@@ -140,6 +143,9 @@
 								$('#unliketopButton').attr('onclick', 'unlike()')
 								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
 								$('#unliketopButton').val('Unlike');
+                                                                                                      
+                $('#numoflikes').val({{$number_of_likes++}});
+                                                                                                      
 								
 						}
 				});
@@ -162,7 +168,8 @@
 								$('#unliketopButton').attr('onclick', 'like()')
 								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
 								$('#unliketopButton').val('Like');
-								
+                                                                                                      
+								$('#numoflikes').val({{$number_of_likes--}});
 						}
 				});
 				return false;
@@ -183,6 +190,7 @@
 								$('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()')
 								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
 								$('#unfavoritebuttonSpace').val('Unfavorite');
+                                                                                      
 						}
 				});
 				return false;
