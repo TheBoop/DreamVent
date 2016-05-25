@@ -77,7 +77,10 @@ class AccountRepository
      */
     public function displayPics($picture_id)
     {
+        if (count($picture_id) == 0)
+            return;
         $picids_ordered = implode(',', $picture_id);
+
         return Picture::whereIn('picture_id', $picture_id)->orderByRaw("FIELD(picture_id, $picids_ordered)")->distinct('picture_link')->paginate(12);
     }
 
@@ -689,6 +692,13 @@ class AccountRepository
         $tag = Tags::where('story_id', $story_id)->get();
         return $tag;
     }
+    
+    public function ReturnPictureTagsArrayByPID($picture_id)
+    {
+        //Check if story ID matches user id
+        $tag = Tags::where('picture_id', $picture_id)->get();
+        return $tag;
+    }
 
      /*
      * ===================================================================
@@ -796,7 +806,7 @@ class AccountRepository
      * Check if Username is blocked by person who is logged in
      * Returns 0 or 1
      */ 
-    public function isBlockedByUsername($poster, $author)
+    public function isBlockedByUsernameComment($poster, $author)
     {
         //get Authenticated User's followlist_id
         if(Auth::guest())
@@ -810,7 +820,19 @@ class AccountRepository
         return count($zero_or_one);
     }
 
-
+    public function isBlockedByUsername($username)
+	{
+        //get Authenticated User's followlist_id
+        if(Auth::guest())
+            return 0;
+        $blocklist_id = USER::find(Auth::user()->id)->blocklist_id;
+        $user_id = User::where('username', $username)->select('id')->first()->id;
+        $zero_or_one = UserListContains::
+                        where('list_id', $blocklist_id) 
+                        ->where('user_id', $user_id)->first();
+        //return 0 or 1 depending if the user is followed or not
+        return count($zero_or_one); 
+	}
     /*
      * Store Block in database
      */ 

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/commentModal.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/thumbnailStory.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/fonts.css') }}">
 
 
 @section('content')
@@ -21,7 +22,7 @@
 				<div class="col-md-12">
 					<div class="commentBox">
 						<a href="/profile/{{$comment->username}}"class="userName">
-							{{$comment->username}}
+							<a class="userNameFont">{{$comment->username}}</a>
 						</a>
 						<h5 class="comment">{{$comment->text}}</h5>
 						<a class="date">{{$comment->created_at}}</a>
@@ -62,12 +63,15 @@
 <div class="row">
 	<div class="contentContainer">
 		<div class="pictureContainer">
-			<img src="{{asset($picture->picture_link)}} " width="100%" >
+			<img src="{{asset($picture->picture_link)}} " width="100%"; height="100%" >
 		</div>
 	</div>
 
 	<div class="buttonContainer">
+    <div class="numLikeContainer" >
 
+        <h2 style="color:green">{{$number_of_likes}}</h2>
+    </div>
 		@if ($isliked)
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
@@ -139,6 +143,9 @@
 								$('#unliketopButton').attr('onclick', 'unlike()')
 								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
 								$('#unliketopButton').val('Unlike');
+                                                                                                      
+                $('#numoflikes').val({{$number_of_likes++}});
+                                                                                                      
 								
 						}
 				});
@@ -161,7 +168,8 @@
 								$('#unliketopButton').attr('onclick', 'like()')
 								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
 								$('#unliketopButton').val('Like');
-								
+                                                                                                      
+								$('#numoflikes').val({{$number_of_likes--}});
 						}
 				});
 				return false;
@@ -182,6 +190,7 @@
 								$('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()')
 								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
 								$('#unfavoritebuttonSpace').val('Unfavorite');
+                                                                                      
 						}
 				});
 				return false;

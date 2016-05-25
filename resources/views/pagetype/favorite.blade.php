@@ -1,16 +1,17 @@
 <link rel="stylesheet" href="{{ URL::asset('css/browse.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/thumbnailPic.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/upload.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/fonts.css') }}">
 @extends('layouts.app')
 <!DOCTYPE html>
 @section('content')
 
 <body>
-    <div class="innerblock" style="width: 70%;">
-        <b>Your Favorite Stories</b>
-    </div>
     <div class="container-fluid">
         @if(isset($pictureList))
+        <div class="innerblock" style="width: 70%;">
+            <a class="favoritePageHeader">Your Favorite Stories</a>
+        </div>
         <div class="row">
             @foreach ($pictureList as $index => $piclist )
             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -48,7 +49,7 @@
 
 @if (isset($favpiclist))
 <div class="innerblock" style="width: 70%;">
-<b>Your Favorite Pictures</b>
+  <b class="favoritePageHeader">Your Favorite Stories</b>
 </div>
 <body>
     <div class="container-fluid">

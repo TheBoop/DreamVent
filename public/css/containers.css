@@ -76,6 +76,19 @@
     overflow-y: scroll;
 }
 
+.numLikeContainer {
+    background-color:lightblue;
+    text-align: center;
+    min-height: 55px;
+    min-width: 63px;
+    vertical-align: middle;
+    border-radius: 100%;
+    float:left;
+    opacity: 0.6;
+    font:green;
+    margin-left:2px;
+}
+
 .commentContainer {
   border: round;
   width: 70%;
@@ -92,8 +105,8 @@
 
 p.descriptionFont {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-	font-size: 16px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
 }
