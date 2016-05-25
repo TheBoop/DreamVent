@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="{{ URL::asset('css/thumbnailStory.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/fonts.css') }}">
 
-
 @section('content')
 <!-- Comment Modal -->
 <div id="myModal" class="modal">
@@ -95,7 +94,6 @@
 
 
 <!-- Picture Description -->
-
 <div class="row">
 	<div class="pictureDescriptionContainer">
 		<div class="descriptionChild">
@@ -103,7 +101,7 @@
 		</div>
 	</div>
 </div>
-
+	@if(count($story) != 0)
 	<div class="col-md-10">
 		<div class="storyGallery" >
 			<div class="row-fluid">
@@ -122,6 +120,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 </div>
 
 
