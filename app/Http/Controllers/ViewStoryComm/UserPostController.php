@@ -191,6 +191,16 @@ class UserPostController extends Controller
        return redirect('/post/story/'.$story_id);
     }
 
+    public function GetTagsPic($picture_id, Request $request) {
+		$currentTag = $this->PostPageInstance->ReturnPictureTagsByPID($picture_id);
+		return view('postpage/editpictags', 
+		[
+		 'picture'=> $this->PostPageInstance->getPictureBasedonPID($picture_id),
+		 'currentTag' => $currentTag,
+		]);
+		//return redirect()->action('UserList\NonUserListController@testProfile', [$story_id]);
+	}
+
     public function StoreNewTags_pic($picture_id, Request $request)
     {   
 		$author_id = Picture::find($picture_id)->author_id;

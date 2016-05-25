@@ -159,8 +159,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::delete('unlikeStory/{story_id}', 'ViewStoryComm\UserPostController@Unlike');
 	//need a form or method to this route
 	Route::delete('deleteStory/{story_id}', 'ViewStoryComm\UserPostController@DeleteStory');
-	Route::get('/editTag/{story_id}', 'ViewStoryComm\UserPostController@GetTags');
-	Route::post('/editTag/{story_id}', 'ViewStoryComm\UserPostController@StoreNewTags');
+	Route::get('/editStoryTag/{story_id}', 'ViewStoryComm\UserPostController@GetTags');
+	Route::post('/editStoryTag/{story_id}', 'ViewStoryComm\UserPostController@StoreNewTags');
+
 
 	Route::get('/editStoryContent/{story_id}', 'ViewStoryComm\UserPostController@GetStoryContent');
 	Route::post('/editStoryContent/{story_id}', 'ViewStoryComm\UserPostController@StoreNewStoryContent');
@@ -172,6 +173,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::delete('unlikePicture/{picture_id}', 'UserList\UserListController@Unlike_pic');
 	Route::post('favoritePicture/{picture_id}', 'UserList\UserListController@Favorite_pic');
 	Route::delete('unfavoritePicture/{picture_id}', 'UserList\UserListController@Unfavorite_pic');
+	Route::get('/editPicTag/{picture_id}', 'ViewStoryComm\UserPostController@GetTagsPic');
+	Route::post('/editPicTag/{picture_id}', 'ViewStoryComm\UserPostController@StoreNewTags_pic');
 	
 });
 
