@@ -686,6 +686,23 @@ class AccountRepository
         return $tagstr;
     }
 
+    public function ReturnPictureTagsByPID($picture_id)
+    {
+        //Check if story ID matches user id
+        $user_id = Auth::user()->id;
+        $check = Picture::where('picture_id', $picture_id)
+                        ->where('author_id', $user_id )->first();
+        $tagstr = "";
+        if($check){
+            $holdlist_tags = Tags::where('picture_id', $picture_id)->get();
+            foreach ($holdlist_tags as $index => $holdlist_tag) {
+                $tagstr = $tagstr.$holdlist_tags[$index]->tag_id.',';
+            }
+            $tagstr = rtrim($tagstr,',');
+        }
+        return $tagstr;
+    }
+
     public function ReturnStoryTagsArrayBySID($story_id)
     {
         //Check if story ID matches user id

@@ -4,10 +4,10 @@
 @section('content')
 
 <div class="container">
-<img src="{{ URL::to('/') }}{{$piclist->picture_link}} ">
+<img src="{{ URL::to('/') }}{{$picture->picture_link}} ">
 </div>
 <!-- display story -->
-{{$story->content}}
+{{$picture->description}}
 <br/>
 <br/>
 
@@ -22,7 +22,7 @@
           </div>
         @endif
         <div class="secure">Edit Tags</div>
-            {!! Form::open(array('url'=>'/editTag/'.$story->story_id,'method'=>'POST')) !!}
+            {!! Form::open(array('url'=>'/editPicTag/'.$picture->picture_id,'method'=>'POST')) !!}
          <div class="control-group">
           <div class="controls">
             <input type="input" name="tag" value ="{{$currentTag}}">
@@ -52,7 +52,6 @@
       </div>
    </div>
 </div>
-
 
 @endsection
 </html>
