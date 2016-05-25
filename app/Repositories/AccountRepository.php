@@ -692,6 +692,13 @@ class AccountRepository
         $tag = Tags::where('story_id', $story_id)->get();
         return $tag;
     }
+    
+    public function ReturnPictureTagsArrayByPID($picture_id)
+    {
+        //Check if story ID matches user id
+        $tag = Tags::where('picture_id', $picture_id)->get();
+        return $tag;
+    }
 
      /*
      * ===================================================================
