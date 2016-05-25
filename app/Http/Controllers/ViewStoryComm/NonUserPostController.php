@@ -37,10 +37,12 @@ class NonUserPostController extends Controller
     		$picture_id = $check;
     	}	
     	$hold = $this->PostPageInstance->getStoryIDsBasedOnPID($picture_id);
+      $story_id = array();
     	foreach ($hold as $key => $value) {
     		$story_id[] = $value->story_id;
     	}
-    	$holdlist =  $this->PostPageInstance->GetStoryDescNPic($story_id, $request->user());
+     if(isset($story_id))
+    	  $holdlist =  $this->PostPageInstance->GetStoryDescNPic($story_id, $request->user());
 		return view('postpage/picture', 
 			[
 			 'picture' => $this->PostPageInstance->getPictureBasedonPID($picture_id),
