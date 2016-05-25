@@ -13,8 +13,9 @@
 		@endif-->
 
 		<div class="innerblock" style="width: 70%;padding-left: 5%; padding-top:3em;">
-			<img class="displayCenter" src="{{asset($picture_path)}}"> 
-
+      <div>  
+			  <img class="displayCenter" src="{{asset($picture_path)}}"  width="100%"> 
+      </div>
 			<p class="centered" style="float:center">
 				{!! Form::open(array('url'=>'/uploadStory/'.$picture_id,'method'=>'POST')) !!}
 			</p>

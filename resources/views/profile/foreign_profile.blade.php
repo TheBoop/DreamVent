@@ -122,15 +122,52 @@ h3 {
 @section('content')
 @if (Auth::guest())
 	<div class="container">
-		<div>
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/follow\/').$User->username }}">
-				<input type="submit" value ="Follow" >
-			</form>
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/block\/').$User->username }}">
-				<input type="submit" value ="Block" >
-			</form>
+        <div class="row userbar">
+            <div class="col-md-10">
+                <h1>
+                    {{$User->username}}
+                </h1>
+                <h3>
+                    {{$User->name}}
+                </h3>
+            </div>
 		</div>
 	</div>
+    <div class="container-fluid">
+        @if(isset($pictureList))
+            <div class="row userpost">
+                @foreach ($pictureList as $index => $piclist )
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="cell" style="height: 400px;">
+                            <a href="/post/picture/{{$pictureList[$index]->picture_id}}">
+                                <img src="{{ URL::to('/') }}{{$piclist->picture_link}}" />
+                            </a>
+                            <div class="overlay">
+                                @if(isset($storyList))
+                                    <p class="titleauthor">
+                                        <a href="/post/story/{{$storyList[$index]->story_id}}" class="title">
+                                            {{$storyList[$index]->title}}
+                                        </a>
+                                        <br />
+                                        by
+                                        <a href="/post/story/{{$storyList[$index]->author_id}}" class="author">
+                                            {{$storyList[$index]->username}}
+                                        </a>
+                                        <p class="storypreview">
+                                            {{$storyList[$index]->content}}
+                                        </p>
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                @endforeach
+            </div>
+            {!! $pictureList->render() !!}
+        @endif
+    </div>
 
 @else
 	<div class="container">
@@ -204,7 +241,6 @@ h3 {
             {!! $pictureList->render() !!}
         @endif
     </div>
-</div>
 @endif
 
 @endsection
