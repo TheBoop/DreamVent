@@ -53,6 +53,7 @@ class NonUserPostController extends Controller
 		 	 'number_of_likes' => $this->PostPageInstance->CountLikesPicture($picture_id),
 		 	 'pictureList' => $holdlist[1],
              'storyList' => $holdlist[0],
+             'tags' => $this->PostPageInstance->ReturnPictureTagsArrayByPID($picture_id),
 			 ]);
 	}
 
