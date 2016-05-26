@@ -67,10 +67,9 @@
 	</div>
 
 	<div class="buttonContainer">
-    <div class="numLikeContainer" >
-
-        <h2 style="color:green">{{$number_of_likes}}</h2>
-    </div>
+	    <div class="numLikeContainer" >
+	        <h2 style="color:green">{{$number_of_likes}}</h2>
+	    </div>
 		@if ($isliked)
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
@@ -96,32 +95,43 @@
 <!-- Picture Description -->
 <div class="row">
 	<div class="pictureDescriptionContainer">
+	<row>
 		<div class="descriptionChild">
 			<p class="descriptionFont">{{$picture->description}}</p>
 		</div>
+	</row>
+	<row>	
+		<div class="tagChild">
+			Tags: 
+			@foreach ($tags as $tags)
+				{{$tags}}  
+			@endforeach
+		</div>
+		</row>
 	</div>
 </div>
-	@if(count($story) != 0)
-	<div class="col-md-10">
-		<div class="storyGallery" >
-			<div class="row-fluid">
-				@foreach ($story as $story)
-					<div class="col-md-3">
-						<div class="thumbnailStory">
-							<a href='/post/story/{{$story->story_id}}'>  
-								<div class="fill-div">
-									{{$story->title}}<br/>
-									By: {{$story->username}}
-								</div>  
-							</a>  
-						</div>
+
+@if(count($story) != 0)
+<div class="col-md-10">
+	<div class="storyGallery" >
+		<div class="row-fluid">
+			@foreach ($story as $story)
+				<div class="col-md-3">
+					<div class="thumbnailStory">
+						<a href='/post/story/{{$story->story_id}}'>  
+							<div class="fill-div" style="font-family: 'Montserrat', sans-serif;">
+								{{$story->title}}<br/>
+								By: {{$story->username}}
+							</div>  
+						</a>  
 					</div>
-				@endforeach
-			</div>
+				</div>
+			@endforeach
 		</div>
 	</div>
-	@endif
 </div>
+@endif
+
 
 
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>

@@ -81,7 +81,6 @@
 		@else
 			<input type="image" src="{{asset('assets/images/heart.png')}}" class="sideButton" id="favoritebuttonSpace" value ="Favorite" onclick ="return favorite()">
 		@endif
-
 		<!-- Trigger Comment Modal -->
 		<input type="image" src="{{asset('assets/images/chat.png')}} " class="sideButton" id="commentBtn">
 
