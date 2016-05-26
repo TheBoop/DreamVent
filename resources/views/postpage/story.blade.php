@@ -93,9 +93,24 @@
 <div class="row">
 	<div class="storyContainer" >
 		<h3>{{$story->title}}</h3>
-		{{$story->content}}
-	</div>
+		{{$story->content}}	
+
+		<p>
+			<row>	
+			<div class="tagChild">
+				Tags: 
+				@foreach ($tags as $tags)
+					<a href="{{url('searchTagTerm/'.$tags->tag_id)}}"> 
+					{{$tags->tag_id}}
+				@endforeach
+			</div>
+			</row>
+		</p>
+
+	</div>	
 </div>
+
+
 
 <!-- ======================================SCRIPTS======================================-->
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
