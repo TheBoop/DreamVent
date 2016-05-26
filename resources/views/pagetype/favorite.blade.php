@@ -10,13 +10,12 @@
     <div class="container-fluid">
         @if(isset($pictureList))
         <div class="innerblock" style="width: 70%;">
-            <a class="favoritePageHeader">Your Favorite Stories</a>
+            <b class="favoritePageHeader">Your Favorite Stories</b>
         </div>
         <div class="row">
             @foreach ($pictureList as $index => $piclist )
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="cell">
-                    <a href="/post/picture/{{$pictureList[$index]->picture_id}}">
                         <img src="{{ URL::to('/') }}{{$piclist->picture_link}}" />
                     </a>
                     @if(isset($storyList))
@@ -49,7 +48,7 @@
 
 @if (isset($favpiclist))
 <div class="innerblock" style="width: 70%;">
-  <b class="favoritePageHeader">Your Favorite Stories</b>
+  <b class="favoritePageHeader">Your Favorite Pictures</b>
 </div>
 <body>
     <div class="container-fluid">
