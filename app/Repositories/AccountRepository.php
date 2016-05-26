@@ -663,8 +663,10 @@ class AccountRepository
 
         if($check){
             $grab_pic = GrabPics::where('story_id', $story_id)->first();
+            $tags = Tags::where('story_id', $story_id);
             $check->delete();
             $grab_pic->delete();
+            $tags->delete();
             //maybe have a column for display/dontdisplay instead of deleting
         }
         return;
