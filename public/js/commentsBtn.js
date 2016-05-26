@@ -27,5 +27,3 @@ window.onclick = function(event) {
 }
 
 
-var myDiv = document.getElementById("uniqueCommentBoxa");
-myDiv.scrollTop = myDiv.scrollHeight;

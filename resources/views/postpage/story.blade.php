@@ -12,10 +12,10 @@
 	<!-- Modal content -->
 	<div class="modal-content">
 		<div class="row">
-			<span class="close">x</span>
-			<div class="commentSection">  
+		<span class="close">x</span>
+			<div class="commentSection" id="uniqueCommentBox">  
 				@foreach($comments as $comment)
-					<div class="commentBox" id="uniqueCommentBox">
+					<div class="commentBox">
 						<a href="/profile/{{$comment->username}}"class="userName">
 					  		<a class="userNameFont">{{$comment->username}}</a>
 						</a>
