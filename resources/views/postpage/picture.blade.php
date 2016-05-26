@@ -9,17 +9,16 @@
 
 @section('content')
 <!-- Comment Modal -->
+<body onload="myFunction()">
 <div id="myModal" class="modal">
 	<!-- Modal content -->
 	<div class="modal-content">
 		<div class="row">
-			<div class="col-md-12">
-				<span class="close">x</span>
-			</div>
-		<div class="commentSection">  
+			<span class="close">x</span>
+		<div class="commentSection" id="uniqueCommentBox">  
 			@foreach($comments as $comment)
-				<div class="col-md-12">
-					<div class="commentBox">
+				<div class="row">
+					<div class="commentBox" id="uniqueCommentBox">
 						<a href="/profile/{{$comment->username}}"class="userName">
 							<a class="userNameFont">{{$comment->username}}</a>
 						</a>
@@ -105,13 +104,19 @@
 	<div class="col-md-10">
 		<div class="storyGallery" >
 			<div class="row-fluid">
-				@foreach ($story as $story)
+				@foreach ($storyList as $index => $storyContent )
+
 					<div class="col-md-3">
 						<div class="thumbnailStory">
-							<a href='/post/story/{{$story->story_id}}'>  
+							<a href='/post/story/{{$storyList[$index]->story_id}}'>  
 								<div class="fill-div">
-									{{$story->title}}<br/>
-									By: {{$story->username}}
+									<div class="title">
+										{{$storyList[$index]->title}}<br/>
+									</div>
+									By: {{$storyList[$index]->username}}
+									<div class="storySample">
+										{{$storyList[$index]->content}}
+									</div>
 								</div>  
 							</a>  
 						</div>
@@ -122,7 +127,6 @@
 	</div>
 	@endif
 </div>
-
 
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
 <script>
@@ -216,6 +220,8 @@
 				});
 				return false;
 		}
+
+
 </script> 
 
 <script type="text/javascript" src="{{URL::to('/')}}/js/commentsBtn.js"></script>
