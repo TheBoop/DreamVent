@@ -7,7 +7,9 @@
 <img src="{{ URL::to('/') }}{{$piclist->picture_link}} ">
 </div>
 <!-- display story -->
-{{$story->content}}
+<div style="white-space: pre-wrap;">
+    {{$story->content}}
+</div>
 <br/>
 <br/>
 

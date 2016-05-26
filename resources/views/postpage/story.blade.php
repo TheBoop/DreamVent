@@ -93,7 +93,9 @@
 <div class="row">
 	<div class="storyContainer" >
 		<h3>{{$story->title}}</h3>
-		{{$story->content}}
+		<div style="white-space: pre-wrap;">
+            {{$story->content}}
+        </div>
 	</div>
 </div>
 
