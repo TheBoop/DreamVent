@@ -69,6 +69,7 @@
 	</div>
 
 	<div class="buttonContainer">
+		<div id="error"></div>
 		@if ($isliked)
 			<div class="numLikeContainer" >
 		    	<h2 id="liked" style="color:green">{{$number_of_likes}}</h2>
@@ -152,18 +153,22 @@
 						url: "/likePicture/{{$picture->picture_id}}",
 						cache:false,
 						success: function(data){
-								$('#liketopButton').attr('onclick', 'unlike()')
-								$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
+								$('#liketopButton').attr('onclick', 'unlike()');
+								$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}');
 								$('#liketopButton').val('Unlike');
-								$('#unliketopButton').attr('onclick', 'unlike()')
-								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
+								$('#unliketopButton').attr('onclick', 'unlike()');
+								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}');
 								$('#unliketopButton').val('Unlike');  
 
                 				$('#liked').text("{{$number_of_likes}}");
                 				$('#notliked').text("{{$number_of_likes+1}}");
-                                                                                                      
+                                $('#error').text("");                                                    
 								
-						}
+						},
+						error: function() {
+          					$('#error').text("Please Login");
+        				}
+
 				});
 				return false;
 		}
@@ -178,16 +183,21 @@
 						url: "/unlikePicture/{{$picture->picture_id}}",
 						cache:false,
 						success: function(data){
-								$('#liketopButton').attr('onclick', 'like()')
-								$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
+								$('#liketopButton').attr('onclick', 'like()');
+								$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}');
 								$('#liketopButton').val('Like');
-								$('#unliketopButton').attr('onclick', 'like()')
-								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
+								$('#unliketopButton').attr('onclick', 'like()');
+								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}');
 								$('#unliketopButton').val('Like');
 
 								$('#liked').text("{{$number_of_likes-1}}");
                 				$('#notliked').text("{{$number_of_likes}}");
-						}
+                				$('#error').text("");
+						},
+
+						error: function() {
+          					$('#error').text("Please Login");
+        				}
 				});
 				return false;
 		}
@@ -201,16 +211,21 @@
 						url: "/favoritePicture/{{$picture->picture_id}}",
 						cache:false,
 						success: function(data){
-								$('#favoritebuttonSpace').attr('onclick', 'unfavorite()')
-								$('#favoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
+								$('#favoritebuttonSpace').attr('onclick', 'unfavorite()');
+								$('#favoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}');
 								$('#favoritebuttonSpace').val('Unfavorite');
-								$('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()')
-								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
+								$('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()');
+								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}');
 								$('#unfavoritebuttonSpace').val('Unfavorite');
 
                                 $('#liked').text("{{$number_of_likes-1}}");
-								$('#notliked').text("{{$number_of_likes}}");                                       
-						}
+								$('#notliked').text("{{$number_of_likes}}"); 
+								$('#error').text("");                                      
+						},
+
+						error: function() {
+          					$('#error').text("Please Login");
+        				}
 				});
 				return false;
 		}
@@ -225,14 +240,18 @@
 						url: "/unfavoritePicture/{{$picture->picture_id}}",
 						cache:false,
 						success: function(data){
-								$('#unfavoritebuttonSpace').attr('onclick', 'favorite()')
+								$('#unfavoritebuttonSpace').attr('onclick', 'favorite()');
 								$('#unfavoritebuttonSpace').val('Favorite');
-								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart.png')}}')
-								$('#favoritebuttonSpace').attr('onclick', 'favorite()')
+								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart.png')}}');
+								$('#favoritebuttonSpace').attr('onclick', 'favorite()');
 								$('#favoritebuttonSpace').val('Favorite');
-								$('#favoritebuttonSpace').attr('src', '{{asset('assets/images/heart.png')}}')
-								
-						}
+								$('#favoritebuttonSpace').attr('src', '{{asset('assets/images/heart.png')}}');
+								$('#error').text("");
+						},
+
+						error: function() {
+          					$('#error').text("Please Login");
+        				}
 				});
 				return false;
 		}
