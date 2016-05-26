@@ -106,10 +106,11 @@
 		<div class="tagChild">
 			Tags: 
 			@foreach ($tags as $tags)
-				{{$tags}}  
+				<a href="{{url('searchTagTerm/'.$tags->tag_id)}}"> 
+				{{$tags->tag_id}}
 			@endforeach
 		</div>
-		</row>
+	</row>
 	</div>
 </div>
 
