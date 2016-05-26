@@ -67,12 +67,15 @@
 	</div>
 
 	<div class="buttonContainer">
-		<div class="numLikeContainer" >
-        	<h2 style="color:green">{{$number_of_likes}}</h2>
-    	</div>
 		@if ($isliked)
+			<div class="numLikeContainer" >
+		    	<h2 id="liked" style="color:green">{{$number_of_likes}}</h2>
+			</div>
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
+			<div class="numLikeContainer" >
+		    	<h2 id="notliked" style="color:green">{{$number_of_likes}}</h2>
+			</div>
 			<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
 		@endif
 
@@ -115,6 +118,9 @@
 				$('#unliketopButton').attr('onclick', 'unlike()')
 				$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
 				$('#unliketopButton').val('Unlike');
+
+				$('#liked').text("{{$number_of_likes}}");
+                $('#notliked').text("{{$number_of_likes+1}}");
 				
 			}
 		});
@@ -137,6 +143,9 @@
 				$('#unliketopButton').attr('onclick', 'like()')
 				$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
 				$('#unliketopButton').val('Like');
+
+				$('#liked').text("{{$number_of_likes-1}}");
+				$('#notliked').text("{{$number_of_likes}}");
 				
 			}
 		});

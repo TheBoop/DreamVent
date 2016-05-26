@@ -58,6 +58,7 @@ class UserPostController extends Controller
 			 'isfavorited' => $this->PostPageInstance->isFavoritedByPID($picture_id),
 		 	 'isliked' => $this->PostPageInstance->isLikedByPID($picture_id),
 		 	 'number_of_likes' => $this->PostPageInstance->CountLikesPicture($picture_id),
+		 	 'tags' => $this->PostPageInstance->ReturnPictureTagsArrayByPID($picture_id),
 			]);
 
 	}
