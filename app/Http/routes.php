@@ -84,6 +84,9 @@ Route::group(['middleware' => ['web']], function () {
 	//Comments
 	Route::post('/post/picture/{picture_id}','ViewStoryComm\UserPostController@StoreImageComment');
 	Route::post('/post/story/{story_id}','ViewStoryComm\UserPostController@StoreStoryComment');
+	
+	//Delete Story
+	Route::delete('/post/story/{story_id}', 'UploadStory\StoryController@deleteStory');
 
 	
 	/*
@@ -123,6 +126,10 @@ Route::group(['middleware' => ['web']], function () {
 	//Search Users - Matt
 	Route::get('/searchUser', 'Search\SearchUserController@getSearch');
 	Route::post('/searchUser', 'Search\SearchUserController@postSearch');
+	
+	//Get content by tag link
+	Route::get('/searchPictureTag/{tag}', 'Search\SearchController@getPicturesByTag');
+	Route::get('/searchStoryTag/{tag}', 'Search\SearchController@getStoriesByTag');
 	
 	/*
 	* =====================

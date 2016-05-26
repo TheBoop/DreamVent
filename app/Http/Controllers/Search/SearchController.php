@@ -30,6 +30,35 @@ class SearchController extends Controller
 		return view('search.searchPicture');
 	}
 	
+	public function getPicturesByTag($tag) {
+		$tagged = Tags::whereNotNull('picture_id')->where('tag_id', $tag)->get();
+		$picIDs = array();
+		foreach($tagged as $key => $value) {
+			$picIDs[] = $value->picture_id;
+		}
+		
+		$holdlist = Picture::distinct('picture_link')->whereIn('picture_id', $picIDs)->latest()->paginate(12);
+		return view('pagetype.index',
+        [
+            'pictureList' => $holdlist, 
+        ]); 
+	}
+	
+		public function getStoriesByTag($tag, Request $request) {
+		$tagged = Tags::whereNotNull('story_id')->where('tag_id', $tag)->get();
+		$storyIDs = array();
+		foreach($tagged as $key => $value) {
+			$storyIDs[] = $value->story_id;
+		}
+		
+		$holdList = $this->search->GetStoryDescNPic($storyIDs, $request->user());
+        return view('pagetype.index',
+        [
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0],
+        ]);
+	}
+	
 	public function postSearch(Request $request) {
 		
 		//Check to see if submission is empty.
