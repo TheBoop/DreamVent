@@ -84,6 +84,9 @@ Route::group(['middleware' => ['web']], function () {
 	//Comments
 	Route::post('/post/picture/{picture_id}','ViewStoryComm\UserPostController@StoreImageComment');
 	Route::post('/post/story/{story_id}','ViewStoryComm\UserPostController@StoreStoryComment');
+	
+	//Delete Story
+	Route::delete('/post/story/{story_id}', 'UploadStory\StoryController@deleteStory');
 
 	
 	/*

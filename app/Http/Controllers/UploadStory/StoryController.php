@@ -111,16 +111,19 @@ class StoryController extends Controller
 
 		}
 		return redirect('post/story/'.$grab_pics->story_id);
-}
+	}
 	
-	//May delete later, here just in case I can use a single function to handle
-	//both parent and child.
-	public function testUpload () {
-		echo "test elegant upload";
-		return;
+	
+	//Deletes a story if you are author.
+	public function deleteStory ($story_id) {
+		$story = Story::find($story_id);
+		if (Auth::user()->id == $story->author_id ) {
+			$story->delete();
+			return redurect('/YourStories');
+		}
+		else { //do nothing
+			return;
+		}
 	}
-	public function testStore() {
-		echo "test elegant store";
-		return;
-	}
+	
 }
