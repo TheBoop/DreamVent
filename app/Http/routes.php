@@ -127,6 +127,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/searchUser', 'Search\SearchUserController@getSearch');
 	Route::post('/searchUser', 'Search\SearchUserController@postSearch');
 	
+	//Get content by tag link
+	Route::get('/searchPictureTag/{tag}', 'Search\SearchController@getPicturesByTag');
+	Route::get('/searchStoryTag/{tag}', 'Search\SearchController@getStoriesByTag');
+	
 	/*
 	* =====================
 	* Make a Story+Picture Upload
