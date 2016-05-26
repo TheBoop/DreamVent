@@ -119,7 +119,7 @@ class StoryController extends Controller
 		$story = Story::find($story_id);
 		if (Auth::user()->id == $story->author_id ) {
 			$story->delete();
-			return redurect('/YourStories');
+			return redirect('/YourStories');
 		}
 		else { //do nothing
 			return;
