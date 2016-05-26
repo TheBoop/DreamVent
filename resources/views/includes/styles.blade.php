@@ -17,11 +17,13 @@
 	.fa-btn {
 	    margin-right: 6px;
 	}
-	
+
 	#wrapper {
 		min-height:100%;
-		width: 1200px; 
+		max-width: 1200px;
+		width: 100%; 
 		margin: 0 auto; 
+		background-color: rgb(6,50,90);
 	}
 	#header {
 		padding:10px;

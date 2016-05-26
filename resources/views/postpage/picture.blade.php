@@ -66,20 +66,15 @@
 		<div class="pictureContainer">
 			<img src="{{asset($picture->picture_link)}} " width="100%"; height="100%" >
 		</div>
-</div>
-
-
+	</div>
 
 	<div class="buttonContainer">
+	    <div class="numLikeContainer" >
+	        <h2 id="likeCount"style="color:green">{{$number_of_likes}}</h2>
+	    </div>
 		@if ($isliked)
-			<div class="numLikeContainer" >
-		    	<h2 id="liked" style="color:green">{{$number_of_likes}}</h2>
-			</div>
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
-			<div class="numLikeContainer" >
-		    	<h2 id="notliked" style="color:green">{{$number_of_likes}}</h2>
-			</div>
 			<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
 		@endif
 
@@ -102,32 +97,43 @@
 <!-- Picture Description -->
 <div class="row">
 	<div class="pictureDescriptionContainer">
+	<row>
 		<div class="descriptionChild">
 			<p class="descriptionFont">{{$picture->description}}</p>
 		</div>
+	</row>
+	<row>	
+		<div class="tagChild">
+			Tags: 
+			@foreach ($tags as $tags)
+				{{$tags}}  
+			@endforeach
+		</div>
+		</row>
 	</div>
 </div>
-	@if(count($story) != 0)
-	<div class="col-md-10">
-		<div class="storyGallery" >
-			<div class="row-fluid">
-				@foreach ($story as $story)
-					<div class="col-md-3">
-						<div class="thumbnailStory">
-							<a href='/post/story/{{$story->story_id}}'>  
-								<div class="fill-div">
-									{{$story->title}}<br/>
-									By: {{$story->username}}
-								</div>  
-							</a>  
-						</div>
+
+@if(count($story) != 0)
+<div class="col-md-10">
+	<div class="storyGallery" >
+		<div class="row-fluid">
+			@foreach ($story as $story)
+				<div class="col-md-3">
+					<div class="thumbnailStory">
+						<a href='/post/story/{{$story->story_id}}'>  
+							<div class="fill-div" style="font-family: 'Montserrat', sans-serif;">
+								{{$story->title}}<br/>
+								By: {{$story->username}}
+							</div>  
+						</a>  
 					</div>
-				@endforeach
-			</div>
+				</div>
+			@endforeach
 		</div>
 	</div>
-	@endif
 </div>
+@endif
+
 
 
 <script src ="http://code.jquery.com/jquery-1.11.1.js "> </script>
@@ -148,9 +154,7 @@
 								$('#unliketopButton').attr('onclick', 'unlike()')
 								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
 								$('#unliketopButton').val('Unlike');     
-
-                				$('#liked').text("{{$number_of_likes}}");
-                				$('#notliked').text("{{$number_of_likes+1}}");
+                				$('#likeCount').text("{{$number_of_likes+1}}");
                                                                                                       
 								
 						}
@@ -174,9 +178,11 @@
 								$('#unliketopButton').attr('onclick', 'like()')
 								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
 								$('#unliketopButton').val('Like');
-                                      
-								$('#liked').text("{{$number_of_likes-1}}");
-								$('#notliked').text("{{$number_of_likes}}");
+								if ($isliked){ 
+									$('#likeCount').text("{{$number_of_likes-1}}");
+								}else{
+									$('#likeCount').text("{{$number_of_likes}}");
+								}
 						}
 				});
 				return false;
@@ -197,7 +203,11 @@
 								$('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()')
 								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
 								$('#unfavoritebuttonSpace').val('Unfavorite');
-                                                                                      
+                                if ($isliked){ 
+									$('#likeCount').text("{{$number_of_likes}}");
+								}else{
+									$('#likeCount').text("{{$number_of_likes+1}}");
+								}                                                
 						}
 				});
 				return false;
