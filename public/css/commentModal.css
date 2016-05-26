@@ -68,6 +68,9 @@ div.commentSection {
 
 .comment {
     top: 0;
+    word-wrap: break-word;
+    padding-right:3%;
+    font-size: 70%;
 }
 
 div.submitComment {

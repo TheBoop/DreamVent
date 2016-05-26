@@ -17,7 +17,7 @@
 			<div class="col-md-12">
 				<span class="close">x</span>
 			</div>
-		<div class="commentSection">  
+		<div class="commentSection" id="uniqueCommentBox">  
 			@foreach($comments as $comment)
 				<div class="col-md-12">
 					<div class="commentBox">
