@@ -115,7 +115,9 @@
 									<div class="title">
 										{{$storyList[$index]->title}}<br/>
 									</div>
+									<a href='/profile/{{$storyList[$index]->username}}'>
 									By: {{$storyList[$index]->username}}
+									</a>
 									<div class="storySample">
 										
 									</div>
