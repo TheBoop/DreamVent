@@ -71,6 +71,10 @@ Route::group(['middleware' => ['web']], function () {
 	//Browse Pictures
 	Route::get('/BrowsePictures', 'Browse\BrowseController@BrowsePictureContent');
 	
+	//All Stories/Pictures
+	Route::get('/allPictures', 'Browse\BrowseController@BrowseAllPics');
+	Route::get('/allStories', 'Browse\BrowseController@BrowseAllStories');
+	
 
 	/*
 	* =====================
