@@ -117,7 +117,7 @@
 									</div>
 									By: {{$storyList[$index]->username}}
 									<div class="storySample">
-										{{$storyList[$index]->content}}
+										
 									</div>
 								</div>  
 							</a>  
