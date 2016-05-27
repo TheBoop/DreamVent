@@ -27,7 +27,7 @@ class BrowseController extends Controller
 	}
 	
     public function BrowseAllPics() {
-		$holdlist = Picture::whereNull('picture')->distinct('picture_link')->latest()->paginate(12);
+		$holdlist = Picture::whereNull('picture_id')->distinct('picture_link')->latest()->paginate(12);
 		return view('pagetype.index',
         [
             'pictureList' => $holdlist, 
