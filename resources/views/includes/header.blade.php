@@ -15,13 +15,36 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="/Browse">Browse Stories</a></li>
-            <li><a href="/BrowsePictures">Browse Pictures</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Browse <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/Browse">Browse Stories</a></li>
+                    <li><a href="/BrowsePictures">Browse Pictures</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    All Posts <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/allPictures">All Picture</a></li>
+                    <li><a href="/allStories">All Story</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Upload <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/uploadPicture">Picture Upload</a></li>
+                    <li><a href="/uploadStoryPic">Story Upload</a></li>
+                </ul>
+            </li>
             <li><a href="/Follows">Follows</a></li>
             <li><a href="/Favorites">Favorites</a></li>
             <li><a href="/search">Search</a></li>
-            <li><a href="/uploadPicture">Picture Upload</a></li>
-            <li><a href="/uploadStoryPic">Story Upload</a></li>
         </ul>
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
