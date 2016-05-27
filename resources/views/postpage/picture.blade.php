@@ -69,12 +69,15 @@
 	</div>
 
 	<div class="buttonContainer">
-	    <div class="numLikeContainer" >
-	        <h2 id="likeCount"style="color:green">{{$number_of_likes}}</h2>
-	    </div>
 		@if ($isliked)
+			<div class="numLikeContainer" >
+		    	<h2 id="liked" style="color:green">{{$number_of_likes}}</h2>
+			</div>
 			<input type="image" src="{{asset('assets/images/arrow-up1.png')}}" class="sideButton" id="unliketopButton" value ="Unlike" onclick ="return unlike()">
 		@else
+			<div class="numLikeContainer" >
+		    	<h2 id="notliked" style="color:green">{{$number_of_likes}}</h2>
+			</div>
 			<input type="image" src="{{asset('assets/images/arrow-up.png')}}" class="sideButton" id="liketopButton" value ="Like" onclick ="return like()">
 		@endif
 
@@ -140,24 +143,23 @@
 <script>
 		function like() {
 				$.ajaxSetup({
-								headers: {
-								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}});
+						headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}});
 				$.ajax({
-						type:"POST",
-						url: "/likePicture/{{$picture->picture_id}}",
-						cache:false,
-						success: function(data){
-								$('#liketopButton').attr('onclick', 'unlike()')
-								$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
-								$('#liketopButton').val('Unlike');
-								$('#unliketopButton').attr('onclick', 'unlike()')
-								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
-								$('#unliketopButton').val('Unlike');     
-                				$('#likeCount').text("{{$number_of_likes+1}}");
-                                                                                                      
-								
-						}
+					type:"POST",
+					url: "/likePicture/{{$picture->picture_id}}",
+					cache:false,
+					success: function(data){
+						$('#liketopButton').attr('onclick', 'unlike()')
+						$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
+						$('#liketopButton').val('Unlike');
+						$('#unliketopButton').attr('onclick', 'unlike()')
+						$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up1.png')}}')
+						$('#unliketopButton').val('Unlike');     
+                		$('#liked').text("{{$number_of_likes}}");
+                		$('#notliked').text("{{$number_of_likes+1}}");
+					}
 				});
 				return false;
 		}
@@ -167,23 +169,20 @@
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}});
 				$.ajax({
-
-						type:"delete",
-						url: "/unlikePicture/{{$picture->picture_id}}",
-						cache:false,
-						success: function(data){
-								$('#liketopButton').attr('onclick', 'like()')
-								$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
-								$('#liketopButton').val('Like');
-								$('#unliketopButton').attr('onclick', 'like()')
-								$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
-								$('#unliketopButton').val('Like');
-								if ($isliked){ 
-									$('#likeCount').text("{{$number_of_likes-1}}");
-								}else{
-									$('#likeCount').text("{{$number_of_likes}}");
-								}
-						}
+					type:"delete",
+					url: "/unlikePicture/{{$picture->picture_id}}",
+					cache:false,
+					success: function(data){
+						$('#liketopButton').attr('onclick', 'like()')
+						$('#liketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
+						$('#liketopButton').val('Like');
+						$('#unliketopButton').attr('onclick', 'like()')
+						$('#unliketopButton').attr('src', '{{asset('assets/images/arrow-up.png')}}')
+						$('#unliketopButton').val('Like');
+						$('#liked').text("{{$number_of_likes-1}}");
+						$('#notliked').text("{{$number_of_likes}}");
+							
+					}
 				});
 				return false;
 		}
@@ -203,11 +202,9 @@
 								$('#unfavoritebuttonSpace').attr('onclick', 'unfavorite()')
 								$('#unfavoritebuttonSpace').attr('src', '{{asset('assets/images/heart1.png')}}')
 								$('#unfavoritebuttonSpace').val('Unfavorite');
-                                if ($isliked){ 
-									$('#likeCount').text("{{$number_of_likes}}");
-								}else{
+
 									$('#likeCount').text("{{$number_of_likes+1}}");
-								}                                                
+                                          
 						}
 				});
 				return false;
