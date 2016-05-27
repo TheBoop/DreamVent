@@ -106,17 +106,17 @@
 	<div class="col-md-10">
 		<div class="storyGallery" >
 			<div class="row-fluid">
-				@foreach ($storyList as $index => $storyContent )
+				@foreach ($story as $index => $storyContent )
 
 					<div class="col-md-3">
 						<div class="thumbnailStory">
-							<a href='/post/story/{{$storyList[$index]->story_id}}'>  
+							<a href='/post/story/{{$story[$index]->story_id}}'>  
 								<div class="fill-div">
 									<div class="title">
-										{{$storyList[$index]->title}}<br/>
+										{{$story[$index]->title}}<br/>
 									</div>
-									<a href='/profile/{{$storyList[$index]->username}}'>
-									By: {{$storyList[$index]->username}}
+									<a href='/profile/{{$story[$index]->username}}'>
+									By: {{$story[$index]->username}}
 									</a>
 									<div class="storySample">
 										
