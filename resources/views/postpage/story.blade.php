@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/padding.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/commentModal.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/fonts.css') }}">
 
 @section('content')
 <!-- Comment Modal -->
@@ -11,19 +12,15 @@
 	<!-- Modal content -->
 	<div class="modal-content">
 		<div class="row">
-			<div class="col-md-12">
-				<span class="close">x</span>
-			</div>
-			<div class="commentSection">  
+		<span class="close">x</span>
+			<div class="commentSection" id="uniqueCommentBox">  
 				@foreach($comments as $comment)
-					<div class="col-md-12">
-						<div class="commentBox">
-							<a href="/profile/{{$comment->username}}"class="userName">
-						  		{{$comment->username}}
-							</a>
-							<h5 class="comment">{{$comment->text}}</h5>
-							<a class="date">{{$comment->created_at}}</a>
-						</div>
+					<div class="commentBox">
+						<a href="/profile/{{$comment->username}}"class="userName">
+					  		<a class="userNameFont">{{$comment->username}}</a>
+						</a>
+						<h5 class="comment">{{$comment->text}}</h5>
+						<a class="date">{{$comment->created_at}}</a>
 					</div>
 				@endforeach
 			</div>
