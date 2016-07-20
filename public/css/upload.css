@@ -1,0 +1,80 @@
+textarea { 
+    resize:vertical ; 
+}
+
+.main{
+    //top: 30%;
+    //left: 50%;
+    //width: 50%;
+    margin: auto;
+    //margin-right: -50%;
+    //transform: translate(-50%, -50%)
+}
+
+.innerblock {
+	  width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color:rgba(210,210,230, 0.5);
+    text-align: center;
+}
+
+h1.title{
+	font-family: Trebuchet MS,Trebuchet,sans-serif;
+	color: rgb(0,0,51);
+	margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    text-align: center;
+}
+
+h1.submit{
+	font-family: Sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    text-align: center;
+    //margin: auto;
+	color: white;
+}
+img.displayCenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3em;
+}
+.send-button {
+    background: rgb(0, 100, 200);
+    color: #fff;
+    font-family: Sans-serif;
+    border-radius: 25px;
+    font-size: 20px;
+    line-height: 50px;
+    margin: 25px 25px;
+    padding: 0px 20px;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.send-button:hover {
+  background: rgb(40, 140, 240);
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+    width:6em;
+}
+
+p.left {
+    padding: 0px -50px; 
+    font: 15px bold, Sans-serif; 
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
