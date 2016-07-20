@@ -1,3 +1,0 @@
-[2016-05-21 21:06:38] production.ERROR: exception 'RuntimeException' with message 'No supported encrypter found. The cipher and / or key length are invalid.' in /var/www/Version-1.00/DreamVent/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:45
-Stack trace:
-#0 /var/www/Version-1.00/DreamVent/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php(25): Illuminate\Encryption\EncryptionServiceProvider->getEncrypterForKeyAndCipher(NULL, 'AES-256-CBC')

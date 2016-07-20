@@ -90,7 +90,6 @@
 	<div class="storyContainer" >
 		<h3>{{$story->title}}</h3>
 		{{$story->content}}	
-
 		<p>
 			<row>	
 			<div class="tagChild">

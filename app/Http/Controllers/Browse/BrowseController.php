@@ -26,16 +26,27 @@ class BrowseController extends Controller
 		$this->middleware('auth');
 	}
 	
-    public function defaultBrowse () {
-		//Paginator::setPageName('Pictures');
-		$pictures = Picture::paginate(3, ['*'], 'Pictures');
+    public function BrowseAllPics() {
+		$holdlist = Picture::whereNull('original_picid')->distinct('picture_link')->latest()->paginate(12);
+		return view('pagetype.index',
+        [
+            'pictureList' => $holdlist, 
+        ]); 
+	}
+	
+	public function BrowseAllStories(Request $request) {
+		$stories = Story::all();
+		$storyIDs = array();
 		
-		//Paginator::setPageName('Stories');
-		$stories = Story::paginate(10, ['*'], 'Stories');
-		
-		return view('browse/browse', 
-			['pictures' => $pictures,
-			 'stories' => $stories]);
+		foreach ($stories as $key => $value) {
+			$storyIDs[] = $value->story_id;
+		}
+		$holdList = $this->Browser->GetStoryDescNPic($storyIDs, $request->user());
+        return view('pagetype.index',
+        [
+            'pictureList' => $holdList[1],
+            'storyList' => $holdList[0],
+        ]);
 	}
 	
 	
